@@ -33,28 +33,28 @@ public class VistaIngreso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        ingresar = new javax.swing.JButton();
+        salir = new javax.swing.JButton();
+        registrarse = new javax.swing.JButton();
+        nombreUsuarioLabel = new javax.swing.JLabel();
+        contraseniaLabel = new javax.swing.JLabel();
+        nombreUsuarioTF = new javax.swing.JTextField();
+        contraseniaTF = new javax.swing.JTextField();
+        bienvenidoLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Ingresar");
+        ingresar.setText("Ingresar");
 
-        jButton2.setText("Salir");
+        salir.setText("Salir");
 
-        jButton3.setText("Registrarse");
+        registrarse.setText("Registrarse");
 
-        jLabel1.setText("Nombre de usuario");
+        nombreUsuarioLabel.setText("Nombre de usuario");
 
-        jLabel2.setText("Contraseña");
+        contraseniaLabel.setText("Contraseña");
 
-        jLabel3.setText("Bienvenido a MedaFighter!");
+        bienvenidoLabel.setText("Bienvenido a MedaFighter!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,47 +67,47 @@ public class VistaIngreso extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
+                                    .addComponent(nombreUsuarioLabel)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(nombreUsuarioTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
+                                    .addComponent(contraseniaLabel)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(contraseniaTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(jButton1)
+                                .addComponent(ingresar)
                                 .addGap(71, 71, 71)
-                                .addComponent(jButton2))
+                                .addComponent(salir))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(75, 75, 75)
-                                .addComponent(jButton3)))
+                                .addComponent(registrarse)))
                         .addGap(82, 82, 82))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(bienvenidoLabel)
                         .addGap(129, 129, 129))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(55, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addComponent(bienvenidoLabel)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(nombreUsuarioLabel)
                         .addGap(24, 24, 24)
-                        .addComponent(jLabel2))
+                        .addComponent(contraseniaLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nombreUsuarioTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(contraseniaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(ingresar)
+                    .addComponent(salir))
                 .addGap(28, 28, 28)
-                .addComponent(jButton3)
+                .addComponent(registrarse)
                 .addGap(38, 38, 38))
         );
 
@@ -116,13 +116,13 @@ public class VistaIngreso extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel bienvenidoLabel;
+    private javax.swing.JLabel contraseniaLabel;
+    private javax.swing.JTextField contraseniaTF;
+    private javax.swing.JButton ingresar;
+    private javax.swing.JLabel nombreUsuarioLabel;
+    private javax.swing.JTextField nombreUsuarioTF;
+    private javax.swing.JButton registrarse;
+    private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 }

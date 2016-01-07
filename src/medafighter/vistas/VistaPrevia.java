@@ -27,44 +27,44 @@ public class VistaPrevia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        queRobobatallaLabel = new javax.swing.JLabel();
+        modoJuegoLabel = new javax.swing.JLabel();
+        modoJuegoCB = new javax.swing.JComboBox();
+        jugadoresLabel = new javax.swing.JLabel();
+        jugador1SP = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jugador2SP = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        robobatalla = new javax.swing.JButton();
+        volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("¿Qué clase de robobatalla desea?");
+        queRobobatallaLabel.setText("¿Qué clase de robobatalla desea?");
 
-        jLabel2.setText("Modo de juego");
+        modoJuegoLabel.setText("Modo de juego");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jugador v/s Jugador", "Jugador v/s CPU", "CPU V/S CPU" }));
+        modoJuegoCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jugador v/s Jugador", "Jugador v/s CPU", "CPU V/S CPU" }));
 
-        jLabel3.setText("Jugadores");
+        jugadoresLabel.setText("Jugadores");
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jugador1SP.setViewportView(jList1);
 
         jList2.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList2);
+        jugador2SP.setViewportView(jList2);
 
-        jButton1.setText("Robobatalla!");
+        robobatalla.setText("Robobatalla!");
 
-        jButton2.setText("Volver");
+        volver.setText("Volver");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,46 +73,46 @@ public class VistaPrevia extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(modoJuegoLabel)
+                    .addComponent(jugadoresLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modoJuegoCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jugador1SP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jugador2SP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(74, 74, 74))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
-                        .addComponent(jLabel1))
+                        .addComponent(queRobobatallaLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addComponent(jButton1)
+                        .addComponent(robobatalla)
                         .addGap(53, 53, 53)
-                        .addComponent(jButton2)))
+                        .addComponent(volver)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jLabel1)
+                .addComponent(queRobobatallaLabel)
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(modoJuegoLabel)
+                    .addComponent(modoJuegoCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jugadoresLabel)
+                    .addComponent(jugador1SP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jugador2SP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(robobatalla)
+                    .addComponent(volver))
                 .addGap(28, 28, 28))
         );
 
@@ -122,15 +122,15 @@ public class VistaPrevia extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jugador1SP;
+    private javax.swing.JScrollPane jugador2SP;
+    private javax.swing.JLabel jugadoresLabel;
+    private javax.swing.JComboBox modoJuegoCB;
+    private javax.swing.JLabel modoJuegoLabel;
+    private javax.swing.JLabel queRobobatallaLabel;
+    private javax.swing.JButton robobatalla;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

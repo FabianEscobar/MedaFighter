@@ -27,23 +27,23 @@ public class VistaMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        queHacerLabel = new javax.swing.JLabel();
+        robobatalla = new javax.swing.JButton();
+        ajustesMedabot = new javax.swing.JButton();
+        cerrarSesion = new javax.swing.JButton();
+        torneo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("¿Qué desea hacer?");
+        queHacerLabel.setText("¿Qué desea hacer?");
 
-        jButton1.setText("Robobatalla");
+        robobatalla.setText("Robobatalla");
 
-        jButton2.setText("Ajustes Medabot");
+        ajustesMedabot.setText("Ajustes Medabot");
 
-        jButton3.setText("Cerrar sesión");
+        cerrarSesion.setText("Cerrar sesión");
 
-        jButton4.setText("Torneo");
+        torneo.setText("Torneo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -52,26 +52,26 @@ public class VistaMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(148, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1))
+                    .addComponent(cerrarSesion)
+                    .addComponent(torneo)
+                    .addComponent(ajustesMedabot)
+                    .addComponent(robobatalla)
+                    .addComponent(queHacerLabel))
                 .addGap(139, 139, 139))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(jLabel1)
+                .addComponent(queHacerLabel)
                 .addGap(37, 37, 37)
-                .addComponent(jButton1)
+                .addComponent(robobatalla)
                 .addGap(27, 27, 27)
-                .addComponent(jButton2)
+                .addComponent(ajustesMedabot)
                 .addGap(27, 27, 27)
-                .addComponent(jButton4)
+                .addComponent(torneo)
                 .addGap(26, 26, 26)
-                .addComponent(jButton3)
+                .addComponent(cerrarSesion)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -81,10 +81,10 @@ public class VistaMenu extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton ajustesMedabot;
+    private javax.swing.JButton cerrarSesion;
+    private javax.swing.JLabel queHacerLabel;
+    private javax.swing.JButton robobatalla;
+    private javax.swing.JButton torneo;
     // End of variables declaration//GEN-END:variables
 }
