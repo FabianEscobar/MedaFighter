@@ -5,6 +5,8 @@
  */
 package medafighter;
 
+import medafighter.controladores.ControladorIngreso;
+
 /**
  *
  * @author Fabián
@@ -15,7 +17,9 @@ public class MedaFighter {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        ControladorIngreso ci = new ControladorIngreso();
+        
     }
     
 }
