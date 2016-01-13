@@ -5,6 +5,8 @@
  */
 package medafighter.vistas;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Fabián
@@ -14,9 +16,28 @@ public class VistaMenu extends javax.swing.JFrame {
     /**
      * Creates new form VistaMenu
      */
-    public VistaMenu() {
+    public VistaMenu(ActionListener al) {
+        
         initComponents();
+        
+        this.setVisible(true);
+        
+        agregarListener(al);        
+        
     }
+    
+    void agregarListener(ActionListener al){
+        
+        this.ajustesMedabot.addActionListener(al);
+        
+        this.robobatalla.addActionListener(al);
+        
+        this.torneo.addActionListener(al);
+        
+        this.cerrarSesion.addActionListener(al);
+        
+    }    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

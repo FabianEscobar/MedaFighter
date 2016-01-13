@@ -5,6 +5,8 @@
  */
 package medafighter.vistas;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Fabián
@@ -14,9 +16,23 @@ public class VistaRegistro extends javax.swing.JFrame {
     /**
      * Creates new form VistaRegistro
      */
-    public VistaRegistro() {
+    public VistaRegistro(ActionListener al) {
+        
         initComponents();
+        
+        this.setVisible(true);
+        
+        agregarListener(al);
+        
     }
+    
+    void agregarListener(ActionListener al){
+        
+        this.registrarse.addActionListener(al);
+        
+        this.volver.addActionListener(al);
+        
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.

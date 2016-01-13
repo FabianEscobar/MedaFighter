@@ -15,7 +15,11 @@ import medafighter.vistas.VistaIngreso;
  */
 public class ControladorIngreso implements ActionListener {
     
-    private VistaIngreso vi; 
+    private VistaIngreso vi;
+    
+    private ControladorRegistro cr;
+    
+    private ControladorMenu cm;
     
     public ControladorIngreso() {
         

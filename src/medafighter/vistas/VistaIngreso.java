@@ -22,6 +22,18 @@ public class VistaIngreso extends javax.swing.JFrame {
         
         this.setVisible(true);
         
+        agregarListener(al);
+        
+    }
+    
+    void agregarListener(ActionListener al){
+        
+        this.ingresar.addActionListener(al);
+        
+        this.registrarse.addActionListener(al);
+        
+        this.salir.addActionListener(al);
+        
     }
 
     /**

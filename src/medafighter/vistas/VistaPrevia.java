@@ -5,6 +5,8 @@
  */
 package medafighter.vistas;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Fabián
@@ -14,8 +16,24 @@ public class VistaPrevia extends javax.swing.JFrame {
     /**
      * Creates new form VistaPrevia
      */
-    public VistaPrevia() {
+    public VistaPrevia(ActionListener al) {
+                
         initComponents();
+        
+        this.setVisible(true);
+        
+        agregarListener(al);       
+        
+    }
+    
+    void agregarListener(ActionListener al){
+        
+        this.modoJuegoCB.addActionListener(al);
+        
+        this.robobatalla.addActionListener(al);
+        
+        this.volver.addActionListener(al);
+        
     }
 
     /**
