@@ -11,4 +11,18 @@ package medafighter.modelo;
  */
 public class ConexionBD {
     
+    public boolean verificarUsuario(String nombreUsuario, String contrasenia){
+        
+        boolean uBoolean = false;
+    
+        
+    
+    
+    
+        return uBoolean;
+    
+    }
+    
+    
+    
 }

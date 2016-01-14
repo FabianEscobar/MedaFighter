@@ -7,12 +7,22 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import medafighter.vistas.VistaMenu;
 
 /**
  *
  * @author Fabián
  */
 public class ControladorMenu implements ActionListener {
+    
+    private VistaMenu vm;
+    
+    public ControladorMenu() {
+        
+        this.vm = new VistaMenu(this);        
+        
+    }
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {

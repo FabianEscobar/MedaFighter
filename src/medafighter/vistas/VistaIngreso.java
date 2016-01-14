@@ -136,7 +136,15 @@ public class VistaIngreso extends javax.swing.JFrame {
     
     public javax.swing.JButton getSalir(){
         return this.salir;
-    }   
+    }
+    
+    public javax.swing.JTextField getNombreUsuario(){
+        return this.nombreUsuarioTF;
+    }
+    
+    public javax.swing.JTextField getContrasenia(){
+        return this.contraseniaTF;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bienvenidoLabel;
