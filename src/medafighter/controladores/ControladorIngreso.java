@@ -7,6 +7,9 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import medafighter.modelo.ConexionBD;
@@ -32,7 +35,7 @@ public class ControladorIngreso implements ActionListener {
         
     }
     
-    public boolean verificarUsuario(String nombreUsuario, String contrasenia){
+    public boolean verificarUsuario(String nombreUsuario, String contrasenia) throws SQLException{
         
         this.cbd = new ConexionBD();
         
@@ -47,13 +50,25 @@ public class ControladorIngreso implements ActionListener {
         
         if(vi != null){           
             
-            if (((JButton)ae.getSource()).equals(this.vi.getIngresar())){
+            if (((JButton)ae.getSource()).equals(this.vi.getIngresar())) {
                 
                    String nombreUsuario = this.vi.getNombreUsuario().getText();
                    
                    String contrasenia = this.vi.getContrasenia().getText();
                    
-                   boolean uBoolean = verificarUsuario(nombreUsuario, contrasenia);
+                   boolean uBoolean = false;
+                
+                   try {
+                   
+                       uBoolean = verificarUsuario(nombreUsuario, contrasenia);
+                    
+                   } 
+                   
+                   catch (SQLException ex) {
+                   
+                       Logger.getLogger(ControladorIngreso.class.getName()).log(Level.SEVERE, null, ex);
+                
+                   }
                    
                     if (uBoolean == true){
                        
@@ -93,6 +108,5 @@ public class ControladorIngreso implements ActionListener {
         } 
         
     }
-    
-    
+   
 }

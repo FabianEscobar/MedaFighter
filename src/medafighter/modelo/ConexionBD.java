@@ -19,10 +19,10 @@ public class ConexionBD {
     
     private static final String SERVIDOR = "localhost";
     private static final String PUERTO = "1527";
-    private static final String NOMBRE_BD = "base";
+    private static final String NOMBRE_BD = "contact";
     private static final String USUARIO = "nbuser";
     private static final String PASSWORD = "nbuser";
-    public static final String URL_CONEXION = "jdbc:derby://localhost:1527/contact" + SERVIDOR + ":"+ PUERTO +"/"+ NOMBRE_BD +";user="+ USUARIO +";password=" + PASSWORD;
+    public static final String URL_CONEXION = "jdbc:derby://" + SERVIDOR + ":"+ PUERTO +"/"+ NOMBRE_BD +";user="+ USUARIO +";password=" + PASSWORD;
 
     private Connection conexion = null;
     
@@ -74,16 +74,28 @@ public class ConexionBD {
         
         boolean uBoolean = false;
     
-        this.conectar();
-    
-        Statement stmt = this.crearConsulta();
+        boolean resultadoConexion = this.conectar();
         
-        String consultaNombreUsuario = "SELECT NOMBRE FROM USUARIO";
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
         
-        ResultSet rset= stmt.executeQuery(consultaNombreUsuario);
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT * FROM USUARIO WHERE NOMBRE = '" + nombreUsuario + "' AND PASS = '" + contrasenia +"'";
         
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                if(resultadoBusqueda.next()) {
+                
+                    uBoolean = true;
+                    
+                }           
+            
+            }  
+            
+        }
         
-    
         return uBoolean;
     
     }
