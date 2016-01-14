@@ -7,6 +7,7 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import medafighter.vistas.VistaIngreso;
 
 /**
@@ -28,8 +29,34 @@ public class ControladorIngreso implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actionPerformed(ActionEvent ae) {
+        
+        if(vi != null){           
+            
+            if (((JButton)ae.getSource()).equals(this.vi.getIngresar())){
+                
+                                
+                
+            }
+            
+            if (((JButton)ae.getSource()).equals(this.vi.getRegistrarse())){
+                
+                this.cr = new ControladorRegistro();
+                
+                this.vi.setVisible(false);
+                
+                this.vi.dispose();                
+                
+            }
+            
+            if (((JButton)ae.getSource()).equals(this.vi.getSalir())){
+                
+                System.exit(0);
+                
+            }            
+            
+        } 
+        
     }
     
     

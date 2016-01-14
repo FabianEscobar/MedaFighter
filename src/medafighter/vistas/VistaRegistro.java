@@ -114,7 +114,13 @@ public class VistaRegistro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    public javax.swing.JButton getRegistrarse(){
+        return this.registrarse;
+    }
+    
+    public javax.swing.JButton getVolver(){
+        return this.volver;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel contraseniaLabel;

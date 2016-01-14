@@ -126,6 +126,17 @@ public class VistaIngreso extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public javax.swing.JButton getIngresar(){
+        return this.ingresar;
+    }
+    
+    public javax.swing.JButton getRegistrarse(){
+        return this.registrarse;
+    }
+    
+    public javax.swing.JButton getSalir(){
+        return this.salir;
+    }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bienvenidoLabel;
