@@ -55,6 +55,7 @@ public class VistaMenu extends javax.swing.JFrame {
         torneo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MedaFighter - Menu");
 
         queHacerLabel.setText("¿Qué desea hacer?");
 

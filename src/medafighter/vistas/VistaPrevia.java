@@ -57,6 +57,7 @@ public class VistaPrevia extends javax.swing.JFrame {
         volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MedaFighter - Previa Medabatalla");
 
         queRobobatallaLabel.setText("¿Qué clase de robobatalla desea?");
 
