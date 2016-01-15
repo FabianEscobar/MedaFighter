@@ -130,10 +130,32 @@ public class ConexionBD {
     
     }
     
-    public void registrarUsuario(String nombreUsuario, String contrasenia) {
+    public boolean registrarUsuario(String nombreUsuario, String contrasenia) throws SQLException {
         
+        boolean registroCorrecto = false;
         
+        boolean resultadoConexion = this.conectar();
         
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "INSERT INTO USUARIO (NOMBRE,PASS,TIPO,VICTORIAS,DERROTAS,TORNEOS) VALUES ('" + nombreUsuario +"','" + contrasenia +"','HUMANO',0,0,0)";
+        
+                stmt.executeUpdate(consultaUsuario);
+                
+                registroCorrecto = true;
+                
+            }           
+            
+        }  
+        
+        return registroCorrecto;
+            
     }
-    
+        
 }
+    
+

@@ -43,11 +43,15 @@ public class ControladorRegistro implements ActionListener {
         
     }
     
-    public void registrarUsuario(String nombreUsuario, String contrasenia) throws SQLException{
+    public boolean registrarUsuario(String nombreUsuario, String contrasenia) throws SQLException{
+        
+        boolean registroCorrecto = false;
         
         this.cbd = new ConexionBD();
         
-        this.cbd.registrarUsuario(nombreUsuario, contrasenia);
+        registroCorrecto = this.cbd.registrarUsuario(nombreUsuario, contrasenia);
+        
+        return registroCorrecto;
         
     }
     
@@ -65,6 +69,8 @@ public class ControladorRegistro implements ActionListener {
                 String contrasenia = this.vr.getContrasenia().getText();
                 
                 boolean uBoolean = false;
+                
+                boolean registroCorrecto = false;
                 
                    try {
                    
@@ -88,7 +94,13 @@ public class ControladorRegistro implements ActionListener {
                         
                         try {
                             
-                            registrarUsuario(nombreUsuario, contrasenia);                                    
+                            registroCorrecto = registrarUsuario(nombreUsuario, contrasenia);
+                            
+                            if (registroCorrecto == true){
+                                
+                                JOptionPane.showMessageDialog(vr, "El registro se ha realizado de manera satisfactoria. Presione 'Volver' para ir a la ventana de ingreso.");
+                                
+                            }
                             
                         }
                         
