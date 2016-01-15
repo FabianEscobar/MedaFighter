@@ -7,8 +7,12 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import medafighter.modelo.ConexionBD;
 import medafighter.vistas.VistaTorneo;
 
 /**
@@ -23,9 +27,19 @@ public class ControladorTorneo implements ActionListener {
     
     private ControladorMenu cm;
     
+    private ConexionBD cbd;
+    
     public ControladorTorneo() {
         
         this.vt = new VistaTorneo(this);        
+        
+    }
+    
+    public String[] buscarJugadores() throws SQLException {
+        
+        String[] jugadores = this.cbd.buscarJugadores();
+        
+        return jugadores;
         
     }
 
@@ -70,7 +84,19 @@ public class ControladorTorneo implements ActionListener {
                     
                 ((JComboBox)ae.getSource()).equals(this.vt.getJugador8())){
                 
+                try {
+                    
+                    String[] jugadores = null; 
+                            
+                    jugadores = buscarJugadores();
                 
+                } 
+                
+                catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorTorneo.class.getName()).log(Level.SEVERE, null, ex);
+                
+                }
                 
             }
             

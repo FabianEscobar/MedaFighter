@@ -155,6 +155,36 @@ public class ConexionBD {
         return registroCorrecto;
             
     }
+    
+    public String[] buscarJugadores() throws SQLException{
+        
+        boolean resultadoConexion = this.conectar();
+        
+        String[] jugadores = null;
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT NOMBRE FROM USUARIO";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                while(resultadoBusqueda.next()) {
+                
+                    String nombre = resultadoBusqueda.getString(1);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return jugadores;
+        
+    }
         
 }
     
