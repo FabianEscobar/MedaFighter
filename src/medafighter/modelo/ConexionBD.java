@@ -100,4 +100,40 @@ public class ConexionBD {
     
     }
     
+    public boolean verificarNombreUsuario(String nombreUsuario) throws SQLException {
+        
+        boolean uBoolean = false;
+    
+        boolean resultadoConexion = this.conectar();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT * FROM USUARIO WHERE NOMBRE = '" + nombreUsuario +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                if(resultadoBusqueda.next()) {
+                
+                    uBoolean = true;
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return uBoolean;
+    
+    }
+    
+    public void registrarUsuario(String nombreUsuario, String contrasenia) {
+        
+        
+        
+    }
+    
 }

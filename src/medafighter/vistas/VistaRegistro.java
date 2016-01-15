@@ -118,6 +118,14 @@ public class VistaRegistro extends javax.swing.JFrame {
     public javax.swing.JButton getVolver(){
         return this.volver;
     }
+    
+    public javax.swing.JTextField getNombreUsuario(){
+        return this.nombreUsuarioTF;
+    }
+    
+    public javax.swing.JPasswordField getContrasenia(){
+        return this.contraseniaTF;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel contraseniaLabel;
