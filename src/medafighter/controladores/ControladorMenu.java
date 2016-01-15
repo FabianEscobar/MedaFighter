@@ -7,6 +7,7 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import medafighter.vistas.VistaMenu;
 
 /**
@@ -17,6 +18,14 @@ public class ControladorMenu implements ActionListener {
     
     private VistaMenu vm;
     
+    private ControladorPrevia cp;
+    
+    private ControladorMedabot cmed;
+    
+    private ControladorTorneo ct;
+    
+    private ControladorIngreso ci;
+    
     public ControladorMenu() {
         
         this.vm = new VistaMenu(this);        
@@ -25,8 +34,52 @@ public class ControladorMenu implements ActionListener {
     
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actionPerformed(ActionEvent ae) {
+        
+        if(vm != null){
+    
+            if (((JButton)ae.getSource()).equals(this.vm.getAjustesMedabot())){
+                
+                this.cmed = new ControladorMedabot();
+                       
+                this.vm.setVisible(false);
+                
+                this.vm.dispose();
+                
+            }
+            
+            if (((JButton)ae.getSource()).equals(this.vm.getRobobatalla())){
+                
+                this.cp = new ControladorPrevia();
+                       
+                this.vm.setVisible(false);
+                
+                this.vm.dispose();
+                
+            }
+            
+            if (((JButton)ae.getSource()).equals(this.vm.getTorneo())){
+                
+                this.ct = new ControladorTorneo();
+                       
+                this.vm.setVisible(false);
+                
+                this.vm.dispose();
+                
+            }
+            
+            if (((JButton)ae.getSource()).equals(this.vm.getCerrarSesion())){
+                
+                this.ci = new ControladorIngreso();
+                       
+                this.vm.setVisible(false);
+                
+                this.vm.dispose();
+                
+            }
+    
+        }
+        
     }
     
 }

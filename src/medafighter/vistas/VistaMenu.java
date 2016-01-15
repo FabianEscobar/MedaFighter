@@ -100,7 +100,21 @@ public class VistaMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    public javax.swing.JButton getAjustesMedabot(){
+        return this.ajustesMedabot;
+    }
+    
+    public javax.swing.JButton getCerrarSesion(){
+        return this.cerrarSesion;
+    }
+    
+    public javax.swing.JButton getRobobatalla(){
+        return this.robobatalla;
+    }
+    
+    public javax.swing.JButton getTorneo(){
+        return this.torneo;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ajustesMedabot;
