@@ -6,6 +6,7 @@
 package medafighter.vistas;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,6 +20,10 @@ public class VistaTorneo extends javax.swing.JFrame {
     public VistaTorneo(ActionListener al) {
         
         initComponents();
+        ArrayList<String> v = new ArrayList<>();
+        v.add("qwe");
+        v.add("jjjkhk");
+        jugador1.addItem(v);
         
         this.setVisible(true);
         
