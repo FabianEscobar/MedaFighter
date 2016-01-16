@@ -14,9 +14,23 @@ public class VistaMedabot extends javax.swing.JFrame {
     /**
      * Creates new form VistaMedabot
      */
-    public VistaMedabot() {
+    public VistaMedabot(ActionListener al) {
+        
         initComponents();
+        
+        this.setVisible(true);
+        
+        agregarListener(al);
     }
+      void agregarListener(ActionListener al){
+          
+          this.brazoDerecho.addActionListener(al);
+          this.brazoIzquierdo.addActionListener(al);
+          this.piernaDerecha.addActionListener(al);
+          this.piernaIzquierda.addActionListener(al);
+          this.cabeza.addActionListener(al);
+          this.medalla.addActionListener(al);
+          this.guardar.addActionListener(al);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,7 +49,7 @@ public class VistaMedabot extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        brazoIzquierdo = new javax.swing.JComboBox();
         jComboBox3 = new javax.swing.JComboBox();
         jComboBox4 = new javax.swing.JComboBox();
         jComboBox5 = new javax.swing.JComboBox();
@@ -64,7 +78,7 @@ public class VistaMedabot extends javax.swing.JFrame {
 
         jLabel5.setText("Pierna Derecha");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        brazoIzquierdo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +111,7 @@ public class VistaMedabot extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(brazoIzquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4))
                                 .addGap(10, 10, 10))
@@ -137,7 +151,7 @@ public class VistaMedabot extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(brazoIzquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(164, 164, 164)
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
@@ -173,8 +187,8 @@ public class VistaMedabot extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox brazoIzquierdo;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
