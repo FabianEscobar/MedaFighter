@@ -49,25 +49,25 @@ public class ControladorTorneo implements ActionListener {
                 String jugador1 = (String)this.vt.getJugador1().getSelectedItem();
                 jugadores.add(jugador1);
                 
-                String jugador2 = (String)this.vt.getJugador1().getSelectedItem();
+                String jugador2 = (String)this.vt.getJugador2().getSelectedItem();
                 jugadores.add(jugador2);
                 
-                String jugador3 = (String)this.vt.getJugador1().getSelectedItem();
+                String jugador3 = (String)this.vt.getJugador3().getSelectedItem();
                 jugadores.add(jugador3);
                 
-                String jugador4 = (String)this.vt.getJugador1().getSelectedItem();
+                String jugador4 = (String)this.vt.getJugador4().getSelectedItem();
                 jugadores.add(jugador4);
                 
-                String jugador5 = (String)this.vt.getJugador1().getSelectedItem();
+                String jugador5 = (String)this.vt.getJugador5().getSelectedItem();
                 jugadores.add(jugador5);
                 
-                String jugador6 = (String)this.vt.getJugador1().getSelectedItem();
+                String jugador6 = (String)this.vt.getJugador6().getSelectedItem();
                 jugadores.add(jugador6);
                 
-                String jugador7 = (String)this.vt.getJugador1().getSelectedItem();
+                String jugador7 = (String)this.vt.getJugador7().getSelectedItem();
                 jugadores.add(jugador7);
                 
-                String jugador8 = (String)this.vt.getJugador1().getSelectedItem();
+                String jugador8 = (String)this.vt.getJugador8().getSelectedItem();
                 jugadores.add(jugador8);
                 
                 boolean validador = true;
@@ -79,6 +79,8 @@ public class ControladorTorneo implements ActionListener {
                         if(jugadores.get(i).equals(jugadores.get(j))){                            
                                                         
                             validador = false;
+                            
+                            break;
                             
                         }
 		
