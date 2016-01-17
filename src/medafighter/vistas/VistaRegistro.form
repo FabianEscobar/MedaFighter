@@ -24,30 +24,38 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="ingreseDatosLabel" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="nombreUsuarioLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="contraseniaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="nombreMedabotLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="nombreUsuarioTF" alignment="0" pref="100" max="32767" attributes="0"/>
+                          <Component id="nombreMedabotTF" alignment="0" pref="141" max="32767" attributes="0"/>
                           <Component id="contraseniaTF" alignment="0" max="32767" attributes="0"/>
+                          <Component id="nombreUsuarioTF" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="registrarse" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="volver" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,18 +68,26 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="nombreUsuarioLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nombreUsuarioTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="18" pref="18" max="18" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="contraseniaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="contraseniaTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="nombreMedabotTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nombreMedabotLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="registrarse" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="volver" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="86" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,7 +105,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="nombreUsuarioLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre de usuario"/>
+        <Property name="text" type="java.lang.String" value="Nombre de Usuario"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="contraseniaLabel">
@@ -105,6 +121,28 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="contraseniaTF">
+    </Component>
+    <Component class="javax.swing.JTextField" name="nombreMedabotTF">
+    </Component>
+    <Component class="javax.swing.JLabel" name="nombreMedabotLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nombre de Medabot"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(entre 4 y 15 caracteres)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(entre 6 y 15 caracteres)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(entre 4 y 15 caracteres)"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

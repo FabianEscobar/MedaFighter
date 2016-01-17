@@ -50,6 +50,11 @@ public class VistaRegistro extends javax.swing.JFrame {
         nombreUsuarioTF = new javax.swing.JTextField();
         ingreseDatosLabel = new javax.swing.JLabel();
         contraseniaTF = new javax.swing.JPasswordField();
+        nombreMedabotTF = new javax.swing.JTextField();
+        nombreMedabotLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Registro");
@@ -58,11 +63,19 @@ public class VistaRegistro extends javax.swing.JFrame {
 
         volver.setText("Volver");
 
-        nombreUsuarioLabel.setText("Nombre de usuario");
+        nombreUsuarioLabel.setText("Nombre de Usuario");
 
         contraseniaLabel.setText("Contraseña");
 
         ingreseDatosLabel.setText("Ingrese sus datos en los siguientes campos");
+
+        nombreMedabotLabel.setText("Nombre de Medabot");
+
+        jLabel1.setText("(entre 4 y 15 caracteres)");
+
+        jLabel2.setText("(entre 6 y 15 caracteres)");
+
+        jLabel3.setText("(entre 4 y 15 caracteres)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,18 +88,25 @@ public class VistaRegistro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nombreUsuarioLabel)
-                            .addComponent(contraseniaLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                            .addComponent(contraseniaLabel)
+                            .addComponent(nombreMedabotLabel))
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nombreUsuarioTF, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(contraseniaTF))
-                        .addGap(87, 87, 87))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
+                            .addComponent(nombreMedabotTF, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(contraseniaTF)
+                            .addComponent(nombreUsuarioTF))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(38, 38, 38))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(registrarse)
                 .addGap(41, 41, 41)
                 .addComponent(volver)
-                .addGap(76, 76, 76))
+                .addGap(159, 159, 159))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,16 +116,23 @@ public class VistaRegistro extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombreUsuarioLabel)
-                    .addComponent(nombreUsuarioTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreUsuarioTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(contraseniaLabel)
-                    .addComponent(contraseniaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(contraseniaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreMedabotTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombreMedabotLabel)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registrarse)
                     .addComponent(volver))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -126,11 +153,20 @@ public class VistaRegistro extends javax.swing.JFrame {
     public javax.swing.JPasswordField getContrasenia(){
         return this.contraseniaTF;
     }
+        
+    public javax.swing.JTextField getNombreMedabot(){
+        return this.nombreMedabotTF;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel contraseniaLabel;
     private javax.swing.JPasswordField contraseniaTF;
     private javax.swing.JLabel ingreseDatosLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel nombreMedabotLabel;
+    private javax.swing.JTextField nombreMedabotTF;
     private javax.swing.JLabel nombreUsuarioLabel;
     private javax.swing.JTextField nombreUsuarioTF;
     private javax.swing.JButton registrarse;

@@ -43,13 +43,13 @@ public class ControladorRegistro implements ActionListener {
         
     }
     
-    public boolean registrarUsuario(String nombreUsuario, String contrasenia) throws SQLException{
+    public boolean registrarUsuario(String nombreUsuario, String contrasenia, String nombreMedabot) throws SQLException{
         
         boolean registroCorrecto = false;
         
         this.cbd = new ConexionBD();
         
-        registroCorrecto = this.cbd.registrarUsuario(nombreUsuario, contrasenia);
+        registroCorrecto = this.cbd.registrarUsuario(nombreUsuario, contrasenia, nombreMedabot);
         
         return registroCorrecto;
         
@@ -68,49 +68,71 @@ public class ControladorRegistro implements ActionListener {
                    
                 String contrasenia = this.vr.getContrasenia().getText();
                 
-                boolean uBoolean = false;
+                String nombreMedabot = this.vr.getNombreMedabot().getText();
                 
-                boolean registroCorrecto = false;
-                
-                   try {
-                   
-                       uBoolean = verificarNombreUsuario(nombreUsuario);
-                    
-                   } 
-                   
-                   catch (SQLException ex) {
-                   
-                       Logger.getLogger(ControladorRegistro.class.getName()).log(Level.SEVERE, null, ex);
-                
-                   }
-                   
-                    if (uBoolean == true){
-                       
-                        JOptionPane.showMessageDialog(vr, "El usuario ingresado ya existe. Ingrese uno distinto.");
-                       
-                    }
-                    
-                    else{
+                int largoNombreUsuario = nombreUsuario.length();
                         
+                int largoContrasenia = contrasenia.length();
+                        
+                int largoNombreMedabot = nombreMedabot.length();
+                
+                if((4 <= largoNombreUsuario)&&(6 <= largoContrasenia)&&(4 <= largoNombreMedabot)){
+                    
+                    if((largoNombreUsuario <=15)&&(largoContrasenia <=15)&&(largoNombreMedabot <=15)){
+                        
+                        boolean uBoolean = false;
+                
+                        boolean registroCorrecto = false;
+                
                         try {
-                            
-                            registroCorrecto = registrarUsuario(nombreUsuario, contrasenia);
-                            
-                            if (registroCorrecto == true){
-                                
-                                JOptionPane.showMessageDialog(vr, "El registro se ha realizado de manera satisfactoria. Presione 'Volver' para ir a la ventana de ingreso.");
-                                
-                            }
-                            
-                        }
-                        
+                   
+                            uBoolean = verificarNombreUsuario(nombreUsuario);
+                    
+                        } 
+                   
                         catch (SQLException ex) {
                    
                             Logger.getLogger(ControladorRegistro.class.getName()).log(Level.SEVERE, null, ex);
                 
                         }
+                   
+                        if (uBoolean == true){
+                       
+                            JOptionPane.showMessageDialog(vr, "El usuario ingresado ya existe. Ingrese uno distinto.");
+                       
+                        }
+                    
+                        else{
+                        
+                            try {
+                            
+                                registroCorrecto = registrarUsuario(nombreUsuario, contrasenia, nombreMedabot);
+                            
+                                if (registroCorrecto == true){
+                                
+                                    JOptionPane.showMessageDialog(vr, "El registro se ha realizado de manera satisfactoria. Presione 'Volver' para ir a la ventana de ingreso.");
+                                
+                                }
+                            
+                            }
+                        
+                            catch (SQLException ex) {
+                   
+                                Logger.getLogger(ControladorRegistro.class.getName()).log(Level.SEVERE, null, ex);
+                
+                            }
+                        
+                        }
                         
                     }
+                    
+                }
+                
+                else {
+                    
+                    JOptionPane.showMessageDialog(vr, "Datos inválidos. Asegúrese de que estén dentro de los límites de caracteres.");
+                    
+                }
                 
             }
             
