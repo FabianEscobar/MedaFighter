@@ -63,8 +63,14 @@ create table USUARIO
 /*Script*/
 /****************** MEDAPARTES  ************************/
 /*Cabezas*/
-insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Cabeza Cohete (C)',500,'Cabeza',250,'M�siles rastreadores',50,50,0,0,5);
+insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Cabeza Cohete (C)',500,'Cabeza',250,'Misiles rastreadores',50,50,0,0,5);
 insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Cabeza Generica (C)',300,'Cabeza',10,'Cuerpo a cuerpo',20,50,0,0,1);
+insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Cabeza Bestial (C)',700,'Cabeza',300,'Cuerpo a cuerpo',70,50,0,20,7);
+insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Cabeza Mira (C)',500,'Cabeza',200,'Disparo',50,70,0,0,5);
+insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Cabeza Cura (C)',700,'Cabeza',150,'Regeneracion',60,30,50,0,5);
+insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Cabeza Tanque (C)',600,'Cabeza',300,'Anti aereos',80,40,0,0,5);
+
+
 /*Brazos*/
 insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Brazo Canon (BD)',500,'BrazoDer',40,'Disparo',50,20,0,0,2);
 insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Brazo Canon (BI)',500,'BrazoIzq',40,'Disparo',50,30,0,0,2);
@@ -105,7 +111,7 @@ insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('
 /* CPU1 */
 
 insert into usuario (nombre,pass,tipo,victorias,derrotas,torneos) values ('cpu1','cpu1','CPU',0,0,0);
-insert into medabot (saludmaxima,nombre,usuario,cabeza,brazoizq,brazoder,piernaizq,medalla,imagen) values (1100,'cpu1','cpu1','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0);
+insert into medabot (saludmaxima,nombre,usuario,cabeza,brazoizq,brazoder,piernaizq,piernader,medalla,imagen) values (1100,'cpu1','cpu1','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0);
 insert into medallausuario (usuario,medalla) VALUES ('cpu1','Mono');
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu1','Cabeza Generica (C)');
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu1','Brazo Generico (BI)');
@@ -116,7 +122,7 @@ insert into medaparteusuario (usuario,medaparte) VALUES ('cpu1','Pierna Generica
 /* CPU2 */
 
 insert into usuario (nombre,pass,tipo,victorias,derrotas,torneos) values ('cpu2','cpu2','CPU',0,0,0);
-insert into medabot (saludmaxima,nombre,usuario,cabeza,brazoizq,brazoder,piernaizq,medalla,imagen) values (1100,'cpu2','cpu2','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Aracna',0);
+insert into medabot (saludmaxima,nombre,usuario,cabeza,brazoizq,brazoder,piernaizq,piernader,medalla,imagen) values (1100,'cpu2','cpu2','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Aracna',0);
 insert into medallausuario (usuario,medalla) VALUES ('cpu2','Aracna');
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu2','Cabeza Generica (C)');
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu2','Brazo Generico (BI)');
@@ -127,10 +133,10 @@ insert into medaparteusuario (usuario,medaparte) VALUES ('cpu2','Pierna Generica
 /* CPU3 */
 
 insert into usuario (nombre,pass,tipo,victorias,derrotas,torneos) values ('cpu3','cpu3','CPU',0,0,0);
-insert into medabot (saludmaxima,nombre,usuario,cabeza,brazoizq,brazoder,piernaizq,medalla,imagen) values (2500,'cpu3','cpu3','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Dragon',0);
+insert into medabot (saludmaxima,nombre,usuario,cabeza,brazoizq,brazoder,piernaizq,piernader,medalla,imagen) values (2500,'cpu3','cpu3','Cabeza Cohete (C)','Brazo Canon (BI)','Brazo Canon (BD)','Pierna Veloz (PI)','Pierna Veloz (PD)','Dragon',0);
 insert into medallausuario (usuario,medalla) VALUES ('cpu3','Dragon');
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Cabeza Cohete (C)');
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Brazo Canon (BI)');
-insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Brazo Canon (BI)');
+insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Brazo Canon (BD)');
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Pierna Veloz (PI)');
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Pierna Veloz (PD)');

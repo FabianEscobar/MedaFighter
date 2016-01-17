@@ -143,37 +143,45 @@ public class ConexionBD {
         
             if(stmt != null) {
             
-                String consultaUsuario1 = "INSERT INTO USUARIO (NOMBRE,PASS,TIPO,VICTORIAS,DERROTAS,TORNEOS) VALUES ('" + nombreUsuario +"','" + contrasenia +"','HUMANO',0,0,0)";
+                String consultaUsuario01 = "INSERT INTO USUARIO (NOMBRE,PASS,TIPO,VICTORIAS,DERROTAS,TORNEOS) VALUES ('" + nombreUsuario +"','" + contrasenia +"','HUMANO',0,0,0)";
                 
-                String consultaUsuario2 = "INSERT INTO MEDABOT (SALUDMAXIMA,NOMBRE,USUARIO,CABEZA,BRAZOIZQ,BRAZODER,PIERNAIZQ,PIERNADER,MEDALLA,IMAGEN) VALUES (1100,'" + nombreMedabot +"','" + nombreUsuario +"','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0)";
+                String consultaUsuario02 = "INSERT INTO MEDABOT (SALUDMAXIMA,NOMBRE,USUARIO,CABEZA,BRAZOIZQ,BRAZODER,PIERNAIZQ,PIERNADER,MEDALLA,IMAGEN) VALUES (1100,'" + nombreMedabot +"V1','" + nombreUsuario +"','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0)";
                 
-                String consultaUsuario3 = "INSERT INTO MEDALLAUSUARIO (USUARIO,MEDALLA) VALUES ('" + nombreUsuario +"','Mono')";
+                String consultaUsuario03 = "INSERT INTO MEDABOT (SALUDMAXIMA,NOMBRE,USUARIO,CABEZA,BRAZOIZQ,BRAZODER,PIERNAIZQ,PIERNADER,MEDALLA,IMAGEN) VALUES (1100,'" + nombreMedabot +"V2','" + nombreUsuario +"','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0)";
+                
+                String consultaUsuario04 = "INSERT INTO MEDABOT (SALUDMAXIMA,NOMBRE,USUARIO,CABEZA,BRAZOIZQ,BRAZODER,PIERNAIZQ,PIERNADER,MEDALLA,IMAGEN) VALUES (1100,'" + nombreMedabot +"V3','" + nombreUsuario +"','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0)";
+                                
+                String consultaUsuario05 = "INSERT INTO MEDALLAUSUARIO (USUARIO,MEDALLA) VALUES ('" + nombreUsuario +"','Mono')";
 
-                String consultaUsuario4 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Cabeza Generica (C)')";
+                String consultaUsuario06 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Cabeza Generica (C)')";
                 
-                String consultaUsuario5 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Brazo Generico (BI)')";
+                String consultaUsuario07 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Brazo Generico (BI)')";
                 
-                String consultaUsuario6 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Brazo Generico (BD)')";
+                String consultaUsuario08 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Brazo Generico (BD)')";
                 
-                String consultaUsuario7 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Pierna Generica (PI)')";
+                String consultaUsuario09 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Pierna Generica (PI)')";
                 
-                String consultaUsuario8 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Pierna Generica (PD)')";
+                String consultaUsuario10 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Pierna Generica (PD)')";
                 
-                stmt.executeUpdate(consultaUsuario1);
+                stmt.executeUpdate(consultaUsuario01);
                 
-                stmt.executeUpdate(consultaUsuario2);
+                stmt.executeUpdate(consultaUsuario02);
                 
-                stmt.executeUpdate(consultaUsuario3);
+                stmt.executeUpdate(consultaUsuario03);
                 
-                stmt.executeUpdate(consultaUsuario4);
+                stmt.executeUpdate(consultaUsuario04);
                 
-                stmt.executeUpdate(consultaUsuario5);
+                stmt.executeUpdate(consultaUsuario05);
                 
-                stmt.executeUpdate(consultaUsuario6);
+                stmt.executeUpdate(consultaUsuario06);
                 
-                stmt.executeUpdate(consultaUsuario7);
+                stmt.executeUpdate(consultaUsuario07);
                 
-                stmt.executeUpdate(consultaUsuario8);
+                stmt.executeUpdate(consultaUsuario08);
+                
+                stmt.executeUpdate(consultaUsuario09);
+                
+                stmt.executeUpdate(consultaUsuario10);
                 
                 registroCorrecto = true;
                 
