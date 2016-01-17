@@ -7,12 +7,29 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import medafighter.vistas.VistaCombate;
 
 /**
  *
  * @author Fabián
  */
 public class ControladorCombate implements ActionListener {
+    
+    private VistaCombate vc;
+    
+    
+    public ControladorCombate() {
+        
+        this.vc = new VistaCombate(this);        
+        
+    }
+    
+    public ControladorCombate(ArrayList<String> jugadores) {
+        
+        this.vc = new VistaCombate(this);        
+        
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

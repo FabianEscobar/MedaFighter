@@ -7,6 +7,9 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import medafighter.vistas.VistaMenu;
 
@@ -60,7 +63,16 @@ public class ControladorMenu implements ActionListener {
             
             if (((JButton)ae.getSource()).equals(this.vm.getTorneo())){
                 
-                this.ct = new ControladorTorneo();
+                try {
+                    
+                    this.ct = new ControladorTorneo();
+                } 
+                
+                catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorMenu.class.getName()).log(Level.SEVERE, null, ex);
+                
+                }
                        
                 this.vm.setVisible(false);
                 

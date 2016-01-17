@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -156,11 +157,11 @@ public class ConexionBD {
             
     }
     
-    public String[] buscarJugadores() throws SQLException{
+    public ArrayList<String> buscarJugadores() throws SQLException{
         
         boolean resultadoConexion = this.conectar();
         
-        String[] jugadores = null;
+        ArrayList<String> jugadores = new ArrayList<>();
         
         if(resultadoConexion == true) {
             
@@ -175,6 +176,8 @@ public class ConexionBD {
                 while(resultadoBusqueda.next()) {
                 
                     String nombre = resultadoBusqueda.getString(1);
+                    
+                    jugadores.add(nombre);
                     
                 }           
             

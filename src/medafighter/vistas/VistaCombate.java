@@ -5,6 +5,8 @@
  */
 package medafighter.vistas;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Fabián
@@ -14,8 +16,12 @@ public class VistaCombate extends javax.swing.JFrame {
     /**
      * Creates new form VistaCombate
      */
-    public VistaCombate() {
+    public VistaCombate(ActionListener al) {
+        
         initComponents();
+        
+        this.setVisible(true);
+        
     }
 
     /**

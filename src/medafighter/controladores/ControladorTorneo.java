@@ -8,10 +8,12 @@ package medafighter.controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import medafighter.modelo.ConexionBD;
 import medafighter.vistas.VistaTorneo;
 
@@ -29,17 +31,9 @@ public class ControladorTorneo implements ActionListener {
     
     private ConexionBD cbd;
     
-    public ControladorTorneo() {
+    public ControladorTorneo() throws SQLException {
         
         this.vt = new VistaTorneo(this);        
-        
-    }
-    
-    public String[] buscarJugadores() throws SQLException {
-        
-        String[] jugadores = this.cbd.buscarJugadores();
-        
-        return jugadores;
         
     }
 
@@ -48,17 +42,69 @@ public class ControladorTorneo implements ActionListener {
         
         if(vt != null){
             
-            if (((JButton)ae.getSource()).equals(this.vt.getTorneo())){
+            if ((ae.getSource()).equals(this.vt.getTorneo())){
                 
-                this.cc = new ControladorCombate();
+                ArrayList<String> jugadores = new ArrayList<>();
+                
+                String jugador1 = (String)this.vt.getJugador1().getSelectedItem();
+                jugadores.add(jugador1);
+                
+                String jugador2 = (String)this.vt.getJugador1().getSelectedItem();
+                jugadores.add(jugador2);
+                
+                String jugador3 = (String)this.vt.getJugador1().getSelectedItem();
+                jugadores.add(jugador3);
+                
+                String jugador4 = (String)this.vt.getJugador1().getSelectedItem();
+                jugadores.add(jugador4);
+                
+                String jugador5 = (String)this.vt.getJugador1().getSelectedItem();
+                jugadores.add(jugador5);
+                
+                String jugador6 = (String)this.vt.getJugador1().getSelectedItem();
+                jugadores.add(jugador6);
+                
+                String jugador7 = (String)this.vt.getJugador1().getSelectedItem();
+                jugadores.add(jugador7);
+                
+                String jugador8 = (String)this.vt.getJugador1().getSelectedItem();
+                jugadores.add(jugador8);
+                
+                boolean validador = true;
+                
+                for (int i = 0; i < jugadores.size()-1; i++) {
+			
+                    for (int j = i+1; j < jugadores.size(); j++) {
+			
+                        if(jugadores.get(i).equals(jugadores.get(j))){                            
+                                                        
+                            validador = false;
+                            
+                        }
+		
+                    }
+		
+                }
+                
+                if (validador == true){
+                    
+                    this.cc = new ControladorCombate(jugadores);
                        
-                this.vt.setVisible(false);
+                    this.vt.setVisible(false);
                 
-                this.vt.dispose();
+                    this.vt.dispose();
+                    
+                }
+                    
+                else {
+                            
+                JOptionPane.showMessageDialog(vt, "Los jugadores sólo pueden estar en una posición.");     
+                    
+                }  
                 
             }
             
-            if (((JButton)ae.getSource()).equals(this.vt.getVolver())){
+            if ((ae.getSource()).equals(this.vt.getVolver())){
                 
                 this.cm = new ControladorMenu();
                        
@@ -67,39 +113,6 @@ public class ControladorTorneo implements ActionListener {
                 this.vt.dispose();
                 
             }
-            
-            if (((JComboBox)ae.getSource()).equals(this.vt.getJugador1())||
-                    
-                ((JComboBox)ae.getSource()).equals(this.vt.getJugador2())||
-                    
-                ((JComboBox)ae.getSource()).equals(this.vt.getJugador3())||
-                    
-                ((JComboBox)ae.getSource()).equals(this.vt.getJugador4())||
-                    
-                ((JComboBox)ae.getSource()).equals(this.vt.getJugador5())||
-                    
-                ((JComboBox)ae.getSource()).equals(this.vt.getJugador6())||
-                    
-                ((JComboBox)ae.getSource()).equals(this.vt.getJugador7())||
-                    
-                ((JComboBox)ae.getSource()).equals(this.vt.getJugador8())){
-                
-                try {
-                    
-                    String[] jugadores = null; 
-                            
-                    jugadores = buscarJugadores();
-                
-                } 
-                
-                catch (SQLException ex) {
-                    
-                    Logger.getLogger(ControladorTorneo.class.getName()).log(Level.SEVERE, null, ex);
-                
-                }
-                
-            }
-            
             
         }
         
