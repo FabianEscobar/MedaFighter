@@ -19,7 +19,7 @@ public class ControladorCombate implements ActionListener {
     private VistaCombate vc;
     
     
-    public ControladorCombate() {
+    public ControladorCombate(String jugador1, String jugador2) {
         
         this.vc = new VistaCombate(this);        
         

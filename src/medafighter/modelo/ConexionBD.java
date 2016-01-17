@@ -224,6 +224,38 @@ public class ConexionBD {
         return jugadores;
         
     }
+    
+    public ArrayList<String> buscarJugadoresTipo(String tipoJugador) throws SQLException{
+        
+        boolean resultadoConexion = this.conectar();
+        
+        ArrayList<String> jugadores = new ArrayList<>();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT NOMBRE FROM USUARIO WHERE TIPO = '" + tipoJugador +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                while(resultadoBusqueda.next()) {
+                
+                    String nombre = resultadoBusqueda.getString(1);
+                    
+                    jugadores.add(nombre);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return jugadores;
+        
+    }
         
 }
     

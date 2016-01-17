@@ -63,37 +63,11 @@ public class VistaTorneo extends javax.swing.JFrame {
         
         this.setVisible(true);
         
-        agregarListenerBoton(al);
-        
-        agregarListenerComboBox(al);
+        agregarListener(al);
         
     }
     
-    void agregarListenerComboBox(ActionListener al){
-        
-        this.jugador1.addActionListener(al);
-        
-        this.jugador2.addActionListener(al);        
-        
-        this.jugador3.addActionListener(al);
-        
-        this.jugador4.addActionListener(al);
-        
-        this.jugador5.addActionListener(al);
-        
-        this.jugador6.addActionListener(al);
-        
-        this.jugador7.addActionListener(al);
-        
-        this.jugador8.addActionListener(al);
-        
-        this.torneo.addActionListener(al);
-        
-        this.volver.addActionListener(al);
-        
-    }
-    
-    void agregarListenerBoton(ActionListener al){
+    void agregarListener(ActionListener al){
         
         this.torneo.addActionListener(al);
         
