@@ -20,6 +20,8 @@ public class VistaCombate extends javax.swing.JFrame {
         
         initComponents();
         
+        this.setLocationRelativeTo(null);
+        
         this.setVisible(true);
         
     }
@@ -35,6 +37,8 @@ public class VistaCombate extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Medabatalla");
+        setLocation(new java.awt.Point(0, 0));
+        setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

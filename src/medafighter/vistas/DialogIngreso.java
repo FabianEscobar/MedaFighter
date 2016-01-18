@@ -28,6 +28,8 @@ public class DialogIngreso extends javax.swing.JDialog {
         
         initComponents();
         
+        this.setLocationRelativeTo(null);
+        
         nombreUsuarioTF.setText(jugador);
         
         this.setVisible(true);
@@ -53,6 +55,7 @@ public class DialogIngreso extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MedaFighter - Ingreso");
+        setAutoRequestFocus(false);
         setResizable(false);
 
         ingresar.setText("Ingresar");

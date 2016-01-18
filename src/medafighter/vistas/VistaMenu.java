@@ -20,6 +20,8 @@ public class VistaMenu extends javax.swing.JFrame {
         
         initComponents();
         
+        this.setLocationRelativeTo(null);
+        
         this.setVisible(true);
         
         agregarListener(al);        
@@ -56,6 +58,7 @@ public class VistaMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Menu");
+        setResizable(false);
 
         queHacerLabel.setText("¿Qué desea hacer?");
 

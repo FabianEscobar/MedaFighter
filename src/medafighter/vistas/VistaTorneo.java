@@ -26,6 +26,8 @@ public class VistaTorneo extends javax.swing.JFrame {
         
         initComponents();
         
+        this.setLocationRelativeTo(null);
+        
         ArrayList<String> jugadores = new ArrayList<>();
         
         this.cbd = new ConexionBD();
@@ -108,6 +110,7 @@ public class VistaTorneo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Torneo");
+        setResizable(false);
 
         jLabel1.setText("1.-");
 

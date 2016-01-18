@@ -27,6 +27,8 @@ public class VistaPrevia extends javax.swing.JFrame {
                 
         initComponents();
         
+        this.setLocationRelativeTo(null);
+        
         this.cbd = new ConexionBD();
         
         ArrayList<String> jugadoresHumanos = new ArrayList<>();
@@ -87,6 +89,7 @@ public class VistaPrevia extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Previa Medabatalla");
+        setResizable(false);
 
         queRobobatallaLabel.setText("¿Qué clase de robobatalla desea?");
 

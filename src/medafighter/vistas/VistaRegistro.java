@@ -20,6 +20,8 @@ public class VistaRegistro extends javax.swing.JFrame {
         
         initComponents();
         
+        this.setLocationRelativeTo(null);
+        
         this.setVisible(true);
         
         agregarListener(al);
@@ -58,6 +60,7 @@ public class VistaRegistro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Registro");
+        setResizable(false);
 
         registrarse.setText("Registrarse");
 
