@@ -25,7 +25,7 @@ public class ControladorCombate implements ActionListener {
         
     }
     
-    public ControladorCombate(ArrayList<String> jugadores) {
+    public ControladorCombate(ArrayList<String> jugadores, String tipoTorneo) {
         
         this.vc = new VistaCombate(this);        
         

@@ -62,7 +62,7 @@ create table USUARIO
 create table SESIONESACTIVAS
 (
 	NOMBRE VARCHAR(64) not null primary key,
-	PASS VARCHAR(64) not null	
+	PASS VARCHAR(64) not null
 );
 
 

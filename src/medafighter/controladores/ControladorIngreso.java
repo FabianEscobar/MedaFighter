@@ -86,7 +86,7 @@ public class ControladorIngreso implements ActionListener {
                         
                         Logger.getLogger(ControladorIngreso.class.getName()).log(Level.SEVERE, null, ex);
                     
-                    }
+                    }         
                     
                     this.cm = new ControladorMenu();
                        

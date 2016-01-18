@@ -82,7 +82,16 @@ public class ControladorMenu implements ActionListener {
             
             if (((JButton)ae.getSource()).equals(this.vm.getCerrarSesion())){
                 
-                this.ci = new ControladorIngreso();
+                try {
+                    
+                    this.ci = new ControladorIngreso();
+                } 
+                
+                catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorMenu.class.getName()).log(Level.SEVERE, null, ex);
+                
+                }
                        
                 this.vm.setVisible(false);
                 

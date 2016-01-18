@@ -90,7 +90,9 @@ public class ControladorTorneo implements ActionListener {
                 
                 if (validador == true){
                     
-                    this.cc = new ControladorCombate(jugadores);
+                    String tipoTorneo = (String)this.vt.getTipoTorneo().getSelectedItem();
+                    
+                    this.cc = new ControladorCombate(jugadores, tipoTorneo);
                        
                     this.vt.setVisible(false);
                 

@@ -107,6 +107,8 @@ public class VistaTorneo extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         torneo = new javax.swing.JButton();
         volver = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        tipoTorneo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Torneo");
@@ -134,6 +136,10 @@ public class VistaTorneo extends javax.swing.JFrame {
         torneo.setText("Comenzar torneo");
 
         volver.setText("Volver");
+
+        jLabel10.setText("Tipo de torneo");
+
+        tipoTorneo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Torneo Normal", "Torneo Avanzado" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,15 +184,19 @@ public class VistaTorneo extends javax.swing.JFrame {
                         .addGap(69, 69, 69)
                         .addComponent(jLabel5)
                         .addGap(10, 10, 10)
-                        .addComponent(jugador8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jugador8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(15, 15, 15)
+                        .addComponent(tipoTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addComponent(jLabel9)
-                .addGap(24, 24, 24)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel5)
                     .addComponent(jugador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,11 +220,15 @@ public class VistaTorneo extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jugador4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jugador7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(tipoTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(torneo)
                     .addComponent(volver))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -259,9 +273,14 @@ public class VistaTorneo extends javax.swing.JFrame {
     public javax.swing.JComboBox getJugador8(){
         return this.jugador8;
     }
+    
+    public javax.swing.JComboBox getTipoTorneo(){
+        return this.tipoTorneo;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -278,6 +297,7 @@ public class VistaTorneo extends javax.swing.JFrame {
     private javax.swing.JComboBox jugador6;
     private javax.swing.JComboBox jugador7;
     private javax.swing.JComboBox jugador8;
+    private javax.swing.JComboBox tipoTorneo;
     private javax.swing.JButton torneo;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables

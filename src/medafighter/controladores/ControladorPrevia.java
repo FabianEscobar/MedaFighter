@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import medafighter.modelo.ConexionBD;
 import medafighter.vistas.DialogIngreso;
+import medafighter.vistas.DialogRecords;
 import medafighter.vistas.VistaPrevia;
 
 /**
@@ -32,6 +33,8 @@ public class ControladorPrevia implements ActionListener {
     
     private DialogIngreso di;
     
+    private DialogRecords dr;
+    
     public ControladorPrevia() {
     
         this.vp = new VistaPrevia(this);
@@ -49,93 +52,103 @@ public class ControladorPrevia implements ActionListener {
             
             String jugador2 = (String)this.vp.getJugador2L().getSelectedValue();
             
-            boolean uBoolean1 = false;
+            if (!jugador1.equals(jugador2)){
+                
+                boolean uBoolean1 = false;
             
-            boolean uBoolean2 = false;
+                boolean uBoolean2 = false;
             
-            String tipoJugador1 = new String();
+                String tipoJugador1 = new String();
                     
-            String tipoJugador2 = new String();
+                String tipoJugador2 = new String();
             
-            try {       
+                try {       
                 
-                tipoJugador1 = this.cbd.buscarTipoJugador(jugador1);
+                    tipoJugador1 = this.cbd.buscarTipoJugador(jugador1);
                 
-                tipoJugador2 = this.cbd.buscarTipoJugador(jugador2);
+                    tipoJugador2 = this.cbd.buscarTipoJugador(jugador2);
                 
-            } 
+                } 
             
-            catch (SQLException ex) {
+                catch (SQLException ex) {
                 
-                Logger.getLogger(ControladorPrevia.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ControladorPrevia.class.getName()).log(Level.SEVERE, null, ex);
             
-            }
+                }
                     
-            try {
+                try {
                 
-                uBoolean1 = this.cbd.verificarSesion(jugador1);
+                    uBoolean1 = this.cbd.verificarSesion(jugador1);
                 
-                uBoolean2 = this.cbd.verificarSesion(jugador2);
+                    uBoolean2 = this.cbd.verificarSesion(jugador2);
             
-            } 
+                } 
             
-            catch (SQLException ex) {
+                catch (SQLException ex) {
                 
-                Logger.getLogger(ControladorPrevia.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ControladorPrevia.class.getName()).log(Level.SEVERE, null, ex);
             
-            }
+                }
             
-            if(tipoJugador1.equals("HUMANO")) {
+                if(tipoJugador1.equals("HUMANO")) {
                 
-                if(uBoolean1 == false) {
+                    if(uBoolean1 == false) {
                     
-                    di = new DialogIngreso(this.vp,true,jugador1);
+                        di = new DialogIngreso(this.vp,true,jugador1);
                     
-                }                
+                    }                
                 
-            }
+                }
             
-            if(tipoJugador2.equals("HUMANO")) {
+                if(tipoJugador2.equals("HUMANO")) {
                 
-                if(uBoolean2 == false) {
+                    if(uBoolean2 == false) {
                     
-                    di = new DialogIngreso(this.vp,true,jugador2);                  
+                        di = new DialogIngreso(this.vp,true,jugador2);                  
                     
-                }                
+                    }                
                 
-            }
+                }
             
-            try {
+                try {
                 
-                uBoolean1 = this.cbd.verificarSesion(jugador1);
+                    uBoolean1 = this.cbd.verificarSesion(jugador1);
                 
-                uBoolean2 = this.cbd.verificarSesion(jugador2);
+                    uBoolean2 = this.cbd.verificarSesion(jugador2);
             
-            } 
+                } 
             
-            catch (SQLException ex) {
+                catch (SQLException ex) {
                 
-                Logger.getLogger(ControladorPrevia.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ControladorPrevia.class.getName()).log(Level.SEVERE, null, ex);
             
-            }
+                }
             
-            if(tipoJugador1.equals("CPU")) uBoolean1 = true;
+                if(tipoJugador1.equals("CPU")) uBoolean1 = true;
             
-            if(tipoJugador2.equals("CPU")) uBoolean2 = true;
+                if(tipoJugador2.equals("CPU")) uBoolean2 = true;
             
-            if((uBoolean1 == true)&&(uBoolean2 == true)) {
+                if((uBoolean1 == true)&&(uBoolean2 == true)) {
                 
-                this.cc = new ControladorCombate(jugador1,jugador2);
+                    this.cc = new ControladorCombate(jugador1,jugador2);
                        
-                this.vp.setVisible(false);
+                    this.vp.setVisible(false);
                 
-                this.vp.dispose();
+                    this.vp.dispose();
+                
+                }
+            
+                else {
+                
+                    JOptionPane.showMessageDialog(this.vp, "No ha sido posible iniciar la partida debido a que no todos los jugadores fueron ingresados. Si desea iniciar una partida, puede hacer otro intento ingresando a los jugadores que falten.");
+                
+                }
                 
             }
             
             else {
                 
-                JOptionPane.showMessageDialog(this.vp, "No ha sido posible iniciar la partida debido a que no todos los jugadores fueron ingresados. Si desea iniciar una partida, puede hacer otro intento ingresando a los jugadores que falten.");
+                JOptionPane.showMessageDialog(this.vp, "No se puede enfrentar un jugador a sí mismo.");
                 
             }
              
@@ -148,6 +161,12 @@ public class ControladorPrevia implements ActionListener {
             this.vp.setVisible(false);
                 
             this.vp.dispose();
+            
+        }
+        
+        if ((ae.getSource()).equals(this.vp.getRecords())){
+            
+            this.dr = new DialogRecords(this.vp,true);
             
         }
     
