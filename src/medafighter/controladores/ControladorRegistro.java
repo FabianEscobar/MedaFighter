@@ -138,7 +138,17 @@ public class ControladorRegistro implements ActionListener {
             
             if (((JButton)ae.getSource()).equals(this.vr.getVolver())){
                 
-                this.ci = new ControladorIngreso();
+                try {
+                
+                    this.ci = new ControladorIngreso();
+                
+                } 
+                
+                catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorRegistro.class.getName()).log(Level.SEVERE, null, ex);
+                
+                }
                 
                 this.vr.setVisible(false);
                 

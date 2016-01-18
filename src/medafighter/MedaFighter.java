@@ -5,8 +5,10 @@
  */
 package medafighter;
 
+import java.sql.SQLException;
 import javax.swing.UIManager;
 import medafighter.controladores.ControladorIngreso;
+import medafighter.modelo.ConexionBD;
 
 /**
  *
@@ -17,7 +19,7 @@ public class MedaFighter {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         
         try { 
     

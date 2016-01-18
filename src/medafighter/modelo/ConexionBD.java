@@ -256,6 +256,102 @@ public class ConexionBD {
         return jugadores;
         
     }
+    
+    public void limpiarSesionesActivas() throws SQLException {
+        
+        boolean resultadoConexion = this.conectar();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "DELETE FROM SESIONESACTIVAS WHERE 1=1";
+        
+                stmt.executeUpdate(consultaUsuario);    
+            
+            }  
+            
+        }
+        
+    }
+    
+    public void agregarSesionActiva(String nombreUsuario, String contrasenia) throws SQLException {
+        
+        boolean resultadoConexion = this.conectar();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "INSERT INTO SESIONESACTIVAS (NOMBRE,PASS) VALUES('" + nombreUsuario +"','" + contrasenia +"')";
+        
+                stmt.executeUpdate(consultaUsuario);    
+            
+            }  
+            
+        }
+        
+    }
+    
+    public boolean verificarSesion(String nombreUsuario) throws SQLException {
+        
+        boolean uBoolean = false;
+    
+        boolean resultadoConexion = this.conectar();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT * FROM SESIONESACTIVA WHERE NOMBRE = '" + nombreUsuario +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                if(resultadoBusqueda.next()) {
+                
+                    uBoolean = true;
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return uBoolean;
+    
+    }
+    
+    public String buscarTipoJugador(String nombreJugador) throws SQLException{
+        
+        boolean resultadoConexion = this.conectar();
+        
+        String tipoJugador = new String();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT * FROM USUARIO WHERE NOMBRE = '"+ nombreJugador +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                tipoJugador = resultadoBusqueda.getString("TIPO");
+                    
+            }  
+            
+        }
+        
+        return tipoJugador;
+        
+    }
         
 }
     

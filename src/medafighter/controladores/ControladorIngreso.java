@@ -29,7 +29,11 @@ public class ControladorIngreso implements ActionListener {
     
     private ConexionBD cbd;
     
-    public ControladorIngreso() {
+    public ControladorIngreso() throws SQLException {
+        
+        this.cbd = new ConexionBD();
+        
+        this.cbd.limpiarSesionesActivas();
         
         this.vi = new VistaIngreso(this);        
         
@@ -52,40 +56,51 @@ public class ControladorIngreso implements ActionListener {
             
             if (((JButton)ae.getSource()).equals(this.vi.getIngresar())) {
                 
-                   String nombreUsuario = this.vi.getNombreUsuario().getText();
+                String nombreUsuario = this.vi.getNombreUsuario().getText();
                    
-                   String contrasenia = this.vi.getContrasenia().getText();
+                String contrasenia = this.vi.getContrasenia().getText();
                    
-                   boolean uBoolean = false;
+                boolean uBoolean = false;
                 
-                   try {
+                try {
                    
-                       uBoolean = verificarUsuario(nombreUsuario, contrasenia);
+                    uBoolean = verificarUsuario(nombreUsuario, contrasenia);
                     
-                   } 
+                } 
                    
-                   catch (SQLException ex) {
+                catch (SQLException ex) {
                    
-                       Logger.getLogger(ControladorIngreso.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ControladorIngreso.class.getName()).log(Level.SEVERE, null, ex);
                 
-                   }
+                }
                    
-                    if (uBoolean == true){
+                if (uBoolean == true){
                        
-                        this.cm = new ControladorMenu();
-                       
-                        this.vi.setVisible(false);
-                
-                        this.vi.dispose();
-                       
-                    }
-                    
-                    else{
+                    try {
                         
-                        JOptionPane.showMessageDialog(vi, "El jugador ingresado no existe o la contraseña ingresada es incorrecta.");
-                                                
+                        cbd.agregarSesionActiva(nombreUsuario, contrasenia);
+                    
+                    } 
+                    
+                    catch (SQLException ex) {
+                        
+                        Logger.getLogger(ControladorIngreso.class.getName()).log(Level.SEVERE, null, ex);
+                    
                     }
                     
+                    this.cm = new ControladorMenu();
+                       
+                    this.vi.setVisible(false);
+                
+                    this.vi.dispose();
+                       
+                }
+                    
+                else{
+                        
+                    JOptionPane.showMessageDialog(vi, "El jugador ingresado no existe o la contraseña ingresada es incorrecta.");
+                                                
+                }  
                 
             }
             

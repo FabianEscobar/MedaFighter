@@ -59,6 +59,12 @@ create table USUARIO
 	TORNEOS INTEGER default 0 not null
 );
 
+create table SESIONESACTIVAS
+(
+	NOMBRE VARCHAR(64) not null primary key,
+	PASS VARCHAR(64) not null	
+);
+
 
 /*Script*/
 /****************** MEDAPARTES  ************************/
