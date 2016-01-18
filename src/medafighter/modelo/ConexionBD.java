@@ -309,7 +309,7 @@ public class ConexionBD {
         
             if(stmt != null) {
             
-                String consultaUsuario = "SELECT * FROM SESIONESACTIVA WHERE NOMBRE = '" + nombreUsuario +"'";
+                String consultaUsuario = "SELECT * FROM SESIONESACTIVAS WHERE NOMBRE = '" + nombreUsuario +"'";
         
                 ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
             
@@ -343,8 +343,12 @@ public class ConexionBD {
         
                 ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
             
+                if(resultadoBusqueda.next()){
+                
                 tipoJugador = resultadoBusqueda.getString("TIPO");
-                    
+                
+                }
+                
             }  
             
         }
