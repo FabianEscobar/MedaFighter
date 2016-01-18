@@ -28,11 +28,9 @@ public class DialogIngreso extends javax.swing.JDialog {
         
         initComponents();
         
-        this.setVisible(true);
-        
         nombreUsuarioTF.setText(jugador);
         
-        cbd = new ConexionBD();
+        this.setVisible(true);
         
     }
 
@@ -133,6 +131,8 @@ public class DialogIngreso extends javax.swing.JDialog {
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
         
         boolean uBoolean = false;
+        
+        cbd = new ConexionBD();
                 
         try {
                    

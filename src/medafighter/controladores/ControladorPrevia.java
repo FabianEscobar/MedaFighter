@@ -87,7 +87,7 @@ public class ControladorPrevia implements ActionListener {
             
             if(tipoJugador1.equals("HUMANO")) {
                 
-                if(uBoolean1 = false) {
+                if(uBoolean1 == false) {
                     
                     di = new DialogIngreso(this.vp,true,jugador1);
                     
@@ -97,7 +97,7 @@ public class ControladorPrevia implements ActionListener {
             
             if(tipoJugador2.equals("HUMANO")) {
                 
-                if(uBoolean2 = false) {
+                if(uBoolean2 == false) {
                     
                     di = new DialogIngreso(this.vp,true,jugador2);                  
                     

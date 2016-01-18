@@ -27,6 +27,30 @@ public class VistaPrevia extends javax.swing.JFrame {
                 
         initComponents();
         
+        this.cbd = new ConexionBD();
+        
+        ArrayList<String> jugadoresHumanos = new ArrayList<>();
+            
+        try {
+            
+            jugadoresHumanos = cbd.buscarJugadoresTipo("HUMANO");
+            
+        } 
+            
+        catch (SQLException ex) {
+            
+            Logger.getLogger(VistaPrevia.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+            
+        String[] arrayJugadoresHumanos;
+            
+        arrayJugadoresHumanos = jugadoresHumanos.toArray(new String[100]);
+            
+        jugador1L.setListData(arrayJugadoresHumanos);
+            
+        jugador2L.setListData(arrayJugadoresHumanos);
+        
         this.setVisible(true);
         
         agregarListener(al);       
@@ -232,7 +256,6 @@ public class VistaPrevia extends javax.swing.JFrame {
             jugador2L.setListData(arrayJugadoresCPU);
             
         }
-        
         
     }//GEN-LAST:event_modoJuegoCBItemStateChanged
 
