@@ -133,8 +133,12 @@ public class ControladorPrevia implements ActionListener {
                     if((uBoolean1 == true)&&(uBoolean2 == true)) {
                 
                         String modoJuego = (String)this.vp.getModoJuegoCB().getSelectedItem();
+                        
+                        String medabotJ1 = (String)this.vp.getMedabotJ1().getSelectedItem();
+                        
+                        String medabotJ2 = (String)this.vp.getMedabotJ1().getSelectedItem();
                     
-                        this.cc = new ControladorCombate(jugador1,jugador2,modoJuego);
+                        this.cc = new ControladorCombate(jugador1,jugador2,medabotJ1,medabotJ2,modoJuego);
                        
                         this.vp.setVisible(false);
                 

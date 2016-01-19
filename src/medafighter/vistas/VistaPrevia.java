@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import medafighter.modelo.ConexionBD;
 
 /**
@@ -89,6 +90,9 @@ public class VistaPrevia extends javax.swing.JFrame {
         robobatalla = new javax.swing.JButton();
         volver = new javax.swing.JButton();
         records = new javax.swing.JButton();
+        medabotJ1 = new javax.swing.JComboBox();
+        medabotJ2 = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Previa Medabatalla");
@@ -119,6 +123,12 @@ public class VistaPrevia extends javax.swing.JFrame {
 
         records.setText("Ver Records");
 
+        medabotJ1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Version 1", "Version 2", "Version 3" }));
+
+        medabotJ2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Version 1", "Version 2", "Version 3" }));
+
+        jLabel1.setText("Medabot");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,14 +147,19 @@ public class VistaPrevia extends javax.swing.JFrame {
                         .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(modoJuegoLabel)
-                            .addComponent(jugadoresLabel))
+                            .addComponent(jugadoresLabel)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(modoJuegoCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jugador1SP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jugador1SP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(medabotJ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jugador2SP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(medabotJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jugador2SP, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(queRobobatallaLabel)))
@@ -168,7 +183,12 @@ public class VistaPrevia extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(jugadoresLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(medabotJ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(medabotJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(robobatalla)
                     .addComponent(volver)
@@ -209,6 +229,20 @@ public class VistaPrevia extends javax.swing.JFrame {
             
             jugador2L.setListData(arrayJugadoresHumanos);
             
+            String[] arrayMedabots = new String[3];
+            
+            arrayMedabots[0] = "Version 1";
+            
+            arrayMedabots[1] = "Version 2";
+            
+            arrayMedabots[2] = "Version 3";
+            
+            DefaultComboBoxModel modeloMedabots = new DefaultComboBoxModel(arrayMedabots);
+            
+            medabotJ1.setModel(modeloMedabots);
+            
+            medabotJ2.setModel(modeloMedabots);
+            
         }
         
         if(modoJuego.equals("Jugador v/s CPU")){
@@ -241,6 +275,26 @@ public class VistaPrevia extends javax.swing.JFrame {
             
             jugador2L.setListData(arrayJugadoresCPU);
             
+            String[] arrayMedabotsJ1 = new String[3];
+            
+            String[] arrayMedabotsJ2 = new String[1];
+            
+            arrayMedabotsJ1[0] = "Version 1";
+            
+            arrayMedabotsJ1[1] = "Version 2";
+            
+            arrayMedabotsJ1[2] = "Version 3";
+            
+            arrayMedabotsJ2[0] = "Version 1";
+            
+            DefaultComboBoxModel modeloMedabotsJ1 = new DefaultComboBoxModel(arrayMedabotsJ1);
+            
+            medabotJ2.setModel(modeloMedabotsJ1);
+            
+            DefaultComboBoxModel modeloMedabotsJ2 = new DefaultComboBoxModel(arrayMedabotsJ2);
+            
+            medabotJ2.setModel(modeloMedabotsJ2);
+            
         }
         
         if(modoJuego.equals("CPU V/S CPU")){
@@ -266,6 +320,16 @@ public class VistaPrevia extends javax.swing.JFrame {
             
             jugador2L.setListData(arrayJugadoresCPU);
             
+            String[] arrayMedabots = new String[1];
+            
+            arrayMedabots[0] = "Version 1";
+            
+            DefaultComboBoxModel modeloMedabots = new DefaultComboBoxModel(arrayMedabots);
+            
+            medabotJ1.setModel(modeloMedabots);
+            
+            medabotJ2.setModel(modeloMedabots);
+            
         }
         
     }//GEN-LAST:event_modoJuegoCBItemStateChanged
@@ -282,6 +346,14 @@ public class VistaPrevia extends javax.swing.JFrame {
         return this.modoJuegoCB;
     }
     
+    public javax.swing.JComboBox getMedabotJ1(){
+        return this.medabotJ1;
+    }
+    
+    public javax.swing.JComboBox getMedabotJ2(){
+        return this.medabotJ2;
+    }
+    
     public javax.swing.JButton getRobobatalla(){
         return this.robobatalla;
     }
@@ -295,11 +367,14 @@ public class VistaPrevia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JList jugador1L;
     private javax.swing.JScrollPane jugador1SP;
     private javax.swing.JList jugador2L;
     private javax.swing.JScrollPane jugador2SP;
     private javax.swing.JLabel jugadoresLabel;
+    private javax.swing.JComboBox medabotJ1;
+    private javax.swing.JComboBox medabotJ2;
     private javax.swing.JComboBox modoJuegoCB;
     private javax.swing.JLabel modoJuegoLabel;
     private javax.swing.JLabel queRobobatallaLabel;
