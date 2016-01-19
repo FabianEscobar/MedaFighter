@@ -356,6 +356,130 @@ public class ConexionBD {
         return tipoJugador;
         
     }
+    
+    public boolean guardarMedabot(String versionMedabot, String jugador, ArrayList<String> medapartes, String medalla) throws SQLException {
+        
+        boolean medabotGuardado = false;
+        
+        String nombreMedabot = new String();
+        
+        if (versionMedabot.equals("Version 1")) {
+            
+            nombreMedabot = ""+jugador+"V1" ;
+            
+        }
+        
+        if (versionMedabot.equals("Version 2")) {
+            
+            nombreMedabot = ""+jugador+"V2" ;
+            
+        }
+        
+        if (versionMedabot.equals("Version 3")) {
+            
+            nombreMedabot = ""+jugador+"V3" ;
+            
+        }
+        
+        boolean resultadoConexion = this.conectar();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consulta = "UPDATE MEDABOT SET CABEZA = '" + medapartes.get(0) +"' WHERE NOMBRE = '" + nombreMedabot +"'";
+                stmt.executeUpdate(consulta);
+                
+                consulta = "UPDATE MEDABOT SET BRAZOIZQ = '" + medapartes.get(1) +"' WHERE NOMBRE = '" + nombreMedabot +"'";
+                stmt.executeUpdate(consulta);
+                
+                consulta = "UPDATE MEDABOT SET BRAZODER = '" + medapartes.get(2) +"' WHERE NOMBRE = '" + nombreMedabot +"'";
+                stmt.executeUpdate(consulta);
+                
+                consulta = "UPDATE MEDABOT SET PIERNAIZQ = '" + medapartes.get(3) +"' WHERE NOMBRE = '" + nombreMedabot +"'";
+                stmt.executeUpdate(consulta);
+                
+                consulta = "UPDATE MEDABOT SET PIERNADER = '" + medapartes.get(4) +"' WHERE NOMBRE = '" + nombreMedabot +"'";
+                stmt.executeUpdate(consulta);
+                
+                consulta = "UPDATE MEDABOT SET MEDALLA = '" + medalla +"' WHERE NOMBRE = '" + nombreMedabot +"'";
+                stmt.executeUpdate(consulta);
+                
+                medabotGuardado = true;
+                
+            }           
+            
+        }  
+        
+        return medabotGuardado;
+        
+    }
+    
+    public ArrayList<String> buscarMedapartesTipo(String tipoMedaparte) throws SQLException{
+        
+        boolean resultadoConexion = this.conectar();
+        
+        ArrayList<String> medapartes = new ArrayList<>();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT NOMBRE FROM MEDAPARTE WHERE TIPO = '" + tipoMedaparte +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                while(resultadoBusqueda.next()) {
+                
+                    String nombre = resultadoBusqueda.getString(1);
+                    
+                    medapartes.add(nombre);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return medapartes;
+        
+    }
+    
+    public ArrayList<String> buscarMedallas() throws SQLException{
+        
+        boolean resultadoConexion = this.conectar();
+        
+        ArrayList<String> medallas = new ArrayList<>();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT NOMBRE FROM MEDALLA";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                while(resultadoBusqueda.next()) {
+                
+                    String nombre = resultadoBusqueda.getString(1);
+                    
+                    medallas.add(nombre);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return medallas;
+        
+    }
         
 }
     

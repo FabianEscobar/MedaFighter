@@ -130,7 +130,9 @@ public class ControladorPrevia implements ActionListener {
             
                 if((uBoolean1 == true)&&(uBoolean2 == true)) {
                 
-                    this.cc = new ControladorCombate(jugador1,jugador2);
+                    String modoJuego = (String)this.vp.getModoJuegoCB().getSelectedItem();
+                    
+                    this.cc = new ControladorCombate(jugador1,jugador2,modoJuego);
                        
                     this.vp.setVisible(false);
                 

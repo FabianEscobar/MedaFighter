@@ -6,21 +6,79 @@
 package medafighter.vistas;
 
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import medafighter.modelo.ConexionBD;
 
 /**
  *
  * @author Fabián
  */
 public class VistaMedabot extends javax.swing.JFrame {
+    
+    private ConexionBD cbd;
 
     /**
      * Creates new form VistaMedabot
      */
-    public VistaMedabot(ActionListener al) {
+    public VistaMedabot(ActionListener al) throws SQLException {
         
         initComponents();
         
         this.setLocationRelativeTo(null);
+        
+        ArrayList<String> jugadores = new ArrayList<>();
+        
+        ArrayList<String> cabezas = new ArrayList<>();
+        ArrayList<String> brazosIzq = new ArrayList<>();
+        ArrayList<String> brazosDer = new ArrayList<>();
+        ArrayList<String> piernasIzq = new ArrayList<>();
+        ArrayList<String> piernasDer = new ArrayList<>();
+        ArrayList<String> medallas = new ArrayList<>();
+        
+        this.cbd = new ConexionBD();
+        
+        jugadores = cbd.buscarJugadoresTipo("HUMANO");
+        
+        cabezas = cbd.buscarMedapartesTipo("Cabeza");
+        brazosIzq = cbd.buscarMedapartesTipo("BrazoIzq");
+        brazosDer = cbd.buscarMedapartesTipo("BrazoDer");
+        piernasIzq = cbd.buscarMedapartesTipo("PiernaIzq");
+        piernasDer = cbd.buscarMedapartesTipo("PiernaDer");
+        medallas = cbd.buscarMedallas();
+                
+        String[] arrayJugadores;
+        String[] arrayCabezas;
+        String[] arrayBrazosIzq;
+        String[] arrayBrazosDer;
+        String[] arrayPiernasIzq;
+        String[] arrayPiernasDer;
+        String[] arrayMedallas;
+        
+        arrayJugadores = jugadores.toArray(new String[100]);
+        arrayCabezas = cabezas.toArray(new String[100]);
+        arrayBrazosIzq = brazosIzq.toArray(new String[100]);
+        arrayBrazosDer = brazosDer.toArray(new String[100]);
+        arrayPiernasIzq = piernasIzq.toArray(new String[100]);
+        arrayPiernasDer = piernasDer.toArray(new String[100]);
+        arrayMedallas = medallas.toArray(new String[100]);
+        
+        DefaultComboBoxModel modeloJugadores = new DefaultComboBoxModel(arrayJugadores);
+        DefaultComboBoxModel modeloCabezas = new DefaultComboBoxModel(arrayCabezas);
+        DefaultComboBoxModel modeloBrazosIzq = new DefaultComboBoxModel(arrayBrazosIzq);
+        DefaultComboBoxModel modeloBrazosDer = new DefaultComboBoxModel(arrayBrazosDer);
+        DefaultComboBoxModel modeloPiernasIzq = new DefaultComboBoxModel(arrayPiernasIzq);
+        DefaultComboBoxModel modeloPiernasDer = new DefaultComboBoxModel(arrayPiernasDer);
+        DefaultComboBoxModel modeloMedallas = new DefaultComboBoxModel(arrayMedallas);
+        
+        jugador.setModel(modeloJugadores);
+        cabeza.setModel(modeloCabezas);
+        brazoIzquierdo.setModel(modeloBrazosIzq);
+        brazoDerecho.setModel(modeloBrazosDer);
+        piernaIzquierda.setModel(modeloPiernasIzq);
+        piernaDerecha.setModel(modeloPiernasDer);
+        medalla.setModel(modeloMedallas);
         
         this.setVisible(true);
         
@@ -41,6 +99,10 @@ public class VistaMedabot extends javax.swing.JFrame {
         this.cabeza.addActionListener(al);
         
         this.medalla.addActionListener(al);
+        
+        this.jugador.addActionListener(al);
+        
+        this.versionMedabot.addActionListener(al);
         
         this.guardar.addActionListener(al);
         
@@ -74,6 +136,11 @@ public class VistaMedabot extends javax.swing.JFrame {
         guardar = new javax.swing.JButton();
         volver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        versionMedabot = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jugador = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -87,8 +154,6 @@ public class VistaMedabot extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        cabeza.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setText("Brazo Izquierdo");
 
         jLabel3.setText("Brazo Derecho");
@@ -97,79 +162,92 @@ public class VistaMedabot extends javax.swing.JFrame {
 
         jLabel5.setText("Pierna Derecha");
 
-        brazoIzquierdo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        brazoDerecho.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        piernaIzquierda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        piernaDerecha.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel6.setText("Cabeza");
 
         jLabel7.setText("Medalla");
-
-        medalla.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         guardar.setText("Guardar");
 
         volver.setText("Volver");
 
-        jLabel1.setText("Escoja las medapartes de su Medabot para la batalla");
+        jLabel1.setText("Escoja las medapartes de su Medabot para la batalla.");
+
+        versionMedabot.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Version 1", "Version 2", "Version 3" }));
+
+        jLabel8.setText("Versión Medabot");
+
+        jLabel9.setText("Jugador");
+
+        jLabel10.setText("Si no ha iniciado sesión, deberá hacerlo para poder guardar cambios.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel2)
-                    .addComponent(brazoIzquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(piernaIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel6)
-                    .addComponent(cabeza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(medalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(guardar)
-                        .addGap(52, 52, 52)
-                        .addComponent(volver)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(jugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(10, 10, 10)
+                .addComponent(versionMedabot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(92, 160, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel2)
+                            .addComponent(brazoIzquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(piernaIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(193, 193, 193))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel6)
+                            .addComponent(cabeza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(medalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(guardar)
+                                .addGap(52, 52, 52)
+                                .addComponent(volver)))
+                        .addGap(9, 9, 9)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel5)
                     .addComponent(piernaDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(brazoDerecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(29, 29, 29))
+                .addGap(130, 130, 130))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(versionMedabot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cabeza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(brazoIzquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel7)
-                        .addGap(8, 8, 8)
-                        .addComponent(medalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(piernaIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -177,12 +255,24 @@ public class VistaMedabot extends javax.swing.JFrame {
                         .addGap(171, 171, 171)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(piernaDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(piernaDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(brazoIzquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel7)
+                        .addGap(8, 8, 8)
+                        .addComponent(medalla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(96, 96, 96)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(piernaIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardar)
                     .addComponent(volver))
-                .addGap(29, 29, 29))
+                .addContainerGap())
         );
 
         pack();
@@ -220,6 +310,14 @@ public class VistaMedabot extends javax.swing.JFrame {
         return this.medalla;
     }
     
+    public javax.swing.JComboBox getJugador(){
+        return this.jugador;
+    }
+    
+    public javax.swing.JComboBox getVersionMedabot(){
+        return this.versionMedabot;
+    }
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox brazoDerecho;
@@ -227,17 +325,22 @@ public class VistaMedabot extends javax.swing.JFrame {
     private javax.swing.JComboBox cabeza;
     private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox jugador;
     private javax.swing.JComboBox medalla;
     private javax.swing.JComboBox piernaDerecha;
     private javax.swing.JComboBox piernaIzquierda;
+    private javax.swing.JComboBox versionMedabot;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }
