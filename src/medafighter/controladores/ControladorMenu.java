@@ -43,7 +43,17 @@ public class ControladorMenu implements ActionListener {
     
             if (((JButton)ae.getSource()).equals(this.vm.getAjustesMedabot())){
                 
-                this.cmed = new ControladorMedabot();
+                try {
+                    
+                    this.cmed = new ControladorMedabot();
+                
+                } 
+                
+                catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorMenu.class.getName()).log(Level.SEVERE, null, ex);
+                
+                }
                        
                 this.vm.setVisible(false);
                 
