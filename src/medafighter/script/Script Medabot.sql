@@ -81,6 +81,9 @@ insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio
 insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Brazo Canon (BD)',500,'BrazoDer',40,'Disparo',50,20,0,0,2);
 insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Brazo Canon (BI)',500,'BrazoIzq',40,'Disparo',50,30,0,0,2);
 
+insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Brazo Espada (BD)',500,'BrazoDer',70,'Cuerpo a cuerpo',50,35,0,0,3);
+insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Brazo Escudo (BI)',1000,'BrazoIzq',10,'Cuerpo a cuerpo',100,35,0,0,3);
+
 insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Brazo Noqueador (BD)',500,'BrazoDer',10,'Cuerpo a cuerpo',50,45,0,0,1);
 insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Brazo Noqueador (BI)',500,'BrazoIzq',10,'Cuerpo a cuerpo',50,30,0,0,1);
 
@@ -95,6 +98,9 @@ insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio
 insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Pierna Generica (PD)',200,'PiernaDer',5,'Cuerpo a cuerpo',20,40,0,5,1);
 insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Pierna Generica (PI)',200,'PiernaIzq',5,'Cuerpo a cuerpo',20,40,0,5,1);
 
+insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Pierna Armadura (PD)',1000,'PiernaDer',15,'Cuerpo a cuerpo',50,40,0,5,2);
+insert into medaparte (nombre,saludmaxima,tipo,ataque,habilidad,defensa,precisio,recuperacion,esquive,puntoshabilidad) values ('Pierna Armadura (PI)',1000,'PiernaIzq',15,'Cuerpo a cuerpo',50,40,0,5,2);
+
 
 /* Medallas */
 insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Escarabajo','precision',50,'venganza','Poder');
@@ -104,12 +110,12 @@ insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('
 insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Aracna','precision',50,'racha','Velocidad');
 insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Gato','ataqueCercano',50,'concentracion','Velocidad');
 insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Serpiente','defensa',50,'venganza','Regeneracion');
-insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Fenix','esquive',50,'racha','Regeneracion');
-insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Dragon','precision',50,'concentracion','Regeneracion');
-insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Demonio','ataqueCercano',50,'venganza','Reaccion');
-insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Angel','defensa',50,'racha','Reaccion');
-insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Fantasma','esquive',50,'concentracion','Reaccion');
-
+insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Fenix','esquive',80,'racha','Regeneracion');
+insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Dragon','precision',85,'concentracion','Regeneracion');
+insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Demonio','ataqueCercano',85,'venganza','Reaccion');
+insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Angel','defensa',85,'racha','Reaccion');
+insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Fantasma','esquive',75,'concentracion','Reaccion');
+insert into medalla (nombre,potenciador,cantidad,tipocarga,medafuerza) values ('Caballero','defensa',60,'fe','Invulnerabilidad');
 
 /****************** PNJs  ************************/
 
@@ -146,3 +152,14 @@ insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Brazo Canon (BI
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Brazo Canon (BD)');
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Pierna Veloz (PI)');
 insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Pierna Veloz (PD)');
+
+/* CPU4 */
+
+insert into usuario (nombre,pass,tipo,victorias,derrotas,torneos) values ('cpu4','cpu4','CPU',0,0,0);
+insert into medabot (saludmaxima,nombre,usuario,cabeza,brazoizq,brazoder,piernaizq,piernader,medalla,imagen) values (2500,'cpu4','cpu4','Cabeza Tanque (C)','Brazo Escudo (BI)','Brazo Espada (BD)','Pierna Armadura (PI)','Pierna Armadura (PD)','Tortuga',0);
+insert into medallausuario (usuario,medalla) VALUES ('cpu4','Tortuga');
+insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Cabeza Tanque (C)');
+insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Brazo Escudo (BI)');
+insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Brazo Espada (BD)');
+insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Pierna Armadura (PI)');
+insert into medaparteusuario (usuario,medaparte) VALUES ('cpu3','Pierna Armadura (PD)');

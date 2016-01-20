@@ -28,13 +28,248 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="esquivarJ1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="atacarJ1" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="rendirseJ1" min="-2" max="-2" attributes="0"/>
+                  <Component id="defenderJ1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="380" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="esquivarJ2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="atacarJ2" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="rendirseJ2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="defenderJ2" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="saludMedabotJ1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="nombreMedabotJ1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="jProgressBar2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="saludMedabotJ2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="nombreMedabotJ2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="medafuerzaJ1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="jProgressBar3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="medafuerzaJ2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Component id="jProgressBar4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="600" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="nombreMedabotJ1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nombreMedabotJ2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="jProgressBar2" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Component id="saludMedabotJ1" min="-2" max="-2" attributes="0"/>
+                  <Component id="saludMedabotJ2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="343" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="medafuerzaJ1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jProgressBar3" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="medafuerzaJ2" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jProgressBar4" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="atacarJ1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="defenderJ1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="esquivarJ1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rendirseJ1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="atacarJ2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="defenderJ2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="esquivarJ2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rendirseJ2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="logBatalla">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="nombreMedabotJ1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nombreMedabotJ2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel2"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Puntos de salud"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="jProgressBar2">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Puntos de salud"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="jProgressBar3">
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="jProgressBar4">
+    </Component>
+    <Component class="javax.swing.JLabel" name="saludMedabotJ1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel7"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="saludMedabotJ2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel8"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="atacarJ1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Atacar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="esquivarJ1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Esquivar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="defenderJ1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Defender"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="rendirseJ1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rendirse"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="esquivarJ2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Esquivar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="defenderJ2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Defender"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="rendirseJ2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rendirse"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="atacarJ2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Atacar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="medafuerzaJ1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Medafuerza"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="medafuerzaJ2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Medafuerza"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

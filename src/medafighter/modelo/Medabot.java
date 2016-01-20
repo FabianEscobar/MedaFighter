@@ -29,6 +29,8 @@ public class Medabot {
     
     private int saludMaxima;
     
+    private int saludActual;
+    
     public void atacar() {
         
         

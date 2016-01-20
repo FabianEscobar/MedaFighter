@@ -17,4 +17,12 @@ public class Robobatalla {
     
     private int turno;
     
+
+
+    public Robobatalla() {
+
+        
+
+    }  
+
 }
