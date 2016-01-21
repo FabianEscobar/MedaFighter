@@ -5,7 +5,54 @@
  */
 package medafighter.modelo;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 
 public class JugadorHumano extends Jugador {
     
+    public JugadorHumano (String nombre, String versionMedabot) throws SQLException {
+    
+        this.cbd = new ConexionBD();
+        
+        this.nombre = nombre;
+        
+        String nombreMedabot = new String();
+                
+        nombreMedabot = this.cbd.buscarNombreMedabot(this.nombre);
+        
+        ArrayList<Object> datosJugador = new ArrayList<>();
+        
+        datosJugador = cbd.buscarJugador(this.nombre);
+        
+        this.tipo = (String)datosJugador.get(2);
+        
+        this.victorias = (Integer)datosJugador.get(3);
+        
+        this.derrotas = (Integer)datosJugador.get(4);
+        
+        this.torneos = (Integer)datosJugador.get(5);
+        
+        if (versionMedabot.equals("Version 1")) {
+            
+            nombreMedabot = ""+nombreMedabot+"V1" ;
+            
+        }
+        
+        if (versionMedabot.equals("Version 2")) {
+            
+            nombreMedabot = ""+nombreMedabot+"V2" ;
+            
+        }
+        
+        if (versionMedabot.equals("Version 3")) {
+            
+            nombreMedabot = ""+nombreMedabot+"V3" ;
+            
+        }
+        
+        this.medabot = new Medabot(nombreMedabot, this.nombre);
+    
+    }
+
 }

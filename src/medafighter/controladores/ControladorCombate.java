@@ -7,6 +7,7 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import medafighter.modelo.ConexionBD;
@@ -36,44 +37,40 @@ public class ControladorCombate implements ActionListener {
     
     private Torneo torneo;
     
-    public ControladorCombate(String jugador1, String jugador2, String medabotJ1, String medabotJ2, String modoJuego) {
-        
-        this.vc = new VistaCombate(this);
+    public ControladorCombate(String jugador1, String jugador2, String versionMedabotJ1, String versionMedabotJ2, String modoJuego) throws SQLException {
         
         this.cbd = new ConexionBD();
         
-        this.medabotJ1 = new Medabot();
-        
-        this.medabotJ2 = new Medabot();
-        
         if (modoJuego.equals("Jugador v/s Jugador")) {
             
-            this.jugador1 = new JugadorHumano();
-            this.jugador2 = new JugadorHumano();
+            this.jugador1 = new JugadorHumano(jugador1, versionMedabotJ1);
+            this.jugador2 = new JugadorHumano(jugador2, versionMedabotJ2);
             
         }
         
         if (modoJuego.equals("Jugador v/s CPU")) {
             
-            this.jugador1 = new JugadorHumano();
-            this.jugador2 = new JugadorCPU();
+            this.jugador1 = new JugadorHumano(jugador1, versionMedabotJ1);
+            this.jugador2 = new JugadorCPU(jugador1, versionMedabotJ1);
             
         }
         
         if (modoJuego.equals("CPU V/S CPU")) {
             
-            this.jugador1 = new JugadorCPU();
-            this.jugador2 = new JugadorCPU();
+            this.jugador1 = new JugadorCPU(jugador1, versionMedabotJ1);
+            this.jugador2 = new JugadorCPU(jugador1, versionMedabotJ1);
             
         }
         
-        this.robobatalla = new Robobatalla();
+        this.robobatalla = new Robobatalla(this.jugador1,this.jugador2);
+        
+        this.vc = new VistaCombate(this,this.jugador1,this.jugador2);
            
     }
     
     public ControladorCombate(ArrayList<String> jugadores, String tipoTorneo) {
         
-        this.vc = new VistaCombate(this);
+        this.vc = new VistaCombate(this,this.jugador1,this.jugador2);
         
         this.cbd = new ConexionBD();
         

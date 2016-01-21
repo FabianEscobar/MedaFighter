@@ -134,11 +134,21 @@ public class ControladorPrevia implements ActionListener {
                 
                         String modoJuego = (String)this.vp.getModoJuegoCB().getSelectedItem();
                         
-                        String medabotJ1 = (String)this.vp.getMedabotJ1().getSelectedItem();
+                        String versionMedabotJ1 = (String)this.vp.getMedabotJ1().getSelectedItem();
                         
-                        String medabotJ2 = (String)this.vp.getMedabotJ1().getSelectedItem();
+                        String versionMedabotJ2 = (String)this.vp.getMedabotJ1().getSelectedItem();
                     
-                        this.cc = new ControladorCombate(jugador1,jugador2,medabotJ1,medabotJ2,modoJuego);
+                        try {
+                            
+                            this.cc = new ControladorCombate(jugador1,jugador2,versionMedabotJ1,versionMedabotJ2,modoJuego);
+                        
+                        } 
+                        
+                        catch (SQLException ex) {
+                            
+                            Logger.getLogger(ControladorPrevia.class.getName()).log(Level.SEVERE, null, ex);
+                        
+                        }
                        
                         this.vp.setVisible(false);
                 

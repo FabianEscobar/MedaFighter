@@ -16,10 +16,8 @@ public class Robobatalla {
     private Jugador jugador2;
     
     private int turno;
-    
 
-
-    public Robobatalla() {
+    public Robobatalla(Jugador jugador1, Jugador jugador2) {
 
         
 

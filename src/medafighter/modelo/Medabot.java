@@ -5,6 +5,9 @@
  */
 package medafighter.modelo;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Fabián
@@ -23,13 +26,72 @@ public class Medabot {
     
     private Medaparte piernaIzq;
     
-    private Medaparte priernaDer;
+    private Medaparte piernaDer;
     
     private Medalla medalla;
     
     private int saludMaxima;
     
     private int saludActual;
+    
+    private ConexionBD cbd;
+    
+    public Medabot (String nombre, String usuario) throws SQLException {
+        
+        this.nombre = nombre;
+        this.jugador = usuario;
+        
+        this.cbd = new ConexionBD();
+        
+        ArrayList<Object> datosMedabot = new ArrayList<>();
+        
+        datosMedabot = cbd.buscarMedabot(nombre);
+                 
+        this.saludMaxima = (Integer)datosMedabot.get(0);
+                
+        this.saludActual = saludMaxima;
+        
+        this.cabeza = new Medaparte((String)datosMedabot.get(3));
+        this.brazoIzq = new Medaparte((String)datosMedabot.get(4));
+        this.brazoDer = new Medaparte((String)datosMedabot.get(5));
+        this.piernaIzq = new Medaparte((String)datosMedabot.get(6));
+        this.piernaDer = new Medaparte((String)datosMedabot.get(7));
+        
+        this.medalla = new Medalla((String)datosMedabot.get(8));
+        
+    }
+    
+    public String getNombre(){
+        return this.nombre;
+    }
+    
+    public Medaparte getCabeza(){
+        return this.cabeza;
+    }
+    
+    public Medaparte getBrazoIzq(){
+        return this.brazoIzq;
+    }
+    
+    public Medaparte getBrazoDer(){
+        return this.brazoDer;
+    }
+    
+    public Medaparte getPiernaIzq(){
+        return this.piernaIzq;
+    }
+    
+    public Medaparte getPiernaDer(){
+        return this.piernaDer;
+    }
+    
+    public int getSaludActual(){
+        return this.saludActual;
+    }
+    
+    public int getSaludMaxima(){
+        return this.saludMaxima;
+    }
     
     public void atacar() {
         

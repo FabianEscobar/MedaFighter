@@ -5,6 +5,9 @@
  */
 package medafighter.modelo;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Fabián
@@ -19,6 +22,28 @@ public class Medalla {
     
     private String medafuerza;
     
-    private int cantidad;    
+    private int cantidad;
+    
+    private ConexionBD cbd;
+    
+    public Medalla (String nombre) throws SQLException {
+        
+        this.cbd = new ConexionBD();
+        
+        this.nombre = nombre;
+        
+        ArrayList<Object> datosMedalla = new ArrayList<>();
+        
+        datosMedalla = cbd.buscarMedalla(nombre);
+        
+        this.potenciador = (String)datosMedalla.get(1);
+        
+        this.cantidad = (Integer)datosMedalla.get(2);
+        
+        this.tipoCarga = (String)datosMedalla.get(3);
+        
+        this.medafuerza = (String)datosMedalla.get(4);
+        
+    }
     
 }

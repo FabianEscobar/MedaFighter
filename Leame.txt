@@ -1,0 +1,11 @@
+Estimado profesor:
+
+Para que este programa funcione bien se debe hacer lo siguiente antes de ejecutar:
+
+1) Hacer coneccion a la base de datos por medio de la conexión "Contact DB".
+
+2) Ejecutar el script "Script Medabot" que está en la carpeta "script" (este script es una modificación del 
+archivo entregado por docencia).
+
+Saludos,
+Grupo 1

@@ -45,6 +45,20 @@ public class ControladorMedabot implements ActionListener {
             
             String jugador = (String)this.vmed.getJugador().getSelectedItem();
             
+            String nombreMedabot = new String();
+            
+            try {
+                
+                nombreMedabot = this.cbd.buscarNombreMedabot(jugador);
+            
+            } 
+            
+            catch (SQLException ex) {
+                
+                Logger.getLogger(ControladorMedabot.class.getName()).log(Level.SEVERE, null, ex);
+            
+            }
+            
             boolean uBoolean = false;
             
             try {
@@ -103,7 +117,7 @@ public class ControladorMedabot implements ActionListener {
                         
                 try {
                     
-                    medabotGuardado = this.cbd.guardarMedabot(versionMedabot, jugador, medapartes, medalla);
+                    medabotGuardado = this.cbd.guardarMedabot(versionMedabot, nombreMedabot, medapartes, medalla);
                 
                 } 
                 

@@ -11,18 +11,26 @@ package medafighter.modelo;
  */
 public abstract class Jugador {
     
-    private String nombre;
+    protected String nombre;
     
-    private String contrasenia;
+    protected String tipo;
     
-    private String tipo;
+    protected int victorias;
     
-    private int victorias;
+    protected int derrotas;
     
-    private int derrotas;
+    protected int torneos;
     
-    private int torneos;
+    public Medabot medabot;
     
-    private Medabot medabot;
+    protected ConexionBD cbd;
+    
+    public String getNombre(){
+        return this.nombre;
+    }
+    
+    public Medabot getMedabot(){
+        return this.medabot;
+    }
     
 }

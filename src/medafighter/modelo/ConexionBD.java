@@ -357,27 +357,57 @@ public class ConexionBD {
         
     }
     
-    public boolean guardarMedabot(String versionMedabot, String jugador, ArrayList<String> medapartes, String medalla) throws SQLException {
-        
-        boolean medabotGuardado = false;
+    public String buscarNombreMedabot(String usuario) throws SQLException {
         
         String nombreMedabot = new String();
         
+        boolean resultadoConexion = this.conectar();
+                      
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+                
+                String consultaMedabot = "SELECT NOMBRE FROM MEDABOT WHERE USUARIO = '" + usuario +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaMedabot);
+            
+                while(resultadoBusqueda.next()) {
+                
+                    nombreMedabot = resultadoBusqueda.getString(1);
+                    
+                    nombreMedabot = nombreMedabot.substring(0,nombreMedabot.length()-2);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return nombreMedabot;
+        
+    }
+    
+    public boolean guardarMedabot(String versionMedabot, String nombreMedabot, ArrayList<String> medapartes, String medalla) throws SQLException {
+        
+        boolean medabotGuardado = false;
+        
         if (versionMedabot.equals("Version 1")) {
             
-            nombreMedabot = ""+jugador+"V1" ;
+            nombreMedabot = ""+nombreMedabot+"V1" ;
             
         }
         
         if (versionMedabot.equals("Version 2")) {
             
-            nombreMedabot = ""+jugador+"V2" ;
+            nombreMedabot = ""+nombreMedabot+"V2" ;
             
         }
         
         if (versionMedabot.equals("Version 3")) {
             
-            nombreMedabot = ""+jugador+"V3" ;
+            nombreMedabot = ""+nombreMedabot+"V3" ;
             
         }
         
@@ -478,6 +508,211 @@ public class ConexionBD {
         }
         
         return medallas;
+        
+    }
+    
+    public ArrayList<Object> buscarMedabot(String nombre) throws SQLException {
+        
+        boolean resultadoConexion = this.conectar();
+        
+        ArrayList<Object> datosMedabot = new ArrayList<>();
+                      
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+                
+                String consultaMedabot = "SELECT * FROM MEDABOT WHERE NOMBRE = '" + nombre +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaMedabot);
+            
+                if(resultadoBusqueda.next()) {
+                
+                    int saludMaxima = resultadoBusqueda.getInt(1);
+                    datosMedabot.add(saludMaxima);
+                                        
+                    nombre = resultadoBusqueda.getString(2);
+                    datosMedabot.add(nombre);
+                    
+                    String usuario = resultadoBusqueda.getString(3);
+                    datosMedabot.add(usuario);
+                    
+                    String cabeza = resultadoBusqueda.getString(4);
+                    datosMedabot.add(cabeza);
+                    
+                    String brazoIzq = resultadoBusqueda.getString(5);
+                    datosMedabot.add(brazoIzq);
+                    
+                    String brazoDer = resultadoBusqueda.getString(6);
+                    datosMedabot.add(brazoDer);
+                    
+                    String piernaIzq = resultadoBusqueda.getString(7);
+                    datosMedabot.add(piernaIzq);
+                    
+                    String piernaDer = resultadoBusqueda.getString(8);
+                    datosMedabot.add(piernaDer);
+                    
+                    String medalla = resultadoBusqueda.getString(9);
+                    datosMedabot.add(medalla);
+                    
+                    int imagen = resultadoBusqueda.getInt(10);
+                    datosMedabot.add(imagen);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return datosMedabot;
+        
+    }
+    
+    public ArrayList<Object> buscarMedalla(String nombre) throws SQLException{
+        
+        boolean resultadoConexion = this.conectar();
+        
+        ArrayList<Object> datosMedalla = new ArrayList<>();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaMedalla = "SELECT * FROM MEDALLA WHERE NOMBRE = '" + nombre +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaMedalla);
+            
+                if(resultadoBusqueda.next()) {
+                
+                    nombre = resultadoBusqueda.getString(1);                    
+                    datosMedalla.add(nombre);
+                    
+                    String potenciador = resultadoBusqueda.getString(2);                    
+                    datosMedalla.add(potenciador);
+                    
+                    int cantidad = resultadoBusqueda.getInt(3);                    
+                    datosMedalla.add(cantidad);
+                    
+                    String tipoCarga = resultadoBusqueda.getString(4);                    
+                    datosMedalla.add(tipoCarga);
+                    
+                    String medafuerza = resultadoBusqueda.getString(5);                    
+                    datosMedalla.add(medafuerza);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return datosMedalla;
+        
+    }
+    
+    public ArrayList<Object> buscarMedaparte(String nombre) throws SQLException{
+        
+        boolean resultadoConexion = this.conectar();
+        
+        ArrayList<Object> datosMedaparte = new ArrayList<>();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaMedalla = "SELECT * FROM MEDAPARTE WHERE NOMBRE = '" + nombre +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaMedalla);
+            
+                if(resultadoBusqueda.next()) {
+                
+                    nombre = resultadoBusqueda.getString(1);                    
+                    datosMedaparte.add(nombre);
+                    
+                    int saludMaxima = resultadoBusqueda.getInt(2);                    
+                    datosMedaparte.add(saludMaxima);
+                    
+                    String tipo = resultadoBusqueda.getString(3);                    
+                    datosMedaparte.add(tipo);
+                    
+                    int ataque = resultadoBusqueda.getInt(4);                    
+                    datosMedaparte.add(ataque);
+                    
+                    String habilidad = resultadoBusqueda.getString(5);                    
+                    datosMedaparte.add(habilidad);
+                    
+                    int defensa = resultadoBusqueda.getInt(6);                    
+                    datosMedaparte.add(defensa);
+                    
+                    int precision = resultadoBusqueda.getInt(7);                    
+                    datosMedaparte.add(precision);
+                    
+                    int recuperacion = resultadoBusqueda.getInt(8);                    
+                    datosMedaparte.add(recuperacion);
+                    
+                    int esquive = resultadoBusqueda.getInt(9);                    
+                    datosMedaparte.add(esquive);
+                    
+                    int puntosHabilidad = resultadoBusqueda.getInt(10);                    
+                    datosMedaparte.add(puntosHabilidad);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return datosMedaparte;
+        
+    }
+    
+    public ArrayList<Object> buscarJugador(String nombre) throws SQLException{
+        
+        boolean resultadoConexion = this.conectar();
+        
+        ArrayList<Object> datosJugador = new ArrayList<>();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT * FROM USUARIO WHERE NOMBRE = '" + nombre +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                if(resultadoBusqueda.next()) {
+                
+                    nombre = resultadoBusqueda.getString(1);                    
+                    datosJugador.add(nombre);
+                    
+                    String pass = resultadoBusqueda.getString(2);                    
+                    datosJugador.add(pass);
+                    
+                    String tipo = resultadoBusqueda.getString(3);                    
+                    datosJugador.add(tipo);
+                    
+                    int victorias = resultadoBusqueda.getInt(4);                    
+                    datosJugador.add(victorias);
+                    
+                    int derrotas = resultadoBusqueda.getInt(5);                    
+                    datosJugador.add(derrotas);
+                    
+                    int torneos = resultadoBusqueda.getInt(6);                    
+                    datosJugador.add(torneos);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return datosJugador;
         
     }
         
