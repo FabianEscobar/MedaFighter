@@ -7,6 +7,7 @@ package medafighter.modelo;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -34,12 +35,20 @@ public class Medabot {
     
     private int saludActual;
     
+    private int danoTotal;
+    
+    private int defensaTotal;
+    
+    private int esquiveTotal;
+    
     private ConexionBD cbd;
     
     public Medabot (String nombre, String usuario) throws SQLException {
         
         this.nombre = nombre;
         this.jugador = usuario;
+        
+        this.danoTotal = 0;
         
         this.cbd = new ConexionBD();
         
@@ -58,6 +67,10 @@ public class Medabot {
         this.piernaDer = new Medaparte((String)datosMedabot.get(7));
         
         this.medalla = new Medalla((String)datosMedabot.get(8));
+        
+        this.defensaTotal = this.cabeza.getDefensa() + this.brazoIzq.getDefensa() + this.brazoDer.getDefensa() + this.piernaIzq.getDefensa() + this.piernaDer.getDefensa();
+        
+        this.esquiveTotal = this.cabeza.getEsquive() + this.brazoIzq.getEsquive() + this.brazoDer.getEsquive() + this.piernaIzq.getEsquive() + this.piernaDer.getEsquive();
         
     }
     
@@ -93,22 +106,96 @@ public class Medabot {
         return this.saludMaxima;
     }
     
+    public int getDanoTotal(){
+        return this.danoTotal;
+    }
+    
     
     public void setSaludActual(int saludActual){
         this.saludActual = saludActual;
     }
     
-    public void atacar() {
+    public void setDanoTotal(int danoTotal){
+        this.danoTotal = danoTotal;
+    }
+    
+    
+    public void atacar(Medaparte medaparteAtacante, Medabot medabotEnemigo, Medaparte medaparteEnemiga) {
         
+        if (medaparteAtacante.getPH() > 0) {
+            
+            int dano = medaparteAtacante.getAtaque() - medaparteEnemiga.getDefensa();
+            
+            if (dano > 0) {
+                
+                medaparteEnemiga.setSaludActual(medaparteEnemiga.getSaludActual() - dano);
+                
+            }  
+            
+            medaparteAtacante.setPH(medaparteAtacante.getPH() - 1);
+            
+            medabotEnemigo.setDanoTotal(medabotEnemigo.getDanoTotal() + dano);
+            
+        }
+        
+        else {
+            
+            
+            
+        }
         
     }
     
-    public void defender() {
+    public void defender(int danoTotal) {
         
+        int danoFinal = danoTotal - this.defensaTotal;
+        
+        if (danoFinal > 0) {
+            
+            this.saludActual = this.saludActual - danoFinal;            
+            
+        }
+        
+        this.danoTotal = 0;
      
     }
     
-    public void esquivar() {        
+    public void esquivar(int danoTotal) {
+        
+        int danoFinal = 0;
+        
+        boolean probabilidadAtaque = new Random().nextInt(100 - this.esquiveTotal)==0;
+        
+        if (probabilidadAtaque == true) {
+            
+            danoFinal = danoTotal;            
+            
+        }
+        
+        else {
+            
+            danoFinal = 0;            
+            
+        }
+        
+        if (danoFinal > 0) {
+            
+            this.saludActual = this.saludActual - danoFinal;            
+            
+        }
+        
+        this.danoTotal = 0;    
+        
+    }
+    
+    public void cargarMedafuerza() {
+        
+        
+        
+    }
+    
+    public void activarMedafuerza() {
+        
         
         
     }

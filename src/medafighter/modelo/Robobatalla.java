@@ -47,6 +47,10 @@ public class Robobatalla {
             this.jugador2 = new JugadorCPU(jugador1, versionMedabotJ1);
             
         }
+        
+        this.turno = 1;
+        
+        this.jugadorActivo = this.jugador1.getNombre();
 
     }
     

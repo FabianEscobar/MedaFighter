@@ -689,7 +689,7 @@ public class VistaCombate extends javax.swing.JFrame {
         return this.atacanteJ1;
     }
     
-    public javax.swing.JComboBox getatacanteJ2(){
+    public javax.swing.JComboBox getAtacanteJ2(){
         return this.atacanteJ2;
     }
     
@@ -700,7 +700,183 @@ public class VistaCombate extends javax.swing.JFrame {
     public javax.swing.JComboBox getDefensorJ2(){
         return this.defensorJ2;
     }
-
+    
+    public javax.swing.JLabel getSaludMedabotJ1(){
+        return this.saludMedabotJ1;
+    }
+    
+    public javax.swing.JLabel getSaludCabezaM1(){
+        return this.saludCabezaM1;
+    }
+    
+    public javax.swing.JLabel getSaludBrazoIzqM1(){
+        return this.saludBrazoIzqM1;
+    }
+    
+    public javax.swing.JLabel getSaludBrazoDerM1(){
+        return this.saludBrazoDerM1;
+    }
+    
+    public javax.swing.JLabel getsaludPiernaIzqM1(){
+        return this.saludPiernaIzqM1;
+    }
+    
+    public javax.swing.JLabel getSaludPiernaDerM1(){
+        return this.saludPiernaDerM1;
+    }
+    
+    public javax.swing.JLabel getPHCabezaM1(){
+        return this.phCabezaM1;
+    }
+    
+    public javax.swing.JLabel getPHBrazoIzqM1(){
+        return this.phBrazoIzqM1;
+    }
+    
+    public javax.swing.JLabel getPHBrazoDerM1(){
+        return this.phBrazoDerM1;
+    }
+    
+    public javax.swing.JLabel getPHPiernaIzqM1(){
+        return this.phPiernaIzqM1;
+    }
+    
+    public javax.swing.JLabel getPHPiernaDerM1(){
+        return this.phPiernaDerM1;
+    }
+    
+    public javax.swing.JLabel getSaludMedabotJ2(){
+        return this.saludMedabotJ2;
+    }
+    
+    public javax.swing.JLabel getSaludCabezaM2(){
+        return this.saludCabezaM2;
+    }
+    
+    public javax.swing.JLabel getSaludBrazoIzqM2(){
+        return this.saludBrazoIzqM2;
+    }
+    
+    public javax.swing.JLabel getSaludBrazoDerM2(){
+        return this.saludBrazoDerM2;
+    }
+    
+    public javax.swing.JLabel getsaludPiernaIzqM2(){
+        return this.saludPiernaIzqM2;
+    }
+    
+    public javax.swing.JLabel getSaludPiernaDerM2(){
+        return this.saludPiernaDerM2;
+    }
+    
+    public javax.swing.JLabel getPHCabezaM2(){
+        return this.phCabezaM2;
+    }
+    
+    public javax.swing.JLabel getPHBrazoIzqM2(){
+        return this.phBrazoIzqM2;
+    }
+    
+    public javax.swing.JLabel getPHBrazoDerM2(){
+        return this.phBrazoDerM2;
+    }
+    
+    public javax.swing.JLabel getPHPiernaIzqM2(){
+        return this.phPiernaIzqM2;
+    }
+    
+    public javax.swing.JLabel getPHPiernaDerM2(){
+        return this.phPiernaDerM2;
+    }
+    
+    
+    public void setSaludMedabotJ1(String text){
+        this.saludMedabotJ1.setText(text);
+    }
+    
+    public void setSaludCabezaM1(String text){
+        this.saludCabezaM1.setText(text);
+    }
+    
+    public void setSaludBrazoIzqM1(String text){
+        this.saludBrazoIzqM1.setText(text);
+    }
+    
+    public void setSaludBrazoDerM1(String text){
+        this.saludBrazoDerM1.setText(text);
+    }
+    
+    public void setSaludPiernaIzqM1(String text){
+        this.saludPiernaIzqM1.setText(text);
+    }
+    
+    public void setSaludPiernaDerM1(String text){
+        this.saludPiernaDerM1.setText(text);
+    }
+    
+    public void setPHCabezaM1(String text){
+        this.phCabezaM1.setText(text);
+    }
+    
+    public void setPHBrazoIzqM1(String text){
+        this.phBrazoIzqM1.setText(text);
+    }
+    
+    public void setPHBrazoDerM1(String text){
+        this.phBrazoDerM1.setText(text);
+    }
+    
+    public void setPHPiernaIzqM1(String text){
+        this.phPiernaIzqM1.setText(text);
+    }
+    
+    public void setPHPiernaDerM1(String text){
+        this.phPiernaDerM1.setText(text);
+    }
+    
+    public void setSaludMedabotJ2(String text){
+        this.saludMedabotJ2.setText(text);
+    }
+    
+    public void setSaludCabezaM2(String text){
+        this.saludCabezaM2.setText(text);
+    }
+    
+    public void setSaludBrazoIzqM2(String text){
+        this.saludBrazoIzqM2.setText(text);
+    }
+    
+    public void setSaludBrazoDerM2(String text){
+        this.saludBrazoDerM2.setText(text);
+    }
+    
+    public void setSaludPiernaIzqM2(String text){
+        this.saludPiernaIzqM2.setText(text);
+    }
+    
+    public void setSaludPiernaDerM2(String text){
+        this.saludPiernaDerM2.setText(text);
+    }
+    
+    public void setPHCabezaM2(String text){
+        this.phCabezaM2.setText(text);
+    }
+    
+    public void setPHBrazoIzqM2(String text){
+        this.phBrazoIzqM2.setText(text);
+    }
+    
+    public void setPHBrazoDerM2(String text){
+        this.phBrazoDerM2.setText(text);
+    }
+    
+    public void setPHPiernaIzqM2(String text){
+        this.phPiernaIzqM2.setText(text);
+    }
+    
+    public void setPHPiernaDerM2(String text){
+        this.phPiernaDerM2.setText(text);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox atacanteJ1;
