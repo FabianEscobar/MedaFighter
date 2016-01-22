@@ -6,7 +6,7 @@
 package medafighter.vistas;
 
 import java.awt.event.ActionListener;
-import medafighter.modelo.Jugador;
+import medafighter.modelo.*;
 
 /**
  *
@@ -17,74 +17,91 @@ public class VistaCombate extends javax.swing.JFrame {
     /**
      * Creates new form VistaCombate
      */
-    public VistaCombate(ActionListener al, Jugador jugador1, Jugador jugador2) {
+    public VistaCombate(ActionListener al, Robobatalla robobatalla) {
         
         initComponents();
         
         this.setLocationRelativeTo(null);
         
-        this.nombreJ1.setText(jugador1.getNombre());        
-        this.nombreJ2.setText(jugador2.getNombre());
+        this.nombreJ1.setText(robobatalla.getJugador1().getNombre());        
+        this.nombreJ2.setText(robobatalla.getJugador2().getNombre());
         
-        this.nombreM1.setText(jugador1.getMedabot().getNombre().substring(0,jugador1.getMedabot().getNombre().length()-2));
-        this.nombreM2.setText(jugador2.getMedabot().getNombre().substring(0,jugador2.getMedabot().getNombre().length()-2));
+        this.nombreM1.setText(robobatalla.getJugador1().getMedabot().getNombre().substring(0,robobatalla.getJugador1().getMedabot().getNombre().length()-2));
+        this.nombreM2.setText(robobatalla.getJugador2().getMedabot().getNombre().substring(0,robobatalla.getJugador2().getMedabot().getNombre().length()-2));
         
-        this.saludMedabotJ1.setText(String.valueOf(jugador1.getMedabot().getSaludActual()));
-        this.saludMedabotJ2.setText(String.valueOf(jugador2.getMedabot().getSaludActual()));
+        this.saludMedabotJ1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getSaludActual()));
+        this.saludMedabotJ2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getSaludActual()));
         
-        this.saludCabezaM1.setText(String.valueOf(jugador1.getMedabot().getCabeza().getSaludActual()));
-        this.saludCabezaM2.setText(String.valueOf(jugador2.getMedabot().getCabeza().getSaludActual()));
+        this.saludCabezaM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getCabeza().getSaludActual()));
+        this.saludCabezaM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getCabeza().getSaludActual()));
         
-        this.saludBrazoIzqM1.setText(String.valueOf(jugador1.getMedabot().getBrazoIzq().getSaludActual()));
-        this.saludBrazoIzqM2.setText(String.valueOf(jugador2.getMedabot().getBrazoIzq().getSaludActual()));
+        this.saludBrazoIzqM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getBrazoIzq().getSaludActual()));
+        this.saludBrazoIzqM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getBrazoIzq().getSaludActual()));
         
-        this.saludBrazoDerM1.setText(String.valueOf(jugador1.getMedabot().getBrazoDer().getSaludActual()));
-        this.saludBrazoDerM2.setText(String.valueOf(jugador2.getMedabot().getBrazoDer().getSaludActual()));
+        this.saludBrazoDerM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getBrazoDer().getSaludActual()));
+        this.saludBrazoDerM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getBrazoDer().getSaludActual()));
         
-        this.saludPiernaIzqM1.setText(String.valueOf(jugador1.getMedabot().getPiernaIzq().getSaludActual()));
-        this.saludPiernaIzqM2.setText(String.valueOf(jugador2.getMedabot().getPiernaIzq().getSaludActual()));
+        this.saludPiernaIzqM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getPiernaIzq().getSaludActual()));
+        this.saludPiernaIzqM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getPiernaIzq().getSaludActual()));
         
-        this.saludPiernaDerM1.setText(String.valueOf(jugador1.getMedabot().getPiernaDer().getSaludActual()));
-        this.saludPiernaDerM2.setText(String.valueOf(jugador2.getMedabot().getPiernaDer().getSaludActual()));
-        
-        
-        this.phCabezaM1.setText(String.valueOf(jugador1.getMedabot().getCabeza().getPH()));
-        this.phCabezaM2.setText(String.valueOf(jugador2.getMedabot().getCabeza().getPH()));
-        
-        this.phBrazoIzqM1.setText(String.valueOf(jugador1.getMedabot().getBrazoIzq().getPH()));
-        this.phBrazoIzqM2.setText(String.valueOf(jugador2.getMedabot().getBrazoIzq().getPH()));
-        
-        this.phBrazoDerM1.setText(String.valueOf(jugador1.getMedabot().getBrazoDer().getPH()));
-        this.phBrazoDerM2.setText(String.valueOf(jugador2.getMedabot().getBrazoDer().getPH()));
-        
-        this.phPiernaIzqM1.setText(String.valueOf(jugador1.getMedabot().getPiernaIzq().getPH()));
-        this.phPiernaIzqM2.setText(String.valueOf(jugador2.getMedabot().getPiernaIzq().getPH()));
-        
-        this.phPiernaDerM1.setText(String.valueOf(jugador1.getMedabot().getPiernaDer().getPH()));
-        this.phPiernaDerM2.setText(String.valueOf(jugador2.getMedabot().getPiernaDer().getPH()));
+        this.saludPiernaDerM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getPiernaDer().getSaludActual()));
+        this.saludPiernaDerM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getPiernaDer().getSaludActual()));
         
         
-        this.barraSaludM1.setMaximum(jugador1.getMedabot().getSaludMaxima());
-        this.barraSaludM2.setMaximum(jugador2.getMedabot().getSaludMaxima());
+        this.phCabezaM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getCabeza().getPH()));
+        this.phCabezaM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getCabeza().getPH()));
         
-        this.barraSaludCabezaM1.setMaximum(jugador1.getMedabot().getCabeza().getSaludMaxima());
-        this.barraSaludCabezaM2.setMaximum(jugador2.getMedabot().getCabeza().getSaludMaxima());
+        this.phBrazoIzqM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getBrazoIzq().getPH()));
+        this.phBrazoIzqM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getBrazoIzq().getPH()));
         
-        this.barraSaludBrazoIzqM1.setMaximum(jugador1.getMedabot().getBrazoIzq().getSaludMaxima());
-        this.barraSaludBrazoIzqM2.setMaximum(jugador2.getMedabot().getBrazoIzq().getSaludMaxima());
+        this.phBrazoDerM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getBrazoDer().getPH()));
+        this.phBrazoDerM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getBrazoDer().getPH()));
         
-        this.barraSaludBrazoDerM1.setMaximum(jugador1.getMedabot().getBrazoDer().getSaludMaxima());
-        this.barraSaludBrazoDerM2.setMaximum(jugador2.getMedabot().getBrazoDer().getSaludMaxima());
+        this.phPiernaIzqM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getPiernaIzq().getPH()));
+        this.phPiernaIzqM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getPiernaIzq().getPH()));
         
-        this.barraSaludPiernaIzqM1.setMaximum(jugador1.getMedabot().getPiernaIzq().getSaludMaxima());
-        this.barraSaludPiernaIzqM2.setMaximum(jugador2.getMedabot().getPiernaIzq().getSaludMaxima());
+        this.phPiernaDerM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getPiernaDer().getPH()));
+        this.phPiernaDerM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getPiernaDer().getPH()));
         
-        this.barraSaludPiernaDerM1.setMaximum(jugador1.getMedabot().getPiernaDer().getSaludMaxima());
-        this.barraSaludPiernaDerM2.setMaximum(jugador2.getMedabot().getPiernaDer().getSaludMaxima());
         
-        this.barraSaludM1.setValue(WIDTH);
+        this.barraSaludM1.setMaximum(robobatalla.getJugador1().getMedabot().getSaludMaxima());
+        this.barraSaludM2.setMaximum(robobatalla.getJugador2().getMedabot().getSaludMaxima());
         
-        String logInicial = ""+jugador1.getNombre()+"'s "+jugador1.getMedabot().getNombre()+" V/S "+jugador2.getMedabot().getNombre()+"'s "+jugador1.getNombre()+"\n\n"
+        this.barraSaludCabezaM1.setMaximum(robobatalla.getJugador1().getMedabot().getCabeza().getSaludMaxima());
+        this.barraSaludCabezaM2.setMaximum(robobatalla.getJugador2().getMedabot().getCabeza().getSaludMaxima());
+        
+        this.barraSaludBrazoIzqM1.setMaximum(robobatalla.getJugador1().getMedabot().getBrazoIzq().getSaludMaxima());
+        this.barraSaludBrazoIzqM2.setMaximum(robobatalla.getJugador2().getMedabot().getBrazoIzq().getSaludMaxima());
+        
+        this.barraSaludBrazoDerM1.setMaximum(robobatalla.getJugador1().getMedabot().getBrazoDer().getSaludMaxima());
+        this.barraSaludBrazoDerM2.setMaximum(robobatalla.getJugador2().getMedabot().getBrazoDer().getSaludMaxima());
+        
+        this.barraSaludPiernaIzqM1.setMaximum(robobatalla.getJugador1().getMedabot().getPiernaIzq().getSaludMaxima());
+        this.barraSaludPiernaIzqM2.setMaximum(robobatalla.getJugador2().getMedabot().getPiernaIzq().getSaludMaxima());
+        
+        this.barraSaludPiernaDerM1.setMaximum(robobatalla.getJugador1().getMedabot().getPiernaDer().getSaludMaxima());
+        this.barraSaludPiernaDerM2.setMaximum(robobatalla.getJugador2().getMedabot().getPiernaDer().getSaludMaxima());
+        
+        
+        this.barraSaludM1.setValue(robobatalla.getJugador1().getMedabot().getSaludActual());
+        this.barraSaludM2.setValue(robobatalla.getJugador2().getMedabot().getSaludActual());
+        
+        this.barraSaludCabezaM1.setValue(robobatalla.getJugador1().getMedabot().getCabeza().getSaludActual());
+        this.barraSaludCabezaM2.setValue(robobatalla.getJugador2().getMedabot().getCabeza().getSaludActual());
+        
+        this.barraSaludBrazoIzqM1.setValue(robobatalla.getJugador1().getMedabot().getBrazoIzq().getSaludActual());
+        this.barraSaludBrazoIzqM2.setValue(robobatalla.getJugador2().getMedabot().getBrazoIzq().getSaludActual());
+        
+        this.barraSaludBrazoDerM1.setValue(robobatalla.getJugador1().getMedabot().getBrazoDer().getSaludActual());
+        this.barraSaludBrazoDerM2.setValue(robobatalla.getJugador2().getMedabot().getBrazoDer().getSaludActual());
+        
+        this.barraSaludPiernaIzqM1.setValue(robobatalla.getJugador1().getMedabot().getPiernaIzq().getSaludActual());
+        this.barraSaludPiernaIzqM2.setValue(robobatalla.getJugador2().getMedabot().getPiernaIzq().getSaludActual());
+        
+        this.barraSaludPiernaDerM1.setValue(robobatalla.getJugador1().getMedabot().getPiernaDer().getSaludActual());
+        this.barraSaludPiernaDerM2.setValue(robobatalla.getJugador2().getMedabot().getPiernaDer().getSaludActual());
+        
+        String logInicial = ""+robobatalla.getJugador1().getNombre()+"'s "+robobatalla.getJugador1().getMedabot().getNombre().substring(0,robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" V/S "+robobatalla.getJugador2().getNombre()+"'s "+robobatalla.getJugador2().getMedabot().getNombre().substring(0,robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"\n\n"
                             + "¡Que comience la robobatalla!\n\n";
         
         logBatalla.setText(logInicial);

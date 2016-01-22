@@ -33,4 +33,28 @@ public abstract class Jugador {
         return this.medabot;
     }
     
+    public int getVictorias(){
+        return this.victorias;
+    }
+    
+    public int getDerrotas(){
+        return this.derrotas;
+    }
+    
+    public int getTorneos(){
+        return this.torneos;
+    }
+    
+    public void setVictorias(int victorias){
+        this.victorias = victorias;
+    }
+    
+    public void setDerrotas(int derrotas){
+        this.derrotas = derrotas;
+    }
+    
+    public void setTorneos(int torneos){
+        this.torneos = torneos;
+    }
+    
 }

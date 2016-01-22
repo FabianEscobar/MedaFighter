@@ -41,36 +41,15 @@ public class ControladorCombate implements ActionListener {
         
         this.cbd = new ConexionBD();
         
-        if (modoJuego.equals("Jugador v/s Jugador")) {
-            
-            this.jugador1 = new JugadorHumano(jugador1, versionMedabotJ1);
-            this.jugador2 = new JugadorHumano(jugador2, versionMedabotJ2);
-            
-        }
+        this.robobatalla = new Robobatalla(jugador1,jugador2,versionMedabotJ1,versionMedabotJ2,modoJuego);
         
-        if (modoJuego.equals("Jugador v/s CPU")) {
-            
-            this.jugador1 = new JugadorHumano(jugador1, versionMedabotJ1);
-            this.jugador2 = new JugadorCPU(jugador1, versionMedabotJ1);
-            
-        }
-        
-        if (modoJuego.equals("CPU V/S CPU")) {
-            
-            this.jugador1 = new JugadorCPU(jugador1, versionMedabotJ1);
-            this.jugador2 = new JugadorCPU(jugador1, versionMedabotJ1);
-            
-        }
-        
-        this.robobatalla = new Robobatalla(this.jugador1,this.jugador2);
-        
-        this.vc = new VistaCombate(this,this.jugador1,this.jugador2);
+        this.vc = new VistaCombate(this,this.robobatalla);
            
     }
     
     public ControladorCombate(ArrayList<String> jugadores, String tipoTorneo) {
         
-        this.vc = new VistaCombate(this,this.jugador1,this.jugador2);
+        this.vc = new VistaCombate(this,this.robobatalla);
         
         this.cbd = new ConexionBD();
         

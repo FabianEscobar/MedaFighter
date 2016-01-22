@@ -93,6 +93,11 @@ public class Medabot {
         return this.saludMaxima;
     }
     
+    
+    public void setSaludActual(int saludActual){
+        this.saludActual = saludActual;
+    }
+    
     public void atacar() {
         
         

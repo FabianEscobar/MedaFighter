@@ -82,4 +82,53 @@ public class Medaparte {
         return this.puntosHabilidad;
     }
     
+    public int getAtaque(){
+        return this.ataque;
+    }
+    
+    public int getDefensa(){
+        return this.defensa;
+    }
+    
+    public int getPrecision(){
+        return this.precision;
+    }
+    
+    public int getRecuperacion(){
+        return this.recuperacion;
+    }
+    
+    public int getEsquive(){
+        return this.esquive;
+    }
+    
+    
+    public void setSaludActual(int saludActual){
+        this.saludActual = saludActual;
+    }
+    
+    public void setPH(int puntosHabilidad){
+        this.puntosHabilidad = puntosHabilidad;
+    }
+    
+    public void setAtaque(int ataque){
+        this.ataque = ataque;
+    }
+    
+    public void setDefensa(int defensa){
+        this.defensa = defensa;
+    }
+    
+    public void setPrecision(int precision){
+        this.precision = precision;
+    }
+    
+    public void setRecuperacion(int recuperacion){
+        this.recuperacion = recuperacion;
+    }
+    
+    public void setEsquive(int esquive){
+        this.esquive = esquive;
+    }
+    
 }

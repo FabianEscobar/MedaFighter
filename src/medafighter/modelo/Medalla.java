@@ -46,4 +46,24 @@ public class Medalla {
         
     }
     
+    public String getNombre(){
+        return this.nombre;
+    }
+    
+    public String getPotenciador(){
+        return this.potenciador;
+    }
+    
+    public String getTipoCarga(){
+        return this.tipoCarga;
+    }
+    
+    public String getMedafuerza(){
+        return this.medafuerza;
+    }
+    
+    public int getCantidad(){
+        return this.cantidad;
+    }
+    
 }
