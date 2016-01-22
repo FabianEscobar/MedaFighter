@@ -29,6 +29,9 @@ public class VistaCombate extends javax.swing.JFrame {
         this.nombreM1.setText(jugador1.getMedabot().getNombre().substring(0,jugador1.getMedabot().getNombre().length()-2));
         this.nombreM2.setText(jugador2.getMedabot().getNombre().substring(0,jugador2.getMedabot().getNombre().length()-2));
         
+        this.saludMedabotJ1.setText(String.valueOf(jugador1.getMedabot().getSaludActual()));
+        this.saludMedabotJ2.setText(String.valueOf(jugador2.getMedabot().getSaludActual()));
+        
         this.saludCabezaM1.setText(String.valueOf(jugador1.getMedabot().getCabeza().getSaludActual()));
         this.saludCabezaM2.setText(String.valueOf(jugador2.getMedabot().getCabeza().getSaludActual()));
         
@@ -41,12 +44,12 @@ public class VistaCombate extends javax.swing.JFrame {
         this.saludPiernaIzqM1.setText(String.valueOf(jugador1.getMedabot().getPiernaIzq().getSaludActual()));
         this.saludPiernaIzqM2.setText(String.valueOf(jugador2.getMedabot().getPiernaIzq().getSaludActual()));
         
-        this.saludBrazoDerM1.setText(String.valueOf(jugador1.getMedabot().getPiernaDer().getSaludActual()));
-        this.saludBrazoDerM2.setText(String.valueOf(jugador2.getMedabot().getPiernaDer().getSaludActual()));
+        this.saludPiernaDerM1.setText(String.valueOf(jugador1.getMedabot().getPiernaDer().getSaludActual()));
+        this.saludPiernaDerM2.setText(String.valueOf(jugador2.getMedabot().getPiernaDer().getSaludActual()));
         
         
-        this.phCabezaM1.setText(String.valueOf(jugador1.getMedabot().getCabeza().getSaludActual()));
-        this.phCabezaM2.setText(String.valueOf(jugador2.getMedabot().getCabeza().getSaludActual()));
+        this.phCabezaM1.setText(String.valueOf(jugador1.getMedabot().getCabeza().getPH()));
+        this.phCabezaM2.setText(String.valueOf(jugador2.getMedabot().getCabeza().getPH()));
         
         this.phBrazoIzqM1.setText(String.valueOf(jugador1.getMedabot().getBrazoIzq().getPH()));
         this.phBrazoIzqM2.setText(String.valueOf(jugador2.getMedabot().getBrazoIzq().getPH()));
@@ -79,6 +82,13 @@ public class VistaCombate extends javax.swing.JFrame {
         this.barraSaludPiernaDerM1.setMaximum(jugador1.getMedabot().getPiernaDer().getSaludMaxima());
         this.barraSaludPiernaDerM2.setMaximum(jugador2.getMedabot().getPiernaDer().getSaludMaxima());
         
+        this.barraSaludM1.setValue(WIDTH);
+        
+        String logInicial = ""+jugador1.getNombre()+"'s "+jugador1.getMedabot().getNombre()+" V/S "+jugador2.getMedabot().getNombre()+"'s "+jugador1.getNombre()+"\n\n"
+                            + "¡Que comience la robobatalla!\n\n";
+        
+        logBatalla.setText(logInicial);
+        
         this.setVisible(true);
         
         agregarListener(al);
@@ -106,6 +116,8 @@ public class VistaCombate extends javax.swing.JFrame {
         this.medafuerzaJ1.addActionListener(al);
         
         this.medafuerzaJ2.addActionListener(al);
+        
+        this.terminarTurno.addActionListener(al);
         
     }
 
@@ -188,6 +200,7 @@ public class VistaCombate extends javax.swing.JFrame {
         phBrazoDerM2 = new javax.swing.JLabel();
         phPiernaIzqM2 = new javax.swing.JLabel();
         phPiernaDerM2 = new javax.swing.JLabel();
+        terminarTurno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Medabatalla");
@@ -313,6 +326,8 @@ public class VistaCombate extends javax.swing.JFrame {
 
         phPiernaDerM2.setText("0");
 
+        terminarTurno.setText("Terminar turno");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -376,11 +391,8 @@ public class VistaCombate extends javax.swing.JFrame {
                             .addComponent(phBrazoDerM1)
                             .addComponent(phBrazoIzqM1)
                             .addComponent(phCabezaM1)
-                            .addComponent(jLabel25))
-                        .addGap(52, 52, 52))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel23)
-                        .addGap(30, 30, 30)))
+                            .addComponent(jLabel25)))
+                    .addComponent(jLabel23))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -433,6 +445,8 @@ public class VistaCombate extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(barraMedafuerzaM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(terminarTurno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(medafuerzaJ2)
                         .addGap(45, 45, 45)
@@ -577,7 +591,8 @@ public class VistaCombate extends javax.swing.JFrame {
                     .addComponent(medafuerzaJ1)
                     .addComponent(barraMedafuerzaM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(medafuerzaJ2)
-                    .addComponent(barraMedafuerzaM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(barraMedafuerzaM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(terminarTurno))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
@@ -647,6 +662,10 @@ public class VistaCombate extends javax.swing.JFrame {
     
     public javax.swing.JButton getMedafuerzaJ2(){
         return this.medafuerzaJ2;
+    }
+    
+    public javax.swing.JButton getTerminarTurno(){
+        return this.terminarTurno;
     }
     
     public javax.swing.JComboBox getAtacanteJ1(){
@@ -737,5 +756,6 @@ public class VistaCombate extends javax.swing.JFrame {
     private javax.swing.JLabel saludPiernaDerM2;
     private javax.swing.JLabel saludPiernaIzqM1;
     private javax.swing.JLabel saludPiernaIzqM2;
+    private javax.swing.JButton terminarTurno;
     // End of variables declaration//GEN-END:variables
 }

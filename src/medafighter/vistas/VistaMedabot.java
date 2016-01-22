@@ -8,6 +8,8 @@ package medafighter.vistas;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import medafighter.modelo.ConexionBD;
 
@@ -40,15 +42,20 @@ public class VistaMedabot extends javax.swing.JFrame {
         this.cbd = new ConexionBD();
         
         jugadores = cbd.buscarJugadoresTipo("HUMANO");
+        String[] arrayJugadores;
+        arrayJugadores = jugadores.toArray(new String[100]);
+        DefaultComboBoxModel modeloJugadores = new DefaultComboBoxModel(arrayJugadores);
+        jugador.setModel(modeloJugadores);
         
-        cabezas = cbd.buscarMedapartesTipo("Cabeza");
-        brazosIzq = cbd.buscarMedapartesTipo("BrazoIzq");
-        brazosDer = cbd.buscarMedapartesTipo("BrazoDer");
-        piernasIzq = cbd.buscarMedapartesTipo("PiernaIzq");
-        piernasDer = cbd.buscarMedapartesTipo("PiernaDer");
+        String jugador = (String)this.jugador.getSelectedItem();
+        
+        cabezas = cbd.buscarMedapartesUsuarioTipo(jugador,"Cabeza");
+        brazosIzq = cbd.buscarMedapartesUsuarioTipo(jugador,"BrazoIzq");
+        brazosDer = cbd.buscarMedapartesUsuarioTipo(jugador,"BrazoDer");
+        piernasIzq = cbd.buscarMedapartesUsuarioTipo(jugador,"PiernaIzq");
+        piernasDer = cbd.buscarMedapartesUsuarioTipo(jugador,"PiernaDer");
         medallas = cbd.buscarMedallas();
                 
-        String[] arrayJugadores;
         String[] arrayCabezas;
         String[] arrayBrazosIzq;
         String[] arrayBrazosDer;
@@ -56,7 +63,7 @@ public class VistaMedabot extends javax.swing.JFrame {
         String[] arrayPiernasDer;
         String[] arrayMedallas;
         
-        arrayJugadores = jugadores.toArray(new String[100]);
+        
         arrayCabezas = cabezas.toArray(new String[100]);
         arrayBrazosIzq = brazosIzq.toArray(new String[100]);
         arrayBrazosDer = brazosDer.toArray(new String[100]);
@@ -64,15 +71,13 @@ public class VistaMedabot extends javax.swing.JFrame {
         arrayPiernasDer = piernasDer.toArray(new String[100]);
         arrayMedallas = medallas.toArray(new String[100]);
         
-        DefaultComboBoxModel modeloJugadores = new DefaultComboBoxModel(arrayJugadores);
         DefaultComboBoxModel modeloCabezas = new DefaultComboBoxModel(arrayCabezas);
         DefaultComboBoxModel modeloBrazosIzq = new DefaultComboBoxModel(arrayBrazosIzq);
         DefaultComboBoxModel modeloBrazosDer = new DefaultComboBoxModel(arrayBrazosDer);
         DefaultComboBoxModel modeloPiernasIzq = new DefaultComboBoxModel(arrayPiernasIzq);
         DefaultComboBoxModel modeloPiernasDer = new DefaultComboBoxModel(arrayPiernasDer);
         DefaultComboBoxModel modeloMedallas = new DefaultComboBoxModel(arrayMedallas);
-        
-        jugador.setModel(modeloJugadores);
+                
         cabeza.setModel(modeloCabezas);
         brazoIzquierdo.setModel(modeloBrazosIzq);
         brazoDerecho.setModel(modeloBrazosDer);
@@ -178,6 +183,12 @@ public class VistaMedabot extends javax.swing.JFrame {
 
         jLabel9.setText("Jugador");
 
+        jugador.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jugadorItemStateChanged(evt);
+            }
+        });
+
         jLabel10.setText("Si no ha iniciado sesión, deberá hacerlo para poder guardar cambios.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,6 +288,66 @@ public class VistaMedabot extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jugadorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jugadorItemStateChanged
+    
+        String jugador = (String)this.jugador.getSelectedItem();
+        
+        this.cbd = new ConexionBD();
+        
+        ArrayList<String> cabezas = new ArrayList<>();
+        ArrayList<String> brazosIzq = new ArrayList<>();
+        ArrayList<String> brazosDer = new ArrayList<>();
+        ArrayList<String> piernasIzq = new ArrayList<>();
+        ArrayList<String> piernasDer = new ArrayList<>();
+        ArrayList<String> medallas = new ArrayList<>();
+        
+        try {
+            
+            cabezas = cbd.buscarMedapartesUsuarioTipo(jugador,"Cabeza");
+            brazosIzq = cbd.buscarMedapartesUsuarioTipo(jugador,"BrazoIzq");
+            brazosDer = cbd.buscarMedapartesUsuarioTipo(jugador,"BrazoDer");
+            piernasIzq = cbd.buscarMedapartesUsuarioTipo(jugador,"PiernaIzq");
+            piernasDer = cbd.buscarMedapartesUsuarioTipo(jugador,"PiernaDer");
+            medallas = cbd.buscarMedallas();
+        } 
+        
+        catch (SQLException ex) {
+            
+            Logger.getLogger(VistaMedabot.class.getName()).log(Level.SEVERE, null, ex);
+        
+        }
+                       
+        String[] arrayCabezas;
+        String[] arrayBrazosIzq;
+        String[] arrayBrazosDer;
+        String[] arrayPiernasIzq;
+        String[] arrayPiernasDer;
+        String[] arrayMedallas;
+        
+        
+        arrayCabezas = cabezas.toArray(new String[100]);
+        arrayBrazosIzq = brazosIzq.toArray(new String[100]);
+        arrayBrazosDer = brazosDer.toArray(new String[100]);
+        arrayPiernasIzq = piernasIzq.toArray(new String[100]);
+        arrayPiernasDer = piernasDer.toArray(new String[100]);
+        arrayMedallas = medallas.toArray(new String[100]);
+        
+        DefaultComboBoxModel modeloCabezas = new DefaultComboBoxModel(arrayCabezas);
+        DefaultComboBoxModel modeloBrazosIzq = new DefaultComboBoxModel(arrayBrazosIzq);
+        DefaultComboBoxModel modeloBrazosDer = new DefaultComboBoxModel(arrayBrazosDer);
+        DefaultComboBoxModel modeloPiernasIzq = new DefaultComboBoxModel(arrayPiernasIzq);
+        DefaultComboBoxModel modeloPiernasDer = new DefaultComboBoxModel(arrayPiernasDer);
+        DefaultComboBoxModel modeloMedallas = new DefaultComboBoxModel(arrayMedallas);
+                
+        cabeza.setModel(modeloCabezas);
+        brazoIzquierdo.setModel(modeloBrazosIzq);
+        brazoDerecho.setModel(modeloBrazosDer);
+        piernaIzquierda.setModel(modeloPiernasIzq);
+        piernaDerecha.setModel(modeloPiernasDer);
+        medalla.setModel(modeloMedallas);
+        
+    }//GEN-LAST:event_jugadorItemStateChanged
 
     public javax.swing.JButton getGuardar(){
         return this.guardar;

@@ -131,6 +131,104 @@ public class ConexionBD {
     
     }
     
+    public int saludMaximaMedabot(String nombreMedabot) throws SQLException {
+        
+        int saludMaximaMedabot = 0;
+        
+        boolean resultadoConexion = this.conectar();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaMedabot = "SELECT * FROM MEDABOT WHERE NOMBRE = '" + nombreMedabot +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaMedabot);
+                
+                String cabeza = new String();
+                String brazoIzq = new String();
+                String brazoDer = new String();
+                String piernaIzq = new String();
+                String piernaDer = new String();
+                
+                int saludCabeza = 0;
+                int saludBrazoIzq = 0;
+                int saludBrazoDer = 0;
+                int saludPiernaIzq = 0;
+                int saludPiernaDer = 0;
+            
+                if(resultadoBusqueda.next()) {
+                
+                    cabeza = resultadoBusqueda.getString(4);
+                    brazoIzq = resultadoBusqueda.getString(5);
+                    brazoDer = resultadoBusqueda.getString(6);
+                    piernaIzq = resultadoBusqueda.getString(7);
+                    piernaDer = resultadoBusqueda.getString(8);
+                    
+                }
+                
+                String consultaCabeza = "SELECT SALUDMAXIMA FROM MEDAPARTE WHERE NOMBRE = '" + cabeza +"'";
+                
+                resultadoBusqueda= stmt.executeQuery(consultaCabeza);
+                
+                if(resultadoBusqueda.next()) {
+                
+                    saludCabeza = resultadoBusqueda.getInt(1);
+                    
+                }
+                
+                String consultaBrazoIzq = "SELECT SALUDMAXIMA FROM MEDAPARTE WHERE NOMBRE = '" + brazoIzq +"'";
+                
+                resultadoBusqueda= stmt.executeQuery(consultaBrazoIzq);
+                
+                if(resultadoBusqueda.next()) {
+                
+                    saludBrazoIzq = resultadoBusqueda.getInt(1);
+                    
+                }
+                
+                String consultaBrazoDer = "SELECT SALUDMAXIMA FROM MEDAPARTE WHERE NOMBRE = '" + brazoDer +"'";
+                
+                resultadoBusqueda= stmt.executeQuery(consultaBrazoDer);
+                
+                if(resultadoBusqueda.next()) {
+                
+                    saludBrazoDer = resultadoBusqueda.getInt(1);
+                    
+                }
+                
+                String consultaPiernaIzq = "SELECT SALUDMAXIMA FROM MEDAPARTE WHERE NOMBRE = '" + piernaIzq +"'";
+                
+                resultadoBusqueda= stmt.executeQuery(consultaPiernaIzq);
+                
+                if(resultadoBusqueda.next()) {
+                
+                    saludPiernaIzq = resultadoBusqueda.getInt(1);
+                    
+                }
+                
+                String consultaPiernaDer = "SELECT SALUDMAXIMA FROM MEDAPARTE WHERE NOMBRE = '" + piernaDer +"'";
+                
+                resultadoBusqueda= stmt.executeQuery(consultaPiernaDer);
+                
+                if(resultadoBusqueda.next()) {
+                
+                    saludPiernaDer = resultadoBusqueda.getInt(1);
+                    
+                }
+                
+                saludMaximaMedabot = saludCabeza + saludBrazoIzq + saludBrazoDer + saludPiernaIzq + saludPiernaDer;
+                
+            }           
+            
+        }  
+        
+        return saludMaximaMedabot;
+        
+    }
+    
     public boolean registrarUsuario(String nombreUsuario, String contrasenia, String nombreMedabot) throws SQLException {
         
         boolean registroCorrecto = false;
@@ -145,23 +243,23 @@ public class ConexionBD {
             
                 String consultaUsuario01 = "INSERT INTO USUARIO (NOMBRE,PASS,TIPO,VICTORIAS,DERROTAS,TORNEOS) VALUES ('" + nombreUsuario +"','" + contrasenia +"','HUMANO',0,0,0)";
                 
-                String consultaUsuario02 = "INSERT INTO MEDABOT (SALUDMAXIMA,NOMBRE,USUARIO,CABEZA,BRAZOIZQ,BRAZODER,PIERNAIZQ,PIERNADER,MEDALLA,IMAGEN) VALUES (1100,'" + nombreMedabot +"V1','" + nombreUsuario +"','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0)";
+                String consultaUsuario02 = "INSERT INTO MEDABOT (SALUDMAXIMA,NOMBRE,USUARIO,CABEZA,BRAZOIZQ,BRAZODER,PIERNAIZQ,PIERNADER,MEDALLA,IMAGEN) VALUES (0,'" + nombreMedabot +"V1','" + nombreUsuario +"','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0)";
                 
-                String consultaUsuario03 = "INSERT INTO MEDABOT (SALUDMAXIMA,NOMBRE,USUARIO,CABEZA,BRAZOIZQ,BRAZODER,PIERNAIZQ,PIERNADER,MEDALLA,IMAGEN) VALUES (1100,'" + nombreMedabot +"V2','" + nombreUsuario +"','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0)";
+                String consultaUsuario03 = "INSERT INTO MEDABOT (SALUDMAXIMA,NOMBRE,USUARIO,CABEZA,BRAZOIZQ,BRAZODER,PIERNAIZQ,PIERNADER,MEDALLA,IMAGEN) VALUES (0,'" + nombreMedabot +"V2','" + nombreUsuario +"','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0)";
                 
-                String consultaUsuario04 = "INSERT INTO MEDABOT (SALUDMAXIMA,NOMBRE,USUARIO,CABEZA,BRAZOIZQ,BRAZODER,PIERNAIZQ,PIERNADER,MEDALLA,IMAGEN) VALUES (1100,'" + nombreMedabot +"V3','" + nombreUsuario +"','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0)";
+                String consultaUsuario04 = "INSERT INTO MEDABOT (SALUDMAXIMA,NOMBRE,USUARIO,CABEZA,BRAZOIZQ,BRAZODER,PIERNAIZQ,PIERNADER,MEDALLA,IMAGEN) VALUES (0,'" + nombreMedabot +"V3','" + nombreUsuario +"','Cabeza Generica (C)','Brazo Generico (BI)','Brazo Generico (BD)','Pierna Generica (PI)','Pierna Generica (PD)','Mono',0)";
                                 
                 String consultaUsuario05 = "INSERT INTO MEDALLAUSUARIO (USUARIO,MEDALLA) VALUES ('" + nombreUsuario +"','Mono')";
 
-                String consultaUsuario06 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Cabeza Generica (C)')";
+                String consultaUsuario06 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE,TIPO) VALUES ('" + nombreUsuario +"','Cabeza Generica (C)','Cabeza')";
                 
-                String consultaUsuario07 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Brazo Generico (BI)')";
+                String consultaUsuario07 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE,TIPO) VALUES ('" + nombreUsuario +"','Brazo Generico (BI)','BrazoIzq')";
                 
-                String consultaUsuario08 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Brazo Generico (BD)')";
+                String consultaUsuario08 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE,TIPO) VALUES ('" + nombreUsuario +"','Brazo Generico (BD)','BrazoDer')";
                 
-                String consultaUsuario09 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Pierna Generica (PI)')";
+                String consultaUsuario09 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE,TIPO) VALUES ('" + nombreUsuario +"','Pierna Generica (PI)','PiernaIzq')";
                 
-                String consultaUsuario10 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE) VALUES ('" + nombreUsuario +"','Pierna Generica (PD)')";
+                String consultaUsuario10 = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE,TIPO) VALUES ('" + nombreUsuario +"','Pierna Generica (PD)','PiernaDer')";
                 
                 stmt.executeUpdate(consultaUsuario01);
                 
@@ -182,6 +280,20 @@ public class ConexionBD {
                 stmt.executeUpdate(consultaUsuario09);
                 
                 stmt.executeUpdate(consultaUsuario10);
+                
+                int saludMaximaMedabot = this.saludMaximaMedabot(nombreMedabot+"V1");
+                
+                String consultaUsuario11 = "UPDATE MEDABOT SET SALUDMAXIMA = " +saludMaximaMedabot+ " WHERE NOMBRE = '" + nombreMedabot +"V1'";
+                
+                String consultaUsuario12 = "UPDATE MEDABOT SET SALUDMAXIMA = " +saludMaximaMedabot+ " WHERE NOMBRE = '" + nombreMedabot +"V2'";
+                
+                String consultaUsuario13 = "UPDATE MEDABOT SET SALUDMAXIMA = " +saludMaximaMedabot+ " WHERE NOMBRE = '" + nombreMedabot +"V3'";
+                                
+                stmt.executeUpdate(consultaUsuario11);
+                
+                stmt.executeUpdate(consultaUsuario12);
+                
+                stmt.executeUpdate(consultaUsuario13);
                 
                 registroCorrecto = true;
                 
@@ -391,8 +503,8 @@ public class ConexionBD {
     
     public boolean guardarMedabot(String versionMedabot, String nombreMedabot, ArrayList<String> medapartes, String medalla) throws SQLException {
         
-        boolean medabotGuardado = false;
-        
+        boolean medabotGuardado = false;        
+                
         if (versionMedabot.equals("Version 1")) {
             
             nombreMedabot = ""+nombreMedabot+"V1" ;
@@ -437,6 +549,11 @@ public class ConexionBD {
                 consulta = "UPDATE MEDABOT SET MEDALLA = '" + medalla +"' WHERE NOMBRE = '" + nombreMedabot +"'";
                 stmt.executeUpdate(consulta);
                 
+                int saludMaximaMedabot = this.saludMaximaMedabot(nombreMedabot);
+                
+                consulta = "UPDATE MEDABOT SET SALUDMAXIMA = " +saludMaximaMedabot+ " WHERE NOMBRE = '" + nombreMedabot +"'";
+                stmt.executeUpdate(consulta);
+                
                 medabotGuardado = true;
                 
             }           
@@ -462,6 +579,38 @@ public class ConexionBD {
                 String consultaUsuario = "SELECT NOMBRE FROM MEDAPARTE WHERE TIPO = '" + tipoMedaparte +"'";
         
                 ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                while(resultadoBusqueda.next()) {
+                
+                    String nombre = resultadoBusqueda.getString(1);
+                    
+                    medapartes.add(nombre);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return medapartes;
+        
+    }
+    
+    public ArrayList<String> buscarMedapartesUsuarioTipo(String usuario, String tipo) throws SQLException{
+        
+        boolean resultadoConexion = this.conectar();
+        
+        ArrayList<String> medapartes = new ArrayList<>();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaMedapartes = "SELECT MEDAPARTE FROM MEDAPARTEUSUARIO WHERE USUARIO = '" + usuario +"' AND TIPO = '" + tipo +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaMedapartes);
             
                 while(resultadoBusqueda.next()) {
                 
