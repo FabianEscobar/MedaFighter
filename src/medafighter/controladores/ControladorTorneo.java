@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/* Paquete contenedor*/
+
 package medafighter.controladores;
+
+/* Clases importadas */
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -120,11 +120,13 @@ public class Medabot {
     }
     
     
-    public void atacar(Medaparte medaparteAtacante, Medabot medabotEnemigo, Medaparte medaparteEnemiga) {
+    public int atacar(Medaparte medaparteAtacante, Medabot medabotEnemigo, Medaparte medaparteEnemiga) {
         
-        if (medaparteAtacante.getPH() > 0) {
+        int dano = 0;
+        
+        if (medaparteAtacante.getPHRes() > 0) {
             
-            int dano = medaparteAtacante.getAtaque() - medaparteEnemiga.getDefensa();
+            dano = medaparteAtacante.getAtaque() - medaparteEnemiga.getDefensa();
             
             if (dano > 0) {
                 
@@ -132,17 +134,13 @@ public class Medabot {
                 
             }  
             
-            medaparteAtacante.setPH(medaparteAtacante.getPH() - 1);
+            medaparteAtacante.setPHRes(medaparteAtacante.getPHRes() - 1);
             
             medabotEnemigo.setDanoTotal(medabotEnemigo.getDanoTotal() + dano);
             
         }
-        
-        else {
-            
-            
-            
-        }
+                
+        return dano;
         
     }
     
@@ -164,7 +162,7 @@ public class Medabot {
         
         int danoFinal = 0;
         
-        boolean probabilidadAtaque = new Random().nextInt(100 - this.esquiveTotal)==0;
+        boolean probabilidadAtaque = new Random().nextInt(100 - this.esquiveTotal) == 0;
         
         if (probabilidadAtaque == true) {
             
@@ -208,7 +206,5 @@ public class Medabot {
         return noqueado;
         
     }
-    
-    
     
 }

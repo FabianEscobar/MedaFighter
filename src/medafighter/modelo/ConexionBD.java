@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/* Paquete contenedor*/
+
 package medafighter.modelo;
 
 import java.sql.Connection;

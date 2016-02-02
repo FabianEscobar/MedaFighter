@@ -8,8 +8,6 @@ package medafighter;
 import java.sql.SQLException;
 import javax.swing.UIManager;
 import medafighter.controladores.ControladorIngreso;
-import medafighter.modelo.ConexionBD;
-
 /**
  *
  * @author Fabián
@@ -19,6 +17,10 @@ public class MedaFighter {
     /**
      * @param args the command line arguments
      */
+    
+    /*Main de la aplicación: selecciona el diseño de UI de Windows y crea un objeto ControladorIngreso,*/
+    /*el cual permite crear a su vez un objeto VistaIngreso para que el usuario pueda ingresar.*/
+    
     public static void main(String[] args) throws SQLException {
         
         try { 

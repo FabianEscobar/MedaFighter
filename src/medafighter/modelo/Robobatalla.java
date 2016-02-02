@@ -6,6 +6,7 @@
 package medafighter.modelo;
 
 import java.sql.SQLException;
+import java.util.Random;
 
 /**
  *
@@ -51,6 +52,10 @@ public class Robobatalla {
         this.turno = 1;
         
         this.jugadorActivo = this.jugador1.getNombre();
+        
+        boolean moneda = new Random().nextInt(2) == 0;
+        
+        if (moneda == true) {jugadorActivo = jugador1;} else {jugadorActivo = jugador2;}
 
     }
     
@@ -68,6 +73,16 @@ public class Robobatalla {
     
     public String getJugadorActivo(){
         return this.jugadorActivo;
+    }
+    
+    public Jugador getJugadorActivo(String jugadorActivo) {
+        
+        if (jugadorActivo.equals(this.jugador1.getNombre())) return this.jugador1;
+        
+        if (jugadorActivo.equals(this.jugador2.getNombre())) return this.jugador2;
+        
+        return null;
+        
     }
     
     
