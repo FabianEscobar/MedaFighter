@@ -69,6 +69,20 @@ public class ControladorCombate implements ActionListener {
         
         if (((JButton)ae.getSource()).equals(this.vc.getAtacarJ1())) {
             
+            if ((this.vc.getDefenderJ1().isEnabled() == true)&&(this.vc.getEsquivarJ1().isEnabled() == true)) {
+                
+                this.robobatalla.getJugador1().getMedabot().setSaludActual(this.robobatalla.getJugador1().getMedabot().getSaludActual() - this.robobatalla.getJugador1().getMedabot().getAtaqueTotal());
+                
+                this.vc.setSaludMedabotJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getSaludActual()));
+            
+                this.vc.setBarraSaludM1(this.robobatalla.getJugador1().getMedabot().getSaludActual());                
+                
+                this.vc.getLogBatalla().append("Se recibe todo el daño del ataque del turno anterior.\n\n");
+                
+                this.robobatalla.getJugador1().getMedabot().setAtaqueTotal(0);
+                
+            }
+            
             String mpAtacante = (String)this.vc.getAtacanteJ1().getSelectedItem();
             String mpDefensora = (String)this.vc.getDefensorJ2().getSelectedItem();
             
@@ -315,21 +329,40 @@ public class ControladorCombate implements ActionListener {
             this.vc.setSaludPiernaIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getSaludActual()));
             this.vc.setSaludPiernaDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaDer().getSaludActual()));
                         
-            this.vc.setPHCabezaM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getCabeza().getPHRes()));
-            this.vc.setPHBrazoIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getPHRes()));
-            this.vc.setPHBrazoDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoDer().getPHRes()));
-            this.vc.setPHPiernaIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getPHRes()));
-            this.vc.setPHPiernaDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getPHRes()));
+            //this.vc.setPHCabezaM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getCabeza().getPHRes()));
+            //this.vc.setPHBrazoIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getPHRes()));
+            //this.vc.setPHBrazoDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoDer().getPHRes()));
+            //this.vc.setPHPiernaIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getPHRes()));
+            //this.vc.setPHPiernaDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getPHRes()));
             
+            this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
+                        
             this.vc.setBarraSaludCabezaM2(this.robobatalla.getJugador2().getMedabot().getCabeza().getSaludActual());
             this.vc.setBarraSaludBrazoIzqM2(this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getSaludActual());
             this.vc.setBarraSaludBrazoDerM2(this.robobatalla.getJugador2().getMedabot().getBrazoDer().getSaludActual());
             this.vc.setBarraSaludPiernaIzqM2(this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getSaludActual());
             this.vc.setBarraSaludPiernaDerM2(this.robobatalla.getJugador2().getMedabot().getPiernaDer().getSaludActual());
             
+            this.vc.getDefenderJ1().setEnabled(false);
+            this.vc.getEsquivarJ1().setEnabled(false);
+            
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getAtacarJ2())) {
+            
+            if ((this.vc.getDefenderJ2().isEnabled() == true)&&(this.vc.getEsquivarJ2().isEnabled() == true)) {
+                
+                this.robobatalla.getJugador2().getMedabot().setSaludActual(this.robobatalla.getJugador2().getMedabot().getSaludActual() - this.robobatalla.getJugador2().getMedabot().getAtaqueTotal());
+                
+                this.vc.setSaludMedabotJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getSaludActual()));
+            
+                this.vc.setBarraSaludM2(this.robobatalla.getJugador2().getMedabot().getSaludActual());
+                            
+                this.vc.getLogBatalla().append("Se recibe todo el daño del ataque del turno anterior.\n\n");
+                
+                this.robobatalla.getJugador2().getMedabot().setAtaqueTotal(0);
+                
+            }
             
             String mpAtacante = (String)this.vc.getAtacanteJ2().getSelectedItem();
             String mpDefensora = (String)this.vc.getDefensorJ1().getSelectedItem();
@@ -577,11 +610,13 @@ public class ControladorCombate implements ActionListener {
             this.vc.setSaludPiernaIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getSaludActual()));
             this.vc.setSaludPiernaDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getSaludActual()));
             
-            this.vc.setPHCabezaM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getCabeza().getPHRes()));
-            this.vc.setPHBrazoIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getPHRes()));
-            this.vc.setPHBrazoDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoDer().getPHRes()));
-            this.vc.setPHPiernaIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getPHRes()));
-            this.vc.setPHPiernaDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaDer().getPHRes()));
+            //this.vc.setPHCabezaM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getCabeza().getPHRes()));
+            //this.vc.setPHBrazoIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getPHRes()));
+            //this.vc.setPHBrazoDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoDer().getPHRes()));
+            //this.vc.setPHPiernaIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getPHRes()));
+            //this.vc.setPHPiernaDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaDer().getPHRes()));
+            
+            this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
             
             this.vc.setBarraSaludCabezaM1(this.robobatalla.getJugador1().getMedabot().getCabeza().getSaludActual());
             this.vc.setBarraSaludBrazoIzqM1(this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getSaludActual());
@@ -589,29 +624,118 @@ public class ControladorCombate implements ActionListener {
             this.vc.setBarraSaludPiernaIzqM1(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getSaludActual());
             this.vc.setBarraSaludPiernaDerM1(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getSaludActual());
             
+            this.vc.getDefenderJ2().setEnabled(false);
+            this.vc.getEsquivarJ2().setEnabled(false);
+            
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getDefenderJ1())) {
             
+            this.robobatalla.getJugador1().getMedabot().defender(this.robobatalla.getJugador1().getMedabot().getAtaqueTotal());
             
+            this.vc.setSaludMedabotJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getSaludActual()));
             
+            this.vc.setBarraSaludM1(this.robobatalla.getJugador1().getMedabot().getSaludActual());
+            
+            this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
+            
+            this.vc.getLogBatalla().append(""+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" se ha defendido de los ataques de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+            
+            this.vc.getDefenderJ1().setEnabled(false);
+            
+            this.vc.getEsquivarJ1().setEnabled(false);
+            
+            this.vc.getAtacarJ1().setEnabled(true);
+            
+            this.vc.getAtacanteJ1().setEnabled(true);
+            
+            this.vc.getDefensorJ2().setEnabled(true);
+            
+            this.robobatalla.getJugador1().getMedabot().setAtaqueTotal(0);
+                    
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getDefenderJ2())) {
             
+            this.robobatalla.getJugador2().getMedabot().defender(this.robobatalla.getJugador2().getMedabot().getAtaqueTotal());
             
+            this.vc.setSaludMedabotJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getSaludActual()));
+            
+            this.vc.setBarraSaludM2(this.robobatalla.getJugador2().getMedabot().getSaludActual());
+            
+            this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
+            
+            this.vc.getLogBatalla().append(""+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" se ha defendido de los ataques de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+".\n\n");
+            
+            this.vc.getDefenderJ2().setEnabled(false);
+            
+            this.vc.getEsquivarJ2().setEnabled(false);
+            
+            this.vc.getAtacarJ2().setEnabled(true);
+            
+            this.vc.getAtacanteJ2().setEnabled(true);
+            
+            this.vc.getDefensorJ1().setEnabled(true);
+            
+            this.robobatalla.getJugador2().getMedabot().setAtaqueTotal(0);
             
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getEsquivarJ1())) {
             
+            boolean esquivar = this.robobatalla.getJugador1().getMedabot().esquivar(this.robobatalla.getJugador1().getMedabot().getAtaqueTotal());
             
+            this.vc.setSaludMedabotJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getSaludActual()));
+            
+            this.vc.setBarraSaludM1(this.robobatalla.getJugador1().getMedabot().getSaludActual());
+            
+            this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
+            
+            this.vc.getLogBatalla().append(""+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha intentado evadir de los ataques de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+            
+            if (esquivar == true) this.vc.getLogBatalla().append("¡Evasión exitosa!\n\n");
+            
+            if (esquivar == false) this.vc.getLogBatalla().append("¡No pudo evadir el ataque enemigo!\n\n");
+            
+            this.vc.getDefenderJ1().setEnabled(false);
+            
+            this.vc.getEsquivarJ1().setEnabled(false);
+            
+            this.vc.getAtacarJ1().setEnabled(true);
+            
+            this.vc.getAtacanteJ1().setEnabled(true);
+            
+            this.vc.getDefensorJ2().setEnabled(true);
+            
+            this.robobatalla.getJugador1().getMedabot().setAtaqueTotal(0);
             
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getEsquivarJ2())) {
             
+            boolean esquivar = this.robobatalla.getJugador2().getMedabot().esquivar(this.robobatalla.getJugador2().getMedabot().getAtaqueTotal());
             
+            this.vc.setSaludMedabotJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getSaludActual()));
+            
+            this.vc.setBarraSaludM2(this.robobatalla.getJugador2().getMedabot().getSaludActual());
+            
+            this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
+            
+            this.vc.getLogBatalla().append(""+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha intentado evadir los ataques de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+".\n\n");
+            
+            if (esquivar == true) this.vc.getLogBatalla().append("¡Evasión exitosa!\n\n");
+            
+            if (esquivar == false) this.vc.getLogBatalla().append("¡No pudo evadir el ataque enemigo!\n\n");this.vc.getDefenderJ2().setEnabled(false);
+            
+            this.vc.getEsquivarJ2().setEnabled(false);
+            
+            this.vc.getAtacarJ2().setEnabled(true);
+            
+            this.vc.getAtacanteJ2().setEnabled(true);
+            
+            this.vc.getDefensorJ1().setEnabled(true);
+            
+            this.robobatalla.getJugador2().getMedabot().setAtaqueTotal(0);
             
         }
         
@@ -658,9 +782,9 @@ public class ControladorCombate implements ActionListener {
                 this.vc.getDefenderJ2().setEnabled(false);
                 this.vc.getEsquivarJ2().setEnabled(false);
                 
-                //this.vc.getAtacanteJ1().setEnabled(true);
-                //this.vc.getDefensorJ2().setEnabled(true);
-                //this.vc.getAtacarJ1().setEnabled(true);
+                this.vc.getAtacanteJ1().setEnabled(true);
+                this.vc.getDefensorJ2().setEnabled(true);
+                this.vc.getAtacarJ1().setEnabled(true);
                 this.vc.getMedafuerzaJ1().setEnabled(true);
                 this.vc.getDefenderJ1().setEnabled(true);
                 this.vc.getEsquivarJ1().setEnabled(true);
@@ -677,44 +801,50 @@ public class ControladorCombate implements ActionListener {
                 this.vc.getDefenderJ1().setEnabled(false);
                 this.vc.getEsquivarJ1().setEnabled(false);
                 
-                //this.vc.getAtacanteJ2().setEnabled(true);
-                //this.vc.getDefensorJ1().setEnabled(true);
-                //this.vc.getAtacarJ2().setEnabled(true);
+                this.vc.getAtacanteJ2().setEnabled(true);
+                this.vc.getDefensorJ1().setEnabled(true);
+                this.vc.getAtacarJ2().setEnabled(true);
                 this.vc.getMedafuerzaJ2().setEnabled(true);
                 this.vc.getDefenderJ2().setEnabled(true);
                 this.vc.getEsquivarJ2().setEnabled(true);
             
             }
             
-            this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getCabeza().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getCabeza().getPHMax());
-            this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoIzq().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoIzq().getPHMax());
-            this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoDer().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoDer().getPHMax());
-            this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaIzq().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaIzq().getPHMax());
-            this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaDer().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaDer().getPHMax());
+            //this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getCabeza().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getCabeza().getPHMax());
+            //this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoIzq().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoIzq().getPHMax());
+            //this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoDer().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoDer().getPHMax());
+            //this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaIzq().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaIzq().getPHMax());
+            //this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaDer().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaDer().getPHMax());
             
+            this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPHMax());
+                        
             if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) {
                
-                this.vc.setPHCabezaM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getCabeza().getPHRes()));
-                this.vc.setPHBrazoIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getPHRes()));
-                this.vc.setPHBrazoDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoDer().getPHRes()));
-                this.vc.setPHPiernaIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getPHRes()));
-                this.vc.setPHPiernaDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getPHRes()));
-             
+                //this.vc.setPHCabezaM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getCabeza().getPHRes()));
+                //this.vc.setPHBrazoIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getPHRes()));
+                //this.vc.setPHBrazoDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoDer().getPHRes()));
+                //this.vc.setPHPiernaIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getPHRes()));
+                //this.vc.setPHPiernaDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getPHRes()));
+            
+                this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
+                
             }
             
             if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
                 
-                this.vc.setPHCabezaM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getCabeza().getPHRes()));
-                this.vc.setPHBrazoIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getPHRes()));
-                this.vc.setPHBrazoDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoDer().getPHRes()));
-                this.vc.setPHPiernaIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getPHRes()));
-                this.vc.setPHPiernaDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaDer().getPHRes()));
+                //this.vc.setPHCabezaM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getCabeza().getPHRes()));
+                //this.vc.setPHBrazoIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getPHRes()));
+                //this.vc.setPHBrazoDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoDer().getPHRes()));
+                //this.vc.setPHPiernaIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getPHRes()));
+                //this.vc.setPHPiernaDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaDer().getPHRes()));
             
+                this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
+                
             }
                         
             this.robobatalla.setTurno(this.robobatalla.getTurno()+1);
             
-            this.vc.getLogBatalla().append("* "+this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(1)+" turno - Turno de "+this.robobatalla.getJugadorActivo()+".\nDebe escoger entre defender o esquivar los ataques realizados el turno anterior.\n\n");
+            this.vc.getLogBatalla().append("* "+this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(1)+" turno - Turno de "+this.robobatalla.getJugadorActivo()+".\nPuede escoger entre defender o esquivar los ataques realizados el turno anterior, o recibir todo el daño y sólo atacar.\n\n");
            
         }
     

@@ -5,6 +5,7 @@
  */
 package medafighter;
 
+import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.UIManager;
 import medafighter.controladores.ControladorIngreso;
@@ -25,7 +26,7 @@ public class MedaFighter {
         
         try { 
     
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); 
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); 
 
         } 
         catch (Exception ex) { 

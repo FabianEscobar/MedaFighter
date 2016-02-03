@@ -100,12 +100,12 @@ public class VistaCombate extends javax.swing.JFrame {
         
         this.barraSaludPiernaDerM1.setValue(robobatalla.getJugador1().getMedabot().getPiernaDer().getSaludActual());
         this.barraSaludPiernaDerM2.setValue(robobatalla.getJugador2().getMedabot().getPiernaDer().getSaludActual());
-        
+                
         logBatalla.setLineWrap(true);
         
         logBatalla.setWrapStyleWord(true);
         
-        String logInicial = ""+robobatalla.getJugador1().getNombre()+"'s "+robobatalla.getJugador1().getMedabot().getNombre().substring(0,robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" V/S "+robobatalla.getJugador2().getNombre()+"'s "+robobatalla.getJugador2().getMedabot().getNombre().substring(0,robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"\n\n"
+        String logInicial = "\n"+robobatalla.getJugador1().getNombre()+"'s "+robobatalla.getJugador1().getMedabot().getNombre().substring(0,robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" V/S "+robobatalla.getJugador2().getNombre()+"'s "+robobatalla.getJugador2().getMedabot().getNombre().substring(0,robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"\n\n"
                             + "¡Que comience la robobatalla!\n\n";
         
         logBatalla.setText(logInicial);
@@ -123,6 +123,8 @@ public class VistaCombate extends javax.swing.JFrame {
             this.defenderJ2.setEnabled(false);
             this.esquivarJ2.setEnabled(false);
             this.atacanteJ2.setEnabled(false);
+            this.defenderJ1.setEnabled(false);
+            this.esquivarJ1.setEnabled(false);
             
         }
         
@@ -135,10 +137,12 @@ public class VistaCombate extends javax.swing.JFrame {
             this.defenderJ1.setEnabled(false);
             this.esquivarJ1.setEnabled(false);
             this.atacanteJ1.setEnabled(false);
+            this.defenderJ2.setEnabled(false);
+            this.esquivarJ2.setEnabled(false);
             
         }
         
-        logBatalla.append(""+numeroAOrdinal(robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.numeroAOrdinal(robobatalla.getTurno()).substring(1)+" turno - Turno de "+robobatalla.getJugadorActivo()+".\n\n");
+        logBatalla.append("* "+numeroAOrdinal(robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.numeroAOrdinal(robobatalla.getTurno()).substring(1)+" turno - Turno de "+robobatalla.getJugadorActivo()+".\n\n");
         
     }
     
@@ -290,432 +294,315 @@ public class VistaCombate extends javax.swing.JFrame {
         phPiernaIzqM2 = new javax.swing.JLabel();
         phPiernaDerM2 = new javax.swing.JLabel();
         terminarTurno = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        phRestanteJ1 = new javax.swing.JLabel();
+        phRestanteJ2 = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Medabatalla");
+        setBounds(new java.awt.Rectangle(0, 0, 800, 600));
         setLocation(new java.awt.Point(0, 0));
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
+        setSize(new java.awt.Dimension(800, 600));
+        getContentPane().setLayout(null);
 
         logBatalla.setEditable(false);
         logBatalla.setBackground(new java.awt.Color(204, 204, 204));
         logBatalla.setColumns(20);
+        logBatalla.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         logBatalla.setRows(5);
-        logBatalla.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        logBatalla.setBorder(null);
         panelLog.setViewportView(logBatalla);
+
+        getContentPane().add(panelLog);
+        panelLog.setBounds(210, 450, 380, 110);
 
         nombreJ1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nombreJ1.setText("Jugador1");
+        getContentPane().add(nombreJ1);
+        nombreJ1.setBounds(19, 12, 66, 15);
 
         nombreJ2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nombreJ2.setText("Jugador2");
+        getContentPane().add(nombreJ2);
+        nombreJ2.setBounds(416, 11, 66, 15);
 
         nombreM1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         nombreM1.setText("Medabot");
+        getContentPane().add(nombreM1);
+        nombreM1.setBounds(19, 55, 66, 14);
+        getContentPane().add(barraSaludM1);
+        barraSaludM1.setBounds(132, 55, 100, 14);
+        getContentPane().add(barraSaludM2);
+        barraSaludM2.setBounds(530, 54, 100, 14);
 
         nombreM2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         nombreM2.setText("Medabot");
+        getContentPane().add(nombreM2);
+        nombreM2.setBounds(416, 54, 66, 14);
+        getContentPane().add(barraMedafuerzaM1);
+        barraMedafuerzaM1.setBounds(150, 410, 146, 14);
+        getContentPane().add(barraMedafuerzaM2);
+        barraMedafuerzaM2.setBounds(630, 410, 146, 14);
 
+        saludMedabotJ1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         saludMedabotJ1.setText("1000");
+        getContentPane().add(saludMedabotJ1);
+        saludMedabotJ1.setBounds(250, 54, 30, 14);
 
+        saludMedabotJ2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         saludMedabotJ2.setText("1000");
+        getContentPane().add(saludMedabotJ2);
+        saludMedabotJ2.setBounds(648, 52, 28, 14);
 
         atacarJ1.setText("Atacar");
+        getContentPane().add(atacarJ1);
+        atacarJ1.setBounds(139, 360, 100, 23);
 
         esquivarJ1.setText("Esquivar");
+        getContentPane().add(esquivarJ1);
+        esquivarJ1.setBounds(105, 489, 73, 23);
 
         defenderJ1.setText("Defender");
+        getContentPane().add(defenderJ1);
+        defenderJ1.setBounds(10, 489, 77, 23);
 
         rendirseJ1.setText("Rendirse");
+        getContentPane().add(rendirseJ1);
+        rendirseJ1.setBounds(60, 530, 75, 23);
 
         esquivarJ2.setText("Esquivar");
+        getContentPane().add(esquivarJ2);
+        esquivarJ2.setBounds(709, 489, 73, 23);
 
         defenderJ2.setText("Defender");
+        getContentPane().add(defenderJ2);
+        defenderJ2.setBounds(614, 489, 77, 23);
 
         rendirseJ2.setText("Rendirse");
+        getContentPane().add(rendirseJ2);
+        rendirseJ2.setBounds(660, 530, 75, 23);
 
         atacarJ2.setText("Atacar");
+        getContentPane().add(atacarJ2);
+        atacarJ2.setBounds(542, 360, 100, 23);
 
         medafuerzaJ1.setText("Medafuerza");
+        getContentPane().add(medafuerzaJ1);
+        medafuerzaJ1.setBounds(20, 410, 89, 23);
 
         medafuerzaJ2.setText("Medafuerza");
+        getContentPane().add(medafuerzaJ2);
+        medafuerzaJ2.setBounds(500, 410, 89, 23);
 
         jLabel1.setText("Cabeza");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(19, 97, 36, 14);
 
         jLabel2.setText("Brazo Izquierdo");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(19, 137, 75, 14);
 
         jLabel5.setText("Brazo Derecho");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(19, 177, 70, 14);
 
         jLabel6.setText("Pierna Izquierda");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(19, 217, 78, 14);
 
         jLabel7.setText("Pierna Derecha");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(19, 258, 73, 14);
 
         jLabel8.setText("Cabeza");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(416, 96, 36, 14);
 
         jLabel9.setText("Brazo Izquierdo");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(416, 136, 75, 14);
 
         jLabel10.setText("Brazo Derecho");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(416, 176, 70, 14);
 
         jLabel11.setText("Pierna Izquierda");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(416, 216, 78, 14);
 
         jLabel12.setText("Pierna Derecha");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(416, 257, 73, 14);
+        getContentPane().add(barraSaludCabezaM1);
+        barraSaludCabezaM1.setBounds(132, 97, 100, 14);
+        getContentPane().add(barraSaludBrazoIzqM1);
+        barraSaludBrazoIzqM1.setBounds(132, 137, 100, 14);
+        getContentPane().add(barraSaludBrazoDerM1);
+        barraSaludBrazoDerM1.setBounds(132, 177, 100, 14);
+        getContentPane().add(barraSaludPiernaIzqM1);
+        barraSaludPiernaIzqM1.setBounds(132, 217, 100, 14);
+        getContentPane().add(barraSaludPiernaDerM1);
+        barraSaludPiernaDerM1.setBounds(132, 258, 100, 14);
+        getContentPane().add(barraSaludCabezaM2);
+        barraSaludCabezaM2.setBounds(530, 96, 100, 14);
+        getContentPane().add(barraSaludBrazoIzqM2);
+        barraSaludBrazoIzqM2.setBounds(530, 136, 100, 14);
+        getContentPane().add(barraSaludBrazoDerM2);
+        barraSaludBrazoDerM2.setBounds(530, 176, 100, 14);
+        getContentPane().add(barraSaludPiernaIzqM2);
+        barraSaludPiernaIzqM2.setBounds(530, 216, 100, 14);
+        getContentPane().add(barraSaludPiernaDerM2);
+        barraSaludPiernaDerM2.setBounds(530, 257, 100, 14);
 
         saludCabezaM1.setText("1000");
+        getContentPane().add(saludCabezaM1);
+        saludCabezaM1.setBounds(250, 96, 24, 14);
 
         saludBrazoIzqM1.setText("1000");
+        getContentPane().add(saludBrazoIzqM1);
+        saludBrazoIzqM1.setBounds(250, 136, 24, 14);
 
         saludBrazoDerM1.setText("1000");
+        getContentPane().add(saludBrazoDerM1);
+        saludBrazoDerM1.setBounds(250, 176, 24, 14);
 
         saludPiernaIzqM1.setText("1000");
+        getContentPane().add(saludPiernaIzqM1);
+        saludPiernaIzqM1.setBounds(250, 216, 24, 14);
 
         saludPiernaDerM1.setText("1000");
+        getContentPane().add(saludPiernaDerM1);
+        saludPiernaDerM1.setBounds(250, 257, 24, 14);
 
         saludCabezaM2.setText("1000");
+        getContentPane().add(saludCabezaM2);
+        saludCabezaM2.setBounds(648, 94, 24, 14);
 
         saludBrazoIzqM2.setText("1000");
+        getContentPane().add(saludBrazoIzqM2);
+        saludBrazoIzqM2.setBounds(648, 134, 24, 14);
 
         saludBrazoDerM2.setText("1000");
+        getContentPane().add(saludBrazoDerM2);
+        saludBrazoDerM2.setBounds(648, 174, 24, 14);
 
         saludPiernaIzqM2.setText("1000");
+        getContentPane().add(saludPiernaIzqM2);
+        saludPiernaIzqM2.setBounds(648, 214, 24, 14);
 
         saludPiernaDerM2.setText("1000");
+        getContentPane().add(saludPiernaDerM2);
+        saludPiernaDerM2.setBounds(648, 255, 24, 14);
 
         atacanteJ1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cabeza", "Brazo Izquierdo", "Brazo Derecho", "Pierna Izquierda", "Pierna Derecha" }));
-        atacanteJ1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atacanteJ1ActionPerformed(evt);
-            }
-        });
+        getContentPane().add(atacanteJ1);
+        atacanteJ1.setBounds(139, 312, 103, 20);
 
         defensorJ2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cabeza", "Brazo Izquierdo", "Brazo Derecho", "Pierna Izquierda", "Pierna Derecha" }));
+        getContentPane().add(defensorJ2);
+        defensorJ2.setBounds(260, 312, 103, 20);
 
         atacanteJ2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cabeza", "Brazo Izquierdo", "Brazo Derecho", "Pierna Izquierda", "Pierna Derecha" }));
+        getContentPane().add(atacanteJ2);
+        atacanteJ2.setBounds(542, 312, 103, 20);
 
         defensorJ1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cabeza", "Brazo Izquierdo", "Brazo Derecho", "Pierna Izquierda", "Pierna Derecha" }));
+        getContentPane().add(defensorJ1);
+        defensorJ1.setBounds(671, 312, 103, 20);
 
         jLabel23.setText("Atacante/Defensor");
+        getContentPane().add(jLabel23);
+        jLabel23.setBounds(19, 315, 92, 14);
 
         jLabel24.setText("Atacante/Defensor");
+        getContentPane().add(jLabel24);
+        jLabel24.setBounds(416, 315, 92, 14);
 
-        jLabel25.setText("PH");
+        jLabel25.setText("Costo PH");
+        getContentPane().add(jLabel25);
+        jLabel25.setBounds(296, 54, 44, 14);
 
         phCabezaM1.setText("0");
+        getContentPane().add(phCabezaM1);
+        phCabezaM1.setBounds(296, 96, 6, 14);
 
         phBrazoIzqM1.setText("0");
+        getContentPane().add(phBrazoIzqM1);
+        phBrazoIzqM1.setBounds(296, 136, 6, 14);
 
         phBrazoDerM1.setText("0");
+        getContentPane().add(phBrazoDerM1);
+        phBrazoDerM1.setBounds(296, 176, 6, 14);
 
         phPiernaIzqM1.setText("0");
+        getContentPane().add(phPiernaIzqM1);
+        phPiernaIzqM1.setBounds(296, 216, 6, 14);
 
         phPiernaDerM1.setText("0");
+        getContentPane().add(phPiernaDerM1);
+        phPiernaDerM1.setBounds(296, 257, 6, 14);
 
-        jLabel32.setText("PH");
+        jLabel32.setText("Costo PH");
+        getContentPane().add(jLabel32);
+        jLabel32.setBounds(700, 52, 44, 14);
 
         phCabezaM2.setText("0");
+        getContentPane().add(phCabezaM2);
+        phCabezaM2.setBounds(700, 94, 6, 14);
 
         phBrazoIzqM2.setText("0");
+        getContentPane().add(phBrazoIzqM2);
+        phBrazoIzqM2.setBounds(700, 134, 6, 14);
 
         phBrazoDerM2.setText("0");
+        getContentPane().add(phBrazoDerM2);
+        phBrazoDerM2.setBounds(700, 174, 6, 14);
 
         phPiernaIzqM2.setText("0");
+        getContentPane().add(phPiernaIzqM2);
+        phPiernaIzqM2.setBounds(700, 214, 6, 14);
 
         phPiernaDerM2.setText("0");
+        getContentPane().add(phPiernaDerM2);
+        phPiernaDerM2.setBounds(700, 255, 6, 14);
 
         terminarTurno.setText("Terminar turno");
+        getContentPane().add(terminarTurno);
+        terminarTurno.setBounds(350, 410, 103, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(defenderJ1)
-                        .addGap(18, 18, 18)
-                        .addComponent(esquivarJ1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(31, 31, 31))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(rendirseJ1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(panelLog, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rendirseJ2)
-                        .addGap(69, 69, 69))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(defenderJ2)
-                        .addGap(18, 18, 18)
-                        .addComponent(esquivarJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(nombreM1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nombreJ1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(barraSaludM1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(barraSaludCabezaM1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(barraSaludBrazoIzqM1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(barraSaludBrazoDerM1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(barraSaludPiernaIzqM1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(barraSaludPiernaDerM1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(saludMedabotJ1)
-                            .addComponent(saludCabezaM1)
-                            .addComponent(saludBrazoIzqM1)
-                            .addComponent(saludBrazoDerM1)
-                            .addComponent(saludPiernaIzqM1)
-                            .addComponent(saludPiernaDerM1))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(phPiernaDerM1)
-                            .addComponent(phPiernaIzqM1)
-                            .addComponent(phBrazoDerM1)
-                            .addComponent(phBrazoIzqM1)
-                            .addComponent(phCabezaM1)
-                            .addComponent(jLabel25)))
-                    .addComponent(jLabel23))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(atacarJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(atacanteJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(defensorJ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(nombreM2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nombreJ2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(barraSaludM2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(barraSaludCabezaM2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(barraSaludBrazoIzqM2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(barraSaludBrazoDerM2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(barraSaludPiernaIzqM2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(barraSaludPiernaDerM2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(saludMedabotJ2)
-                            .addComponent(saludPiernaDerM2)
-                            .addComponent(saludPiernaIzqM2)
-                            .addComponent(saludBrazoDerM2)
-                            .addComponent(saludBrazoIzqM2)
-                            .addComponent(saludCabezaM2))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(phCabezaM2)
-                            .addComponent(jLabel32)
-                            .addComponent(phBrazoIzqM2)
-                            .addComponent(phBrazoDerM2)
-                            .addComponent(phPiernaIzqM2)
-                            .addComponent(phPiernaDerM2))))
-                .addGap(26, 26, 26))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(medafuerzaJ1)
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(barraMedafuerzaM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(terminarTurno)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(medafuerzaJ2)
-                        .addGap(45, 45, 45)
-                        .addComponent(barraMedafuerzaM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(atacarJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(atacanteJ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(defensorJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nombreJ1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(nombreM1)
-                                    .addComponent(barraSaludM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel1)
-                                    .addComponent(barraSaludCabezaM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel2)
-                                    .addComponent(barraSaludBrazoIzqM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel5)
-                                    .addComponent(barraSaludBrazoDerM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel6)
-                                    .addComponent(barraSaludPiernaIzqM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel7)
-                                    .addComponent(barraSaludPiernaDerM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(40, 40, 40))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludMedabotJ1)
-                                    .addComponent(jLabel25))
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludCabezaM1)
-                                    .addComponent(phCabezaM1))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludBrazoIzqM1)
-                                    .addComponent(phBrazoIzqM1))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludBrazoDerM1)
-                                    .addComponent(phBrazoDerM1))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludPiernaIzqM1)
-                                    .addComponent(phPiernaIzqM1))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludPiernaDerM1)
-                                    .addComponent(phPiernaDerM1))
-                                .addGap(41, 41, 41))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nombreJ2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(nombreM2)
-                                    .addComponent(barraSaludM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel8)
-                                    .addComponent(barraSaludCabezaM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel9)
-                                    .addComponent(barraSaludBrazoIzqM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel10)
-                                    .addComponent(barraSaludBrazoDerM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel11)
-                                    .addComponent(barraSaludPiernaIzqM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                    .addComponent(jLabel12)
-                                    .addComponent(barraSaludPiernaDerM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludMedabotJ2)
-                                    .addComponent(jLabel32))
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludCabezaM2)
-                                    .addComponent(phCabezaM2))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludBrazoIzqM2)
-                                    .addComponent(phBrazoIzqM2))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludBrazoDerM2)
-                                    .addComponent(phBrazoDerM2))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludPiernaIzqM2)
-                                    .addComponent(phPiernaIzqM2))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(saludPiernaDerM2)
-                                    .addComponent(phPiernaDerM2))))
-                        .addGap(41, 41, 41)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(atacanteJ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(defensorJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(atacanteJ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(defensorJ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel24))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(atacarJ1)
-                    .addComponent(atacarJ2))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(medafuerzaJ1)
-                    .addComponent(barraMedafuerzaM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(medafuerzaJ2)
-                    .addComponent(barraMedafuerzaM2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(terminarTurno))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(defenderJ1)
-                            .addComponent(esquivarJ1))
-                        .addGap(34, 34, 34)
-                        .addComponent(rendirseJ1)
-                        .addGap(31, 31, 31))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(defenderJ2)
-                            .addComponent(esquivarJ2))
-                        .addGap(33, 33, 33)
-                        .addComponent(rendirseJ2)
-                        .addGap(32, 32, 32))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(panelLog, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))))
-        );
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("PH Restante");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(132, 13, 70, 14);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("PH Restante");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(530, 12, 70, 14);
+
+        phRestanteJ1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        phRestanteJ1.setText("10");
+        getContentPane().add(phRestanteJ1);
+        phRestanteJ1.setBounds(210, 13, 14, 14);
+
+        phRestanteJ2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        phRestanteJ2.setText("10");
+        getContentPane().add(phRestanteJ2);
+        phRestanteJ2.setBounds(608, 12, 14, 14);
+
+        fondo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/medafighter/imagenes/vistaCombate.png"))); // NOI18N
+        fondo.setText("jLabel13");
+        getContentPane().add(fondo);
+        fondo.setBounds(0, 0, 800, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void atacanteJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atacanteJ1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_atacanteJ1ActionPerformed
 
     public javax.swing.JButton getAtacarJ1(){
         return this.atacarJ1;
@@ -793,12 +680,16 @@ public class VistaCombate extends javax.swing.JFrame {
         return this.saludBrazoDerM1;
     }
     
-    public javax.swing.JLabel getsaludPiernaIzqM1(){
+    public javax.swing.JLabel getSaludPiernaIzqM1(){
         return this.saludPiernaIzqM1;
     }
     
     public javax.swing.JLabel getSaludPiernaDerM1(){
         return this.saludPiernaDerM1;
+    }
+    
+    public javax.swing.JLabel getPHRestanteJ1(){
+        return this.phRestanteJ1;
     }
     
     public javax.swing.JLabel getPHCabezaM1(){
@@ -843,6 +734,10 @@ public class VistaCombate extends javax.swing.JFrame {
     
     public javax.swing.JLabel getSaludPiernaDerM2(){
         return this.saludPiernaDerM2;
+    }
+    
+    public javax.swing.JLabel getPHRestanteJ2(){
+        return this.phRestanteJ2;
     }
     
     public javax.swing.JLabel getPHCabezaM2(){
@@ -989,6 +884,10 @@ public class VistaCombate extends javax.swing.JFrame {
         this.saludPiernaDerM1.setText(text);
     }
     
+    public void setPHJ1(String text){
+        this.phRestanteJ1.setText(text);
+    }
+    
     public void setPHCabezaM1(String text){
         this.phCabezaM1.setText(text);
     }
@@ -1007,6 +906,10 @@ public class VistaCombate extends javax.swing.JFrame {
     
     public void setPHPiernaDerM1(String text){
         this.phPiernaDerM1.setText(text);
+    }
+    
+    public void setPHJ2(String text){
+        this.phRestanteJ2.setText(text);
     }
     
     public void setSaludMedabotJ2(String text){
@@ -1078,6 +981,7 @@ public class VistaCombate extends javax.swing.JFrame {
     private javax.swing.JComboBox defensorJ2;
     private javax.swing.JButton esquivarJ1;
     private javax.swing.JButton esquivarJ2;
+    private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1086,7 +990,9 @@ public class VistaCombate extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1110,6 +1016,8 @@ public class VistaCombate extends javax.swing.JFrame {
     private javax.swing.JLabel phPiernaDerM2;
     private javax.swing.JLabel phPiernaIzqM1;
     private javax.swing.JLabel phPiernaIzqM2;
+    private javax.swing.JLabel phRestanteJ1;
+    private javax.swing.JLabel phRestanteJ2;
     private javax.swing.JButton rendirseJ1;
     private javax.swing.JButton rendirseJ2;
     private javax.swing.JLabel saludBrazoDerM1;

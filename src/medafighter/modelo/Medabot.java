@@ -37,9 +37,15 @@ public class Medabot {
     
     private int danoTotal;
     
+    private int ataqueTotal;
+    
     private int defensaTotal;
     
     private int esquiveTotal;
+    
+    private int puntosHabilidadMax;
+    
+    private int puntosHabilidadRes;
     
     private ConexionBD cbd;
     
@@ -49,6 +55,8 @@ public class Medabot {
         this.jugador = usuario;
         
         this.danoTotal = 0;
+        
+        this.ataqueTotal = 0;
         
         this.cbd = new ConexionBD();
         
@@ -71,6 +79,10 @@ public class Medabot {
         this.defensaTotal = this.cabeza.getDefensa() + this.brazoIzq.getDefensa() + this.brazoDer.getDefensa() + this.piernaIzq.getDefensa() + this.piernaDer.getDefensa();
         
         this.esquiveTotal = this.cabeza.getEsquive() + this.brazoIzq.getEsquive() + this.brazoDer.getEsquive() + this.piernaIzq.getEsquive() + this.piernaDer.getEsquive();
+        
+        this.puntosHabilidadMax = 10;
+        
+        this.puntosHabilidadRes = this.puntosHabilidadMax;
         
     }
     
@@ -106,8 +118,20 @@ public class Medabot {
         return this.saludMaxima;
     }
     
+    public int getAtaqueTotal(){
+        return this.ataqueTotal;
+    }
+    
     public int getDanoTotal(){
         return this.danoTotal;
+    }
+    
+    public int getPHMax() {
+        return this.puntosHabilidadMax;        
+    }
+    
+    public int getPHRes() {
+        return this.puntosHabilidadRes;        
     }
     
     
@@ -115,16 +139,24 @@ public class Medabot {
         this.saludActual = saludActual;
     }
     
+    public void setAtaqueTotal(int ataqueTotal){
+        this.ataqueTotal = ataqueTotal;
+    }
+    
     public void setDanoTotal(int danoTotal){
         this.danoTotal = danoTotal;
     }
     
+    public void setPHRes(int puntosHabilidadesRes) {
+        this.puntosHabilidadRes = puntosHabilidadesRes;
+    }
     
+        
     public int atacar(Medaparte medaparteAtacante, Medabot medabotEnemigo, Medaparte medaparteEnemiga) {
         
         int dano = 0;
         
-        if (medaparteAtacante.getPHRes() > 0) {
+        if (this.getPHRes() > 0) {
             
             dano = medaparteAtacante.getAtaque() - medaparteEnemiga.getDefensa();
             
@@ -134,55 +166,75 @@ public class Medabot {
                 
             }  
             
-            medaparteAtacante.setPHRes(medaparteAtacante.getPHRes() - 1);
+            this.setPHRes(this.getPHRes() - 2);
             
             medabotEnemigo.setDanoTotal(medabotEnemigo.getDanoTotal() + dano);
             
-        }
-                
+            medabotEnemigo.ataqueTotal = medabotEnemigo.ataqueTotal + medaparteAtacante.getAtaque();
+            
+        }        
+                       
         return dano;
         
     }
     
-    public void defender(int danoTotal) {
+    public void defender(int ataqueTotal) {
         
-        int danoFinal = danoTotal - this.defensaTotal;
+        //int danoFinal = danoTotal - this.defensaTotal;
         
-        if (danoFinal > 0) {
+        int danoFinal = ataqueTotal - this.defensaTotal;
+        
+        if(this.getPHRes() > 0) {
             
-            this.saludActual = this.saludActual - danoFinal;            
+            if (danoFinal > 0) {
+            
+                this.saludActual = this.saludActual - danoFinal;            
+            
+            }
+        
+            this.danoTotal = 0;
+            
+            this.setPHRes(this.getPHRes() - 2);
             
         }
-        
-        this.danoTotal = 0;
      
     }
     
-    public void esquivar(int danoTotal) {
+    public boolean esquivar(int danoTotal) {
         
-        int danoFinal = 0;
+        boolean esquive = false;
         
-        boolean probabilidadAtaque = new Random().nextInt(100 - this.esquiveTotal) == 0;
-        
-        if (probabilidadAtaque == true) {
+        if(this.getPHRes() > 0) {
             
-            danoFinal = danoTotal;            
+            int danoFinal = 0;
+        
+            esquive = new Random().nextInt(100 - this.esquiveTotal) == 0;
+        
+            if (esquive == false) {
+            
+                danoFinal = danoTotal;            
+            
+            }   
+        
+            else {
+            
+                danoFinal = 0;            
+            
+            }
+        
+            if (danoFinal > 0) {
+            
+                this.saludActual = this.saludActual - danoFinal;            
+            
+            }
+        
+            this.danoTotal = 0;
+            
+            this.setPHRes(this.getPHRes() - 2);
             
         }
         
-        else {
-            
-            danoFinal = 0;            
-            
-        }
-        
-        if (danoFinal > 0) {
-            
-            this.saludActual = this.saludActual - danoFinal;            
-            
-        }
-        
-        this.danoTotal = 0;    
+        return esquive;
         
     }
     
@@ -201,7 +253,6 @@ public class Medabot {
     public boolean noqueado(int saludActual, int dañoFinal) {
         
         boolean noqueado = false;
-        
         
         return noqueado;
         
