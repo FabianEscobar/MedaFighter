@@ -134,6 +134,14 @@ public class Medabot {
         return this.puntosHabilidadRes;        
     }
     
+    public int getDefensaTotal() {
+        return this.defensaTotal;        
+    }
+    
+    public int getEsquiveTotal() {
+        return this.esquiveTotal;        
+    }
+    
     
     public void setSaludActual(int saludActual){
         this.saludActual = saludActual;
@@ -151,6 +159,14 @@ public class Medabot {
         this.puntosHabilidadRes = puntosHabilidadesRes;
     }
     
+    public void setDefensaTotal(int defensaTotal) {
+        this.defensaTotal = defensaTotal;
+    }
+    
+    public void setEsquiveTotal(int esquiveTotal) {
+        this.esquiveTotal = esquiveTotal;
+    }
+    
         
     public int atacar(Medaparte medaparteAtacante, Medabot medabotEnemigo, Medaparte medaparteEnemiga) {
         
@@ -166,7 +182,7 @@ public class Medabot {
                 
             }  
             
-            this.setPHRes(this.getPHRes() - 2);
+            this.setPHRes(this.getPHRes() - medaparteAtacante.getCostoPH());
             
             medabotEnemigo.setDanoTotal(medabotEnemigo.getDanoTotal() + dano);
             

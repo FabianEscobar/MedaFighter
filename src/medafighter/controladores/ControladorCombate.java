@@ -16,6 +16,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import medafighter.modelo.ConexionBD;
 import medafighter.vistas.VistaCombate;
 import medafighter.modelo.*;
@@ -27,20 +30,13 @@ import medafighter.modelo.*;
 
 /* Clase ControladorCombate con sus atributos y métodos */
 
-public class ControladorCombate implements ActionListener {
+public class ControladorCombate implements ActionListener, ChangeListener {
     
     private VistaCombate vc;
     
     private ConexionBD cbd;
     
-    private Jugador jugador1;    
-    private Jugador jugador2;
-    
-    private Medabot medabotJ1;    
-    private Medabot medabotJ2;
-            
-    private Medalla medallaJ1;
-    private Medalla medallaJ2;
+    private ControladorMenu cm;
     
     private Robobatalla robobatalla;
     
@@ -77,7 +73,7 @@ public class ControladorCombate implements ActionListener {
             
                 this.vc.setBarraSaludM1(this.robobatalla.getJugador1().getMedabot().getSaludActual());                
                 
-                this.vc.getLogBatalla().append("Se recibe todo el daño del ataque del turno anterior.\n\n");
+                this.vc.getLogBatalla().append("- Al no defender o intentar esquivar, "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" recibe todo el daño de los ataques del turno anterior.\n\n");
                 
                 this.robobatalla.getJugador1().getMedabot().setAtaqueTotal(0);
                 
@@ -358,7 +354,7 @@ public class ControladorCombate implements ActionListener {
             
                 this.vc.setBarraSaludM2(this.robobatalla.getJugador2().getMedabot().getSaludActual());
                             
-                this.vc.getLogBatalla().append("Se recibe todo el daño del ataque del turno anterior.\n\n");
+                this.vc.getLogBatalla().append("- Al no defender o intentar esquivar, "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" recibe todo el daño de los ataques del turno anterior.\n\n");
                 
                 this.robobatalla.getJugador2().getMedabot().setAtaqueTotal(0);
                 
@@ -639,19 +635,23 @@ public class ControladorCombate implements ActionListener {
             
             this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
             
-            this.vc.getLogBatalla().append(""+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" se ha defendido de los ataques de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+            this.vc.getLogBatalla().append("- "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" se ha defendido de los ataques de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
             
-            this.vc.getDefenderJ1().setEnabled(false);
+            if (this.robobatalla.getJugador1().getMedabot().getSaludActual() > 0) {
             
-            this.vc.getEsquivarJ1().setEnabled(false);
+                this.vc.getDefenderJ1().setEnabled(false);
             
-            this.vc.getAtacarJ1().setEnabled(true);
+                this.vc.getEsquivarJ1().setEnabled(false);
             
-            this.vc.getAtacanteJ1().setEnabled(true);
+                this.vc.getAtacarJ1().setEnabled(true);
             
-            this.vc.getDefensorJ2().setEnabled(true);
+                this.vc.getAtacanteJ1().setEnabled(true);
             
-            this.robobatalla.getJugador1().getMedabot().setAtaqueTotal(0);
+                this.vc.getDefensorJ2().setEnabled(true);
+            
+                this.robobatalla.getJugador1().getMedabot().setAtaqueTotal(0);
+            
+            }
                     
         }
         
@@ -665,19 +665,23 @@ public class ControladorCombate implements ActionListener {
             
             this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
             
-            this.vc.getLogBatalla().append(""+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" se ha defendido de los ataques de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+".\n\n");
+            this.vc.getLogBatalla().append("- "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" se ha defendido de los ataques de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+".\n\n");
             
-            this.vc.getDefenderJ2().setEnabled(false);
+            if (this.robobatalla.getJugador1().getMedabot().getSaludActual() > 0) {
             
-            this.vc.getEsquivarJ2().setEnabled(false);
+                this.vc.getDefenderJ2().setEnabled(false);
             
-            this.vc.getAtacarJ2().setEnabled(true);
+                this.vc.getEsquivarJ2().setEnabled(false);
             
-            this.vc.getAtacanteJ2().setEnabled(true);
+                this.vc.getAtacarJ2().setEnabled(true);
             
-            this.vc.getDefensorJ1().setEnabled(true);
+                this.vc.getAtacanteJ2().setEnabled(true);
             
-            this.robobatalla.getJugador2().getMedabot().setAtaqueTotal(0);
+                this.vc.getDefensorJ1().setEnabled(true);
+            
+                this.robobatalla.getJugador2().getMedabot().setAtaqueTotal(0);
+            
+            }
             
         }
         
@@ -693,21 +697,25 @@ public class ControladorCombate implements ActionListener {
             
             this.vc.getLogBatalla().append(""+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha intentado evadir de los ataques de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
             
-            if (esquivar == true) this.vc.getLogBatalla().append("¡Evasión exitosa!\n\n");
+            if (esquivar == true) this.vc.getLogBatalla().append("- ¡Evasión exitosa!\n\n");
             
-            if (esquivar == false) this.vc.getLogBatalla().append("¡No pudo evadir el ataque enemigo!\n\n");
+            if (esquivar == false) this.vc.getLogBatalla().append("- ¡No pudo evadir el ataque enemigo!\n\n");
             
-            this.vc.getDefenderJ1().setEnabled(false);
+            if (this.robobatalla.getJugador1().getMedabot().getSaludActual() > 0) {
             
-            this.vc.getEsquivarJ1().setEnabled(false);
+                this.vc.getDefenderJ1().setEnabled(false);
             
-            this.vc.getAtacarJ1().setEnabled(true);
+                this.vc.getEsquivarJ1().setEnabled(false);
             
-            this.vc.getAtacanteJ1().setEnabled(true);
+                this.vc.getAtacarJ1().setEnabled(true);
             
-            this.vc.getDefensorJ2().setEnabled(true);
+                this.vc.getAtacanteJ1().setEnabled(true);
             
-            this.robobatalla.getJugador1().getMedabot().setAtaqueTotal(0);
+                this.vc.getDefensorJ2().setEnabled(true);
+            
+                this.robobatalla.getJugador1().getMedabot().setAtaqueTotal(0);
+                
+            }
             
         }
         
@@ -723,19 +731,23 @@ public class ControladorCombate implements ActionListener {
             
             this.vc.getLogBatalla().append(""+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha intentado evadir los ataques de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+".\n\n");
             
-            if (esquivar == true) this.vc.getLogBatalla().append("¡Evasión exitosa!\n\n");
+            if (esquivar == true) this.vc.getLogBatalla().append("- ¡Evasión exitosa!\n\n");
             
-            if (esquivar == false) this.vc.getLogBatalla().append("¡No pudo evadir el ataque enemigo!\n\n");this.vc.getDefenderJ2().setEnabled(false);
+            if (esquivar == false) this.vc.getLogBatalla().append("- ¡No pudo evadir el ataque enemigo!\n\n");this.vc.getDefenderJ2().setEnabled(false);
             
-            this.vc.getEsquivarJ2().setEnabled(false);
+            if (this.robobatalla.getJugador1().getMedabot().getSaludActual() > 0) {
             
-            this.vc.getAtacarJ2().setEnabled(true);
+                this.vc.getEsquivarJ2().setEnabled(false);
             
-            this.vc.getAtacanteJ2().setEnabled(true);
+                this.vc.getAtacarJ2().setEnabled(true);
             
-            this.vc.getDefensorJ1().setEnabled(true);
+                this.vc.getAtacanteJ2().setEnabled(true);
             
-            this.robobatalla.getJugador2().getMedabot().setAtaqueTotal(0);
+                this.vc.getDefensorJ1().setEnabled(true);
+            
+                this.robobatalla.getJugador2().getMedabot().setAtaqueTotal(0);
+            
+            }
             
         }
         
@@ -778,17 +790,16 @@ public class ControladorCombate implements ActionListener {
                 this.vc.getAtacanteJ2().setEnabled(false);
                 this.vc.getDefensorJ1().setEnabled(false);
                 this.vc.getAtacarJ2().setEnabled(false);
-                this.vc.getMedafuerzaJ2().setEnabled(false);
                 this.vc.getDefenderJ2().setEnabled(false);
                 this.vc.getEsquivarJ2().setEnabled(false);
+                this.vc.getRendirseJ2().setEnabled(false);
                 
                 this.vc.getAtacanteJ1().setEnabled(true);
                 this.vc.getDefensorJ2().setEnabled(true);
                 this.vc.getAtacarJ1().setEnabled(true);
-                this.vc.getMedafuerzaJ1().setEnabled(true);
                 this.vc.getDefenderJ1().setEnabled(true);
                 this.vc.getEsquivarJ1().setEnabled(true);
-                
+                this.vc.getRendirseJ1().setEnabled(true);
             
             }
         
@@ -797,16 +808,16 @@ public class ControladorCombate implements ActionListener {
                 this.vc.getAtacanteJ1().setEnabled(false);
                 this.vc.getDefensorJ2().setEnabled(false);
                 this.vc.getAtacarJ1().setEnabled(false);
-                this.vc.getMedafuerzaJ1().setEnabled(false);
                 this.vc.getDefenderJ1().setEnabled(false);
                 this.vc.getEsquivarJ1().setEnabled(false);
+                this.vc.getRendirseJ1().setEnabled(false);
                 
                 this.vc.getAtacanteJ2().setEnabled(true);
                 this.vc.getDefensorJ1().setEnabled(true);
                 this.vc.getAtacarJ2().setEnabled(true);
-                this.vc.getMedafuerzaJ2().setEnabled(true);
                 this.vc.getDefenderJ2().setEnabled(true);
                 this.vc.getEsquivarJ2().setEnabled(true);
+                this.vc.getRendirseJ2().setEnabled(true);
             
             }
             
@@ -846,6 +857,439 @@ public class ControladorCombate implements ActionListener {
             
             this.vc.getLogBatalla().append("* "+this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(1)+" turno - Turno de "+this.robobatalla.getJugadorActivo()+".\nPuede escoger entre defender o esquivar los ataques realizados el turno anterior, o recibir todo el daño y sólo atacar.\n\n");
            
+        }   
+    
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent ce) {
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludM1())) {
+            
+            if (this.vc.getBarraSaludM1().getValue() == 0) {
+                
+                this.vc.setSaludMedabotJ1("0");
+                
+                this.vc.getNombreJ1().setEnabled(false);
+                this.vc.getNombreM1().setEnabled(false);
+                this.vc.getPHRestanteLabelJ1().setEnabled(false);
+                this.vc.getPHRestanteJ1().setEnabled(false);
+                this.vc.getBarraSaludM1().setEnabled(false);
+                this.vc.getSaludMedabotJ1().setEnabled(false);
+                this.vc.getCostoPHLabelJ1().setEnabled(false);
+                
+                this.vc.getCabezaJ1().setEnabled(false);
+                this.vc.getBrazoIzqJ1().setEnabled(false);
+                this.vc.getBrazoDerJ1().setEnabled(false);
+                this.vc.getPiernaIzqJ1().setEnabled(false);
+                this.vc.getPiernaDerJ1().setEnabled(false);
+                
+                this.vc.getBarraSaludCabezaM1().setEnabled(false);
+                this.vc.getBarraSaludBrazoIzqM1().setEnabled(false);
+                this.vc.getBarraSaludBrazoDerM1().setEnabled(false);
+                this.vc.getBarraSaludPiernaIzqM1().setEnabled(false);
+                this.vc.getBarraSaludPiernaDerM1().setEnabled(false);
+                
+                this.vc.getSaludCabezaM1().setEnabled(false);
+                this.vc.getSaludBrazoIzqM1().setEnabled(false);
+                this.vc.getSaludBrazoDerM1().setEnabled(false);
+                this.vc.getSaludPiernaIzqM1().setEnabled(false);
+                this.vc.getSaludPiernaDerM1().setEnabled(false);
+                
+                this.vc.getPHCabezaM1().setEnabled(false);
+                this.vc.getPHBrazoIzqM1().setEnabled(false);
+                this.vc.getPHBrazoDerM1().setEnabled(false);
+                this.vc.getPHPiernaIzqM1().setEnabled(false);
+                this.vc.getPHPiernaDerM1().setEnabled(false);
+                
+                this.vc.getMedabotJ1().setEnabled(false);
+                this.vc.getAtacanteJ1().setEnabled(false);
+                this.vc.getDefensorJ2().setEnabled(false);
+                this.vc.getAtacarJ1().setEnabled(false);
+                this.vc.getMedafuerzaJ1().setEnabled(false);
+                this.vc.getBarraMedafuerzaM1().setEnabled(false);
+                this.vc.getDefenderJ1().setEnabled(false);
+                this.vc.getEsquivarJ1().setEnabled(false);            
+                this.vc.getRendirseJ1().setEnabled(false);
+                
+                this.vc.getTerminarTurno().setEnabled(false);
+                
+                this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha sido noqueado!\n\n- ¡"+this.robobatalla.getJugador2().getNombre()+" es el ganador!\n\n");
+                
+                JOptionPane.showMessageDialog(vc, "- ¡"+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha sido noqueado!\n\n- ¡"+this.robobatalla.getJugador2().getNombre()+" es el ganador!\n\n");
+                
+                this.cm = new ControladorMenu();
+                
+                this.vc.setVisible(false);
+                
+                this.vc.dispose();                  
+                
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludCabezaM1())) {
+            
+            if (this.vc.getBarraSaludCabezaM1().getValue() == 0) {
+                
+                this.vc.getAtacanteJ1().removeItem("Cabeza");
+                
+                this.vc.getDefensorJ1().removeItem("Cabeza");
+                
+                this.vc.setSaludCabezaM1("0");
+                
+                this.vc.getBarraSaludCabezaM1().setEnabled(false);                
+                
+                this.vc.getSaludCabezaM1().setEnabled(false);
+                
+                this.vc.getCabezaJ1().setEnabled(false);
+                
+                this.vc.getPHCabezaM1().setEnabled(false);                                
+                
+                this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal() - this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa());
+                
+                this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive());
+                
+                this.vc.getLogBatalla().append("- La Cabeza de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
+                                
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludBrazoIzqM1())) {
+            
+            if (this.vc.getBarraSaludBrazoIzqM1().getValue() == 0) {
+                
+                this.vc.getAtacanteJ1().removeItem("Brazo Izquierdo");
+                
+                this.vc.getDefensorJ1().removeItem("Brazo Izquierdo");
+                
+                this.vc.setSaludBrazoIzqM1("0");
+                
+                this.vc.getBarraSaludBrazoIzqM1().setEnabled(false);
+                
+                this.vc.getSaludBrazoIzqM1().setEnabled(false);
+                
+                this.vc.getBrazoIzqJ1().setEnabled(false);
+                
+                this.vc.getPHBrazoIzqM1().setEnabled(false);
+                
+                this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal() - this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa());
+                
+                this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive());
+                
+                this.vc.getLogBatalla().append("- El Brazo Izquierdo de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
+                 
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludBrazoDerM1())) {
+            
+            if (this.vc.getBarraSaludBrazoDerM1().getValue() == 0) {
+                
+                this.vc.getAtacanteJ1().removeItem("Brazo Derecho");
+                
+                this.vc.getDefensorJ1().removeItem("Brazo Derecho");
+                
+                this.vc.setSaludBrazoDerM1("0");
+                
+                this.vc.getBarraSaludBrazoDerM1().setEnabled(false);
+                
+                this.vc.getSaludBrazoDerM1().setEnabled(false);
+                
+                this.vc.getBrazoDerJ1().setEnabled(false);
+                
+                this.vc.getPHBrazoDerM1().setEnabled(false);
+                
+                this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal() - this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa());
+                
+                this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive());
+                
+                this.vc.getLogBatalla().append("- El Brazo Derecho de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
+                 
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludPiernaIzqM1())) {
+            
+            if (this.vc.getBarraSaludPiernaIzqM1().getValue() == 0) {
+                
+                this.vc.getAtacanteJ1().removeItem("Pierna Izquierda");
+                
+                this.vc.getDefensorJ1().removeItem("Pierna Izquierda");
+                
+                this.vc.setSaludPiernaIzqM1("0");
+                
+                this.vc.getBarraSaludPiernaIzqM1().setEnabled(false);
+                
+                this.vc.getSaludPiernaIzqM1().setEnabled(false);
+                
+                this.vc.getPiernaIzqJ1().setEnabled(false);
+                
+                this.vc.getPHPiernaIzqM1().setEnabled(false);
+                
+                this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal() - this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa());
+                
+                this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive());
+                
+                this.vc.getLogBatalla().append("- La Pierna Izquierda de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
+                 
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludPiernaDerM1())) {
+            
+            if (this.vc.getBarraSaludPiernaDerM1().getValue() == 0) {
+                
+                this.vc.getAtacanteJ1().removeItem("Pierna Derecha");
+                
+                this.vc.getDefensorJ1().removeItem("Pierna Derecha");
+                
+                this.vc.setSaludPiernaDerM1("0");
+                
+                this.vc.getBarraSaludPiernaDerM1().setEnabled(false);
+                
+                this.vc.getSaludPiernaDerM1().setEnabled(false);
+                
+                this.vc.getPiernaDerJ1().setEnabled(false);
+                
+                this.vc.getPHPiernaDerM1().setEnabled(false);
+                
+                this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal() - this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa());
+                
+                this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive());
+                
+                this.vc.getLogBatalla().append("- La Pierna Derecha de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
+                 
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraMedafuerzaM1())) {
+            
+            if (this.vc.getBarraMedafuerzaM1().getValue() == 100) {
+                
+                
+                
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludM2())) {
+            
+            if (this.vc.getBarraSaludM2().getValue() == 0) {
+                
+                this.vc.setSaludMedabotJ2("0");
+                
+                this.vc.getNombreJ2().setEnabled(false);
+                this.vc.getNombreM2().setEnabled(false);
+                this.vc.getPHRestanteLabelJ2().setEnabled(false);
+                this.vc.getPHRestanteJ2().setEnabled(false);
+                this.vc.getBarraSaludM2().setEnabled(false);
+                this.vc.getSaludMedabotJ2().setEnabled(false);
+                this.vc.getCostoPHLabelJ2().setEnabled(false);
+                
+                this.vc.getCabezaJ2().setEnabled(false);
+                this.vc.getBrazoIzqJ2().setEnabled(false);
+                this.vc.getBrazoDerJ2().setEnabled(false);
+                this.vc.getPiernaIzqJ2().setEnabled(false);
+                this.vc.getPiernaDerJ2().setEnabled(false);
+                
+                this.vc.getBarraSaludCabezaM2().setEnabled(false);
+                this.vc.getBarraSaludBrazoIzqM2().setEnabled(false);
+                this.vc.getBarraSaludBrazoDerM2().setEnabled(false);
+                this.vc.getBarraSaludPiernaIzqM2().setEnabled(false);
+                this.vc.getBarraSaludPiernaDerM2().setEnabled(false);
+                
+                this.vc.getSaludCabezaM2().setEnabled(false);
+                this.vc.getSaludBrazoIzqM2().setEnabled(false);
+                this.vc.getSaludBrazoDerM2().setEnabled(false);
+                this.vc.getSaludPiernaIzqM2().setEnabled(false);
+                this.vc.getSaludPiernaDerM2().setEnabled(false);
+                
+                this.vc.getPHCabezaM2().setEnabled(false);
+                this.vc.getPHBrazoIzqM2().setEnabled(false);
+                this.vc.getPHBrazoDerM2().setEnabled(false);
+                this.vc.getPHPiernaIzqM2().setEnabled(false);
+                this.vc.getPHPiernaDerM2().setEnabled(false);
+                
+                this.vc.getMedabotJ2().setEnabled(false);
+                this.vc.getAtacanteJ2().setEnabled(false);
+                this.vc.getDefensorJ1().setEnabled(false);
+                this.vc.getAtacarJ2().setEnabled(false);
+                this.vc.getMedafuerzaJ2().setEnabled(false);
+                this.vc.getBarraMedafuerzaM2().setEnabled(false);
+                this.vc.getDefenderJ2().setEnabled(false);
+                this.vc.getEsquivarJ2().setEnabled(false);            
+                this.vc.getRendirseJ2().setEnabled(false);
+                
+                this.vc.getTerminarTurno().setEnabled(false);
+                
+                this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha sido noqueado!\n\n- ¡"+this.robobatalla.getJugador1().getNombre()+" es el ganador!\n\n");
+                
+                JOptionPane.showMessageDialog(vc, "- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha sido noqueado!\n\n- ¡"+this.robobatalla.getJugador1().getNombre()+" es el ganador!\n\n");
+                
+                this.cm = new ControladorMenu();
+                
+                this.vc.setVisible(false);
+                
+                this.vc.dispose(); 
+                
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludCabezaM2())) {
+            
+            if (this.vc.getBarraSaludCabezaM2().getValue() == 0) {
+                
+                this.vc.getAtacanteJ2().removeItem("Cabeza");
+                
+                this.vc.getDefensorJ2().removeItem("Cabeza");
+                
+                this.vc.setSaludCabezaM2("0");
+                
+                this.vc.getBarraSaludCabezaM2().setEnabled(false);
+                
+                this.vc.getSaludCabezaM2().setEnabled(false);
+                
+                this.vc.getCabezaJ2().setEnabled(false);
+                
+                this.vc.getPHCabezaM2().setEnabled(false);
+                
+                this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal() - this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa());
+                
+                this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive());
+            
+                this.vc.getLogBatalla().append("- La Cabeza de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
+                             
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludBrazoIzqM2())) {
+            
+            if (this.vc.getBarraSaludBrazoIzqM2().getValue() == 0) {
+                
+                this.vc.getAtacanteJ2().removeItem("Brazo Izquierdo");
+                
+                this.vc.getDefensorJ2().removeItem("Brazo Izquierdo");
+                
+                this.vc.setSaludBrazoIzqM2("0");
+                
+                this.vc.getBarraSaludBrazoIzqM2().setEnabled(false);
+                
+                this.vc.getSaludBrazoIzqM2().setEnabled(false);
+                
+                this.vc.getBrazoIzqJ2().setEnabled(false);
+                
+                this.vc.getPHBrazoIzqM2().setEnabled(false);
+                
+                this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal() - this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa());
+                
+                this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive());
+                
+                this.vc.getLogBatalla().append("- El Brazo Izquierdo de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
+                
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludBrazoDerM2())) {
+            
+            if (this.vc.getBarraSaludBrazoDerM2().getValue() == 0) {
+                
+                this.vc.getAtacanteJ2().removeItem("Brazo Derecho");
+                
+                this.vc.getDefensorJ2().removeItem("Brazo Derecho");
+                
+                this.vc.setSaludBrazoDerM2("0");
+                
+                this.vc.getBarraSaludBrazoDerM2().setEnabled(false);
+                
+                this.vc.getSaludBrazoDerM2().setEnabled(false);
+                
+                this.vc.getBrazoDerJ2().setEnabled(false);
+                
+                this.vc.getPHBrazoDerM2().setEnabled(false);
+                
+                this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal() - this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa());
+                
+                this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive());
+                
+                this.vc.getLogBatalla().append("- El Brazo Derecho de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
+                
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludPiernaIzqM2())) {
+            
+            if (this.vc.getBarraSaludPiernaIzqM2().getValue() == 0) {
+                
+                this.vc.getAtacanteJ2().removeItem("Pierna Izquierda");
+                
+                this.vc.getDefensorJ2().removeItem("Pierna Izquierda");
+                
+                this.vc.setSaludPiernaIzqM2("0");
+                
+                this.vc.getBarraSaludPiernaIzqM2().setEnabled(false);
+                
+                this.vc.getSaludPiernaIzqM2().setEnabled(false);
+                
+                this.vc.getPiernaIzqJ2().setEnabled(false);
+                
+                this.vc.getPHPiernaIzqM2().setEnabled(false);
+                
+                this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal() - this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa());
+                
+                this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive());
+                
+                this.vc.getLogBatalla().append("- La Pierna Izquierda de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
+                
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludPiernaDerM2())) {
+            
+            if (this.vc.getBarraSaludPiernaDerM2().getValue() == 0) {
+                
+                this.vc.getAtacanteJ2().removeItem("Pierna Derecha");
+                
+                this.vc.getDefensorJ2().removeItem("Pierna Derecha");
+                
+                this.vc.setSaludPiernaDerM2("0");
+                
+                this.vc.getBarraSaludPiernaDerM2().setEnabled(false);
+                
+                this.vc.getSaludPiernaDerM2().setEnabled(false);
+                
+                this.vc.getPiernaDerJ2().setEnabled(false);
+                
+                this.vc.getPHPiernaDerM2().setEnabled(false);
+                
+                this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal() - this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa());
+                
+                this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive());
+                
+                this.vc.getLogBatalla().append("- La Pierna Derecha de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
+                
+            }
+            
+        }
+        
+        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraMedafuerzaM2())) {
+            
+            if (this.vc.getBarraMedafuerzaM2().getValue() == 100) {
+                
+                
+                
+            }
+            
         }
     
     }

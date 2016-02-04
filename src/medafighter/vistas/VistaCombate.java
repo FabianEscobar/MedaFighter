@@ -6,6 +6,8 @@
 package medafighter.vistas;
 
 import java.awt.event.ActionListener;
+import java.util.EventListener;
+import javax.swing.event.ChangeListener;
 import medafighter.modelo.*;
 
 /**
@@ -17,7 +19,7 @@ public class VistaCombate extends javax.swing.JFrame {
     /**
      * Creates new form VistaCombate
      */
-    public VistaCombate(ActionListener al, Robobatalla robobatalla) {
+    public VistaCombate(EventListener el, Robobatalla robobatalla) {
         
         initComponents();
         
@@ -48,20 +50,20 @@ public class VistaCombate extends javax.swing.JFrame {
         this.saludPiernaDerM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getPiernaDer().getSaludActual()));
         
         
-        this.phCabezaM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getCabeza().getPHMax()));
-        this.phCabezaM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getCabeza().getPHMax()));
+        this.phCabezaM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getCabeza().getCostoPH()));
+        this.phCabezaM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getCabeza().getCostoPH()));
         
-        this.phBrazoIzqM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getBrazoIzq().getPHMax()));
-        this.phBrazoIzqM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getBrazoIzq().getPHMax()));
+        this.phBrazoIzqM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getBrazoIzq().getCostoPH()));
+        this.phBrazoIzqM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getBrazoIzq().getCostoPH()));
         
-        this.phBrazoDerM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getBrazoDer().getPHMax()));
-        this.phBrazoDerM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getBrazoDer().getPHMax()));
+        this.phBrazoDerM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getBrazoDer().getCostoPH()));
+        this.phBrazoDerM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getBrazoDer().getCostoPH()));
         
-        this.phPiernaIzqM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getPiernaIzq().getPHMax()));
-        this.phPiernaIzqM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getPiernaIzq().getPHMax()));
+        this.phPiernaIzqM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getPiernaIzq().getCostoPH()));
+        this.phPiernaIzqM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getPiernaIzq().getCostoPH()));
         
-        this.phPiernaDerM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getPiernaDer().getPHMax()));
-        this.phPiernaDerM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getPiernaDer().getPHMax()));
+        this.phPiernaDerM1.setText(String.valueOf(robobatalla.getJugador1().getMedabot().getPiernaDer().getCostoPH()));
+        this.phPiernaDerM2.setText(String.valueOf(robobatalla.getJugador2().getMedabot().getPiernaDer().getCostoPH()));
         
         
         this.barraSaludM1.setMaximum(robobatalla.getJugador1().getMedabot().getSaludMaxima());
@@ -105,26 +107,31 @@ public class VistaCombate extends javax.swing.JFrame {
         
         logBatalla.setWrapStyleWord(true);
         
-        String logInicial = "\n"+robobatalla.getJugador1().getNombre()+"'s "+robobatalla.getJugador1().getMedabot().getNombre().substring(0,robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" V/S "+robobatalla.getJugador2().getNombre()+"'s "+robobatalla.getJugador2().getMedabot().getNombre().substring(0,robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"\n\n"
+        String logInicial = ""+robobatalla.getJugador1().getNombre()+"'s "+robobatalla.getJugador1().getMedabot().getNombre().substring(0,robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" V/S "+robobatalla.getJugador2().getNombre()+"'s "+robobatalla.getJugador2().getMedabot().getNombre().substring(0,robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"\n\n"
                             + "¡Que comience la robobatalla!\n\n";
         
         logBatalla.setText(logInicial);
         
         this.setVisible(true);
         
-        agregarListener(al);
+        agregarActionListener((ActionListener) el);
+        
+        agregarChangeListener((ChangeListener) el);
+        
+        this.medafuerzaJ1.setEnabled(false);
+        this.medafuerzaJ2.setEnabled(false);
         
         if (robobatalla.getJugadorActivo().equals(robobatalla.getJugador1().getNombre())) {
             
             this.atacanteJ2.setEnabled(false);
             this.defensorJ1.setEnabled(false);
-            this.atacarJ2.setEnabled(false);
-            this.medafuerzaJ2.setEnabled(false);
+            this.atacarJ2.setEnabled(false);            
             this.defenderJ2.setEnabled(false);
             this.esquivarJ2.setEnabled(false);
             this.atacanteJ2.setEnabled(false);
             this.defenderJ1.setEnabled(false);
             this.esquivarJ1.setEnabled(false);
+            this.rendirseJ2.setEnabled(false);
             
         }
         
@@ -133,20 +140,20 @@ public class VistaCombate extends javax.swing.JFrame {
             this.atacanteJ1.setEnabled(false);
             this.defensorJ2.setEnabled(false);
             this.atacarJ1.setEnabled(false);
-            this.medafuerzaJ1.setEnabled(false);
             this.defenderJ1.setEnabled(false);
             this.esquivarJ1.setEnabled(false);
             this.atacanteJ1.setEnabled(false);
             this.defenderJ2.setEnabled(false);
-            this.esquivarJ2.setEnabled(false);
+            this.esquivarJ2.setEnabled(false);            
+            this.rendirseJ1.setEnabled(false);
             
         }
         
-        logBatalla.append("* "+numeroAOrdinal(robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.numeroAOrdinal(robobatalla.getTurno()).substring(1)+" turno - Turno de "+robobatalla.getJugadorActivo()+".\n\n");
+        logBatalla.append("* "+numeroAOrdinal(robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.numeroAOrdinal(robobatalla.getTurno()).substring(1)+" turno - Turno de "+robobatalla.getJugadorActivo()+".\n- Como es el primer turno, puede atacar sin la necesidad de defender o esquivar un ataque anterior.\n\n");
         
     }
     
-    void agregarListener(ActionListener al){
+    void agregarActionListener(ActionListener al){
         
         this.atacarJ1.addActionListener(al);
         
@@ -169,6 +176,38 @@ public class VistaCombate extends javax.swing.JFrame {
         this.medafuerzaJ2.addActionListener(al);
         
         this.terminarTurno.addActionListener(al);
+        
+    }
+    
+    void agregarChangeListener(ChangeListener cl){
+        
+        this.barraSaludM1.addChangeListener(cl);
+        
+        this.barraSaludCabezaM1.addChangeListener(cl);
+        
+        this.barraSaludBrazoIzqM1.addChangeListener(cl);
+        
+        this.barraSaludBrazoDerM1.addChangeListener(cl);
+        
+        this.barraSaludPiernaIzqM1.addChangeListener(cl);
+        
+        this.barraSaludPiernaDerM1.addChangeListener(cl);
+        
+        this.barraMedafuerzaM1.addChangeListener(cl);
+        
+        this.barraSaludM2.addChangeListener(cl);
+        
+        this.barraSaludCabezaM2.addChangeListener(cl);
+        
+        this.barraSaludBrazoIzqM2.addChangeListener(cl);
+        
+        this.barraSaludBrazoDerM2.addChangeListener(cl);
+        
+        this.barraSaludPiernaIzqM2.addChangeListener(cl);
+        
+        this.barraSaludPiernaDerM2.addChangeListener(cl);
+        
+        this.barraMedafuerzaM2.addChangeListener(cl);
         
     }
     
@@ -245,16 +284,16 @@ public class VistaCombate extends javax.swing.JFrame {
         atacarJ2 = new javax.swing.JButton();
         medafuerzaJ1 = new javax.swing.JButton();
         medafuerzaJ2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        cabezaJ1 = new javax.swing.JLabel();
+        brazoIzqJ1 = new javax.swing.JLabel();
+        brazoDerJ1 = new javax.swing.JLabel();
+        piernaIzqJ1 = new javax.swing.JLabel();
+        piernaDerJ1 = new javax.swing.JLabel();
+        cabezaJ2 = new javax.swing.JLabel();
+        brazoIzqJ2 = new javax.swing.JLabel();
+        brazoDerJ2 = new javax.swing.JLabel();
+        piernaIzqJ2 = new javax.swing.JLabel();
+        piernaDerJ2 = new javax.swing.JLabel();
         barraSaludCabezaM1 = new javax.swing.JProgressBar();
         barraSaludBrazoIzqM1 = new javax.swing.JProgressBar();
         barraSaludBrazoDerM1 = new javax.swing.JProgressBar();
@@ -279,25 +318,25 @@ public class VistaCombate extends javax.swing.JFrame {
         defensorJ2 = new javax.swing.JComboBox();
         atacanteJ2 = new javax.swing.JComboBox();
         defensorJ1 = new javax.swing.JComboBox();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        costoPHLabelJ1 = new javax.swing.JLabel();
         phCabezaM1 = new javax.swing.JLabel();
         phBrazoIzqM1 = new javax.swing.JLabel();
         phBrazoDerM1 = new javax.swing.JLabel();
         phPiernaIzqM1 = new javax.swing.JLabel();
         phPiernaDerM1 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
+        costoPHLabelJ2 = new javax.swing.JLabel();
         phCabezaM2 = new javax.swing.JLabel();
         phBrazoIzqM2 = new javax.swing.JLabel();
         phBrazoDerM2 = new javax.swing.JLabel();
         phPiernaIzqM2 = new javax.swing.JLabel();
         phPiernaDerM2 = new javax.swing.JLabel();
         terminarTurno = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        phRestanteLabelJ1 = new javax.swing.JLabel();
+        phRestanteLabelJ2 = new javax.swing.JLabel();
         phRestanteJ1 = new javax.swing.JLabel();
         phRestanteJ2 = new javax.swing.JLabel();
+        medabotJ1 = new javax.swing.JLabel();
+        medabotJ2 = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -308,302 +347,310 @@ public class VistaCombate extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         logBatalla.setEditable(false);
         logBatalla.setBackground(new java.awt.Color(204, 204, 204));
         logBatalla.setColumns(20);
         logBatalla.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         logBatalla.setRows(5);
-        logBatalla.setBorder(null);
+        logBatalla.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        logBatalla.setMargin(new java.awt.Insets(10, 10, 10, 10));
         panelLog.setViewportView(logBatalla);
 
-        getContentPane().add(panelLog);
-        panelLog.setBounds(210, 450, 380, 110);
+        getContentPane().add(panelLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 380, 120));
 
         nombreJ1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nombreJ1.setText("Jugador1");
-        getContentPane().add(nombreJ1);
-        nombreJ1.setBounds(19, 12, 66, 15);
+        getContentPane().add(nombreJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 12, 66, -1));
 
         nombreJ2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nombreJ2.setText("Jugador2");
-        getContentPane().add(nombreJ2);
-        nombreJ2.setBounds(416, 11, 66, 15);
+        getContentPane().add(nombreJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 11, 66, -1));
 
         nombreM1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         nombreM1.setText("Medabot");
-        getContentPane().add(nombreM1);
-        nombreM1.setBounds(19, 55, 66, 14);
-        getContentPane().add(barraSaludM1);
-        barraSaludM1.setBounds(132, 55, 100, 14);
-        getContentPane().add(barraSaludM2);
-        barraSaludM2.setBounds(530, 54, 100, 14);
+        getContentPane().add(nombreM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 55, 66, -1));
+        getContentPane().add(barraSaludM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 55, 100, 20));
+        getContentPane().add(barraSaludM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 54, 100, 20));
 
         nombreM2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         nombreM2.setText("Medabot");
-        getContentPane().add(nombreM2);
-        nombreM2.setBounds(416, 54, 66, 14);
-        getContentPane().add(barraMedafuerzaM1);
-        barraMedafuerzaM1.setBounds(150, 410, 146, 14);
-        getContentPane().add(barraMedafuerzaM2);
-        barraMedafuerzaM2.setBounds(630, 410, 146, 14);
+        getContentPane().add(nombreM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 54, 66, -1));
+        getContentPane().add(barraMedafuerzaM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, -1, 20));
+        getContentPane().add(barraMedafuerzaM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, 20));
 
         saludMedabotJ1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         saludMedabotJ1.setText("1000");
-        getContentPane().add(saludMedabotJ1);
-        saludMedabotJ1.setBounds(250, 54, 30, 14);
+        getContentPane().add(saludMedabotJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 54, 40, -1));
 
         saludMedabotJ2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         saludMedabotJ2.setText("1000");
-        getContentPane().add(saludMedabotJ2);
-        saludMedabotJ2.setBounds(648, 52, 28, 14);
+        getContentPane().add(saludMedabotJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 52, -1, -1));
 
         atacarJ1.setText("Atacar");
-        getContentPane().add(atacarJ1);
-        atacarJ1.setBounds(139, 360, 100, 23);
+        getContentPane().add(atacarJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 360, 100, -1));
 
         esquivarJ1.setText("Esquivar");
-        getContentPane().add(esquivarJ1);
-        esquivarJ1.setBounds(105, 489, 73, 23);
+        getContentPane().add(esquivarJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 489, -1, -1));
 
         defenderJ1.setText("Defender");
-        getContentPane().add(defenderJ1);
-        defenderJ1.setBounds(10, 489, 77, 23);
+        getContentPane().add(defenderJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 489, -1, -1));
 
         rendirseJ1.setText("Rendirse");
-        getContentPane().add(rendirseJ1);
-        rendirseJ1.setBounds(60, 530, 75, 23);
+        getContentPane().add(rendirseJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 530, -1, -1));
 
         esquivarJ2.setText("Esquivar");
-        getContentPane().add(esquivarJ2);
-        esquivarJ2.setBounds(709, 489, 73, 23);
+        getContentPane().add(esquivarJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(709, 489, -1, -1));
 
         defenderJ2.setText("Defender");
-        getContentPane().add(defenderJ2);
-        defenderJ2.setBounds(614, 489, 77, 23);
+        getContentPane().add(defenderJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 489, -1, -1));
 
         rendirseJ2.setText("Rendirse");
-        getContentPane().add(rendirseJ2);
-        rendirseJ2.setBounds(660, 530, 75, 23);
+        getContentPane().add(rendirseJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 530, -1, -1));
 
         atacarJ2.setText("Atacar");
-        getContentPane().add(atacarJ2);
-        atacarJ2.setBounds(542, 360, 100, 23);
+        getContentPane().add(atacarJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, 100, -1));
 
         medafuerzaJ1.setText("Medafuerza");
-        getContentPane().add(medafuerzaJ1);
-        medafuerzaJ1.setBounds(20, 410, 89, 23);
+        getContentPane().add(medafuerzaJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
 
         medafuerzaJ2.setText("Medafuerza");
-        getContentPane().add(medafuerzaJ2);
-        medafuerzaJ2.setBounds(500, 410, 89, 23);
+        getContentPane().add(medafuerzaJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 450, -1, -1));
 
-        jLabel1.setText("Cabeza");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(19, 97, 36, 14);
+        cabezaJ1.setText("Cabeza");
+        getContentPane().add(cabezaJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 97, -1, -1));
 
-        jLabel2.setText("Brazo Izquierdo");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(19, 137, 75, 14);
+        brazoIzqJ1.setText("Brazo Izquierdo");
+        getContentPane().add(brazoIzqJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 137, -1, -1));
 
-        jLabel5.setText("Brazo Derecho");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(19, 177, 70, 14);
+        brazoDerJ1.setText("Brazo Derecho");
+        getContentPane().add(brazoDerJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 177, -1, -1));
 
-        jLabel6.setText("Pierna Izquierda");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(19, 217, 78, 14);
+        piernaIzqJ1.setText("Pierna Izquierda");
+        getContentPane().add(piernaIzqJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 217, -1, -1));
 
-        jLabel7.setText("Pierna Derecha");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(19, 258, 73, 14);
+        piernaDerJ1.setText("Pierna Derecha");
+        getContentPane().add(piernaDerJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 258, -1, -1));
 
-        jLabel8.setText("Cabeza");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(416, 96, 36, 14);
+        cabezaJ2.setText("Cabeza");
+        getContentPane().add(cabezaJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 96, -1, -1));
 
-        jLabel9.setText("Brazo Izquierdo");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(416, 136, 75, 14);
+        brazoIzqJ2.setText("Brazo Izquierdo");
+        getContentPane().add(brazoIzqJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 136, -1, -1));
 
-        jLabel10.setText("Brazo Derecho");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(416, 176, 70, 14);
+        brazoDerJ2.setText("Brazo Derecho");
+        getContentPane().add(brazoDerJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 176, -1, -1));
 
-        jLabel11.setText("Pierna Izquierda");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(416, 216, 78, 14);
+        piernaIzqJ2.setText("Pierna Izquierda");
+        getContentPane().add(piernaIzqJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 216, -1, -1));
 
-        jLabel12.setText("Pierna Derecha");
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(416, 257, 73, 14);
-        getContentPane().add(barraSaludCabezaM1);
-        barraSaludCabezaM1.setBounds(132, 97, 100, 14);
-        getContentPane().add(barraSaludBrazoIzqM1);
-        barraSaludBrazoIzqM1.setBounds(132, 137, 100, 14);
-        getContentPane().add(barraSaludBrazoDerM1);
-        barraSaludBrazoDerM1.setBounds(132, 177, 100, 14);
-        getContentPane().add(barraSaludPiernaIzqM1);
-        barraSaludPiernaIzqM1.setBounds(132, 217, 100, 14);
-        getContentPane().add(barraSaludPiernaDerM1);
-        barraSaludPiernaDerM1.setBounds(132, 258, 100, 14);
-        getContentPane().add(barraSaludCabezaM2);
-        barraSaludCabezaM2.setBounds(530, 96, 100, 14);
-        getContentPane().add(barraSaludBrazoIzqM2);
-        barraSaludBrazoIzqM2.setBounds(530, 136, 100, 14);
-        getContentPane().add(barraSaludBrazoDerM2);
-        barraSaludBrazoDerM2.setBounds(530, 176, 100, 14);
-        getContentPane().add(barraSaludPiernaIzqM2);
-        barraSaludPiernaIzqM2.setBounds(530, 216, 100, 14);
-        getContentPane().add(barraSaludPiernaDerM2);
-        barraSaludPiernaDerM2.setBounds(530, 257, 100, 14);
+        piernaDerJ2.setText("Pierna Derecha");
+        getContentPane().add(piernaDerJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 257, -1, -1));
+        getContentPane().add(barraSaludCabezaM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 97, 100, -1));
+        getContentPane().add(barraSaludBrazoIzqM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 137, 100, -1));
+        getContentPane().add(barraSaludBrazoDerM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 177, 100, -1));
+        getContentPane().add(barraSaludPiernaIzqM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 217, 100, -1));
+        getContentPane().add(barraSaludPiernaDerM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 258, 100, -1));
+        getContentPane().add(barraSaludCabezaM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 96, 100, -1));
+        getContentPane().add(barraSaludBrazoIzqM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 136, 100, -1));
+        getContentPane().add(barraSaludBrazoDerM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 176, 100, -1));
+        getContentPane().add(barraSaludPiernaIzqM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 216, 100, -1));
+        getContentPane().add(barraSaludPiernaDerM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 257, 100, -1));
 
         saludCabezaM1.setText("1000");
-        getContentPane().add(saludCabezaM1);
-        saludCabezaM1.setBounds(250, 96, 24, 14);
+        getContentPane().add(saludCabezaM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 96, -1, -1));
 
         saludBrazoIzqM1.setText("1000");
-        getContentPane().add(saludBrazoIzqM1);
-        saludBrazoIzqM1.setBounds(250, 136, 24, 14);
+        getContentPane().add(saludBrazoIzqM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 136, -1, -1));
 
         saludBrazoDerM1.setText("1000");
-        getContentPane().add(saludBrazoDerM1);
-        saludBrazoDerM1.setBounds(250, 176, 24, 14);
+        getContentPane().add(saludBrazoDerM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 176, -1, -1));
 
         saludPiernaIzqM1.setText("1000");
-        getContentPane().add(saludPiernaIzqM1);
-        saludPiernaIzqM1.setBounds(250, 216, 24, 14);
+        getContentPane().add(saludPiernaIzqM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 216, -1, -1));
 
         saludPiernaDerM1.setText("1000");
-        getContentPane().add(saludPiernaDerM1);
-        saludPiernaDerM1.setBounds(250, 257, 24, 14);
+        getContentPane().add(saludPiernaDerM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 257, -1, -1));
 
         saludCabezaM2.setText("1000");
-        getContentPane().add(saludCabezaM2);
-        saludCabezaM2.setBounds(648, 94, 24, 14);
+        getContentPane().add(saludCabezaM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 94, -1, -1));
 
         saludBrazoIzqM2.setText("1000");
-        getContentPane().add(saludBrazoIzqM2);
-        saludBrazoIzqM2.setBounds(648, 134, 24, 14);
+        getContentPane().add(saludBrazoIzqM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 134, -1, -1));
 
         saludBrazoDerM2.setText("1000");
-        getContentPane().add(saludBrazoDerM2);
-        saludBrazoDerM2.setBounds(648, 174, 24, 14);
+        getContentPane().add(saludBrazoDerM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 174, -1, -1));
 
         saludPiernaIzqM2.setText("1000");
-        getContentPane().add(saludPiernaIzqM2);
-        saludPiernaIzqM2.setBounds(648, 214, 24, 14);
+        getContentPane().add(saludPiernaIzqM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 214, -1, -1));
 
         saludPiernaDerM2.setText("1000");
-        getContentPane().add(saludPiernaDerM2);
-        saludPiernaDerM2.setBounds(648, 255, 24, 14);
+        getContentPane().add(saludPiernaDerM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 255, -1, -1));
 
         atacanteJ1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cabeza", "Brazo Izquierdo", "Brazo Derecho", "Pierna Izquierda", "Pierna Derecha" }));
-        getContentPane().add(atacanteJ1);
-        atacanteJ1.setBounds(139, 312, 103, 20);
+        getContentPane().add(atacanteJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 312, -1, -1));
 
         defensorJ2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cabeza", "Brazo Izquierdo", "Brazo Derecho", "Pierna Izquierda", "Pierna Derecha" }));
-        getContentPane().add(defensorJ2);
-        defensorJ2.setBounds(260, 312, 103, 20);
+        getContentPane().add(defensorJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 312, -1, -1));
 
         atacanteJ2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cabeza", "Brazo Izquierdo", "Brazo Derecho", "Pierna Izquierda", "Pierna Derecha" }));
-        getContentPane().add(atacanteJ2);
-        atacanteJ2.setBounds(542, 312, 103, 20);
+        getContentPane().add(atacanteJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, -1, -1));
 
         defensorJ1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cabeza", "Brazo Izquierdo", "Brazo Derecho", "Pierna Izquierda", "Pierna Derecha" }));
-        getContentPane().add(defensorJ1);
-        defensorJ1.setBounds(671, 312, 103, 20);
+        getContentPane().add(defensorJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 310, -1, -1));
 
-        jLabel23.setText("Atacante/Defensor");
-        getContentPane().add(jLabel23);
-        jLabel23.setBounds(19, 315, 92, 14);
-
-        jLabel24.setText("Atacante/Defensor");
-        getContentPane().add(jLabel24);
-        jLabel24.setBounds(416, 315, 92, 14);
-
-        jLabel25.setText("Costo PH");
-        getContentPane().add(jLabel25);
-        jLabel25.setBounds(296, 54, 44, 14);
+        costoPHLabelJ1.setText("Costo PH");
+        getContentPane().add(costoPHLabelJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 54, -1, -1));
 
         phCabezaM1.setText("0");
-        getContentPane().add(phCabezaM1);
-        phCabezaM1.setBounds(296, 96, 6, 14);
+        getContentPane().add(phCabezaM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 96, -1, -1));
 
         phBrazoIzqM1.setText("0");
-        getContentPane().add(phBrazoIzqM1);
-        phBrazoIzqM1.setBounds(296, 136, 6, 14);
+        getContentPane().add(phBrazoIzqM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 136, -1, -1));
 
         phBrazoDerM1.setText("0");
-        getContentPane().add(phBrazoDerM1);
-        phBrazoDerM1.setBounds(296, 176, 6, 14);
+        getContentPane().add(phBrazoDerM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 176, -1, -1));
 
         phPiernaIzqM1.setText("0");
-        getContentPane().add(phPiernaIzqM1);
-        phPiernaIzqM1.setBounds(296, 216, 6, 14);
+        getContentPane().add(phPiernaIzqM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 216, -1, -1));
 
         phPiernaDerM1.setText("0");
-        getContentPane().add(phPiernaDerM1);
-        phPiernaDerM1.setBounds(296, 257, 6, 14);
+        getContentPane().add(phPiernaDerM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 257, -1, -1));
 
-        jLabel32.setText("Costo PH");
-        getContentPane().add(jLabel32);
-        jLabel32.setBounds(700, 52, 44, 14);
+        costoPHLabelJ2.setText("Costo PH");
+        getContentPane().add(costoPHLabelJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 52, -1, -1));
 
         phCabezaM2.setText("0");
-        getContentPane().add(phCabezaM2);
-        phCabezaM2.setBounds(700, 94, 6, 14);
+        getContentPane().add(phCabezaM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 94, -1, -1));
 
         phBrazoIzqM2.setText("0");
-        getContentPane().add(phBrazoIzqM2);
-        phBrazoIzqM2.setBounds(700, 134, 6, 14);
+        getContentPane().add(phBrazoIzqM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 134, -1, -1));
 
         phBrazoDerM2.setText("0");
-        getContentPane().add(phBrazoDerM2);
-        phBrazoDerM2.setBounds(700, 174, 6, 14);
+        getContentPane().add(phBrazoDerM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 174, -1, -1));
 
         phPiernaIzqM2.setText("0");
-        getContentPane().add(phPiernaIzqM2);
-        phPiernaIzqM2.setBounds(700, 214, 6, 14);
+        getContentPane().add(phPiernaIzqM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 214, -1, -1));
 
         phPiernaDerM2.setText("0");
-        getContentPane().add(phPiernaDerM2);
-        phPiernaDerM2.setBounds(700, 255, 6, 14);
+        getContentPane().add(phPiernaDerM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 255, -1, -1));
 
         terminarTurno.setText("Terminar turno");
-        getContentPane().add(terminarTurno);
-        terminarTurno.setBounds(350, 410, 103, 23);
+        getContentPane().add(terminarTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setText("PH Restante");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(132, 13, 70, 14);
+        phRestanteLabelJ1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        phRestanteLabelJ1.setText("PH Restante");
+        getContentPane().add(phRestanteLabelJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 13, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setText("PH Restante");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(530, 12, 70, 14);
+        phRestanteLabelJ2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        phRestanteLabelJ2.setText("PH Restante");
+        getContentPane().add(phRestanteLabelJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 12, -1, -1));
 
         phRestanteJ1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         phRestanteJ1.setText("10");
-        getContentPane().add(phRestanteJ1);
-        phRestanteJ1.setBounds(210, 13, 14, 14);
+        getContentPane().add(phRestanteJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 13, -1, -1));
 
         phRestanteJ2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         phRestanteJ2.setText("10");
-        getContentPane().add(phRestanteJ2);
-        phRestanteJ2.setBounds(608, 12, 14, 14);
+        getContentPane().add(phRestanteJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 12, -1, -1));
+
+        medabotJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/medafighter/imagenes/medabotJ1.jpg"))); // NOI18N
+        medabotJ1.setText("jLabel1");
+        getContentPane().add(medabotJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 100, -1));
+
+        medabotJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/medafighter/imagenes/medabotJ2.jpg"))); // NOI18N
+        medabotJ2.setText("jLabel1");
+        getContentPane().add(medabotJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 310, 100, -1));
 
         fondo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/medafighter/imagenes/vistaCombate.png"))); // NOI18N
         fondo.setText("jLabel13");
-        getContentPane().add(fondo);
-        fondo.setBounds(0, 0, 800, 600);
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public javax.swing.JLabel getNombreJ1(){
+        return this.nombreJ1;
+    }
+    
+    public javax.swing.JLabel getPHRestanteLabelJ1(){
+        return this.phRestanteLabelJ1;
+    }
+    
+    public javax.swing.JLabel getNombreM1(){
+        return this.nombreM1;
+    }
+    
+    public javax.swing.JLabel getCostoPHLabelJ1(){
+        return this.costoPHLabelJ1;
+    }
+    
+    public javax.swing.JLabel getMedabotJ1(){
+        return this.medabotJ1;
+    }
+    
+    public javax.swing.JLabel getCabezaJ1(){
+        return this.cabezaJ1;
+    }
+    
+    public javax.swing.JLabel getBrazoIzqJ1(){
+        return this.brazoIzqJ1;
+    }
+    
+    public javax.swing.JLabel getBrazoDerJ1(){
+        return this.brazoDerJ1;
+    }
+    
+    public javax.swing.JLabel getPiernaIzqJ1(){
+        return this.piernaIzqJ1;
+    }
+    
+    public javax.swing.JLabel getPiernaDerJ1(){
+        return this.piernaDerJ1;
+    }
+    
+    public javax.swing.JLabel getNombreJ2(){
+        return this.nombreJ2;
+    }
+    
+    public javax.swing.JLabel getPHRestanteLabelJ2(){
+        return this.phRestanteLabelJ2;
+    }
+    
+    public javax.swing.JLabel getNombreM2(){
+        return this.nombreM2;
+    }
+    
+    public javax.swing.JLabel getCostoPHLabelJ2(){
+        return this.costoPHLabelJ2;
+    }
+    
+    public javax.swing.JLabel getMedabotJ2(){
+        return this.medabotJ2;
+    }
+    
+    public javax.swing.JLabel getCabezaJ2(){
+        return this.cabezaJ2;
+    }
+    
+    public javax.swing.JLabel getBrazoIzqJ2(){
+        return this.brazoIzqJ2;
+    }
+    
+    public javax.swing.JLabel getBrazoDerJ2(){
+        return this.brazoDerJ2;
+    }
+    
+    public javax.swing.JLabel getPiernaIzqJ2(){
+        return this.piernaIzqJ2;
+    }
+    
+    public javax.swing.JLabel getPiernaDerJ2(){
+        return this.piernaDerJ2;
+    }
+    
     public javax.swing.JButton getAtacarJ1(){
         return this.atacarJ1;
     }
@@ -728,7 +775,7 @@ public class VistaCombate extends javax.swing.JFrame {
         return this.saludBrazoDerM2;
     }
     
-    public javax.swing.JLabel getsaludPiernaIzqM2(){
+    public javax.swing.JLabel getSaludPiernaIzqM2(){
         return this.saludPiernaIzqM2;
     }
     
@@ -784,12 +831,16 @@ public class VistaCombate extends javax.swing.JFrame {
         return this.barraSaludPiernaDerM1;
     }
     
+    public javax.swing.JProgressBar getBarraMedafuerzaM1(){
+        return this.barraMedafuerzaM1;
+    }
+    
     public javax.swing.JProgressBar getBarraSaludM2(){
         return this.barraSaludM2;
     }
     
     public javax.swing.JProgressBar getBarraSaludCabezaM2(){
-        return this.barraSaludCabezaM1;
+        return this.barraSaludCabezaM2;
     }
     
     public javax.swing.JProgressBar getBarraSaludBrazoIzqM2(){
@@ -806,6 +857,10 @@ public class VistaCombate extends javax.swing.JFrame {
     
     public javax.swing.JProgressBar getBarraSaludPiernaDerM2(){
         return this.barraSaludPiernaDerM2;
+    }
+    
+    public javax.swing.JProgressBar getBarraMedafuerzaM2(){
+        return this.barraMedafuerzaM2;
     }
     
     public javax.swing.JTextArea getLogBatalla(){
@@ -975,6 +1030,14 @@ public class VistaCombate extends javax.swing.JFrame {
     private javax.swing.JProgressBar barraSaludPiernaDerM2;
     private javax.swing.JProgressBar barraSaludPiernaIzqM1;
     private javax.swing.JProgressBar barraSaludPiernaIzqM2;
+    private javax.swing.JLabel brazoDerJ1;
+    private javax.swing.JLabel brazoDerJ2;
+    private javax.swing.JLabel brazoIzqJ1;
+    private javax.swing.JLabel brazoIzqJ2;
+    private javax.swing.JLabel cabezaJ1;
+    private javax.swing.JLabel cabezaJ2;
+    private javax.swing.JLabel costoPHLabelJ1;
+    private javax.swing.JLabel costoPHLabelJ2;
     private javax.swing.JButton defenderJ1;
     private javax.swing.JButton defenderJ2;
     private javax.swing.JComboBox defensorJ1;
@@ -982,23 +1045,9 @@ public class VistaCombate extends javax.swing.JFrame {
     private javax.swing.JButton esquivarJ1;
     private javax.swing.JButton esquivarJ2;
     private javax.swing.JLabel fondo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextArea logBatalla;
+    private javax.swing.JLabel medabotJ1;
+    private javax.swing.JLabel medabotJ2;
     private javax.swing.JButton medafuerzaJ1;
     private javax.swing.JButton medafuerzaJ2;
     private javax.swing.JLabel nombreJ1;
@@ -1018,6 +1067,12 @@ public class VistaCombate extends javax.swing.JFrame {
     private javax.swing.JLabel phPiernaIzqM2;
     private javax.swing.JLabel phRestanteJ1;
     private javax.swing.JLabel phRestanteJ2;
+    private javax.swing.JLabel phRestanteLabelJ1;
+    private javax.swing.JLabel phRestanteLabelJ2;
+    private javax.swing.JLabel piernaDerJ1;
+    private javax.swing.JLabel piernaDerJ2;
+    private javax.swing.JLabel piernaIzqJ1;
+    private javax.swing.JLabel piernaIzqJ2;
     private javax.swing.JButton rendirseJ1;
     private javax.swing.JButton rendirseJ2;
     private javax.swing.JLabel saludBrazoDerM1;

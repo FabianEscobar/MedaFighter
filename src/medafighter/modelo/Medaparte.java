@@ -34,9 +34,7 @@ public class Medaparte {
     
     private int esquive;
     
-    private final int puntosHabilidadMax;
-    
-    private int puntosHabilidadRes;
+    private int costoPH;
     
     private ConexionBD cbd;
     
@@ -68,9 +66,7 @@ public class Medaparte {
         
         this.esquive = (Integer)datosMedaparte.get(8);
         
-        this.puntosHabilidadMax = (Integer)datosMedaparte.get(9);
-        
-        this.puntosHabilidadRes = this.puntosHabilidadMax;
+        this.costoPH = (Integer)datosMedaparte.get(9);
         
     }
     
@@ -94,12 +90,8 @@ public class Medaparte {
         return this.saludMaxima;
     }
     
-    public int getPHMax(){
-        return this.puntosHabilidadMax;
-    }
-
-    public int getPHRes() {
-        return this.puntosHabilidadRes;
+    public int getCostoPH(){
+        return this.costoPH;
     }
     
     public int getAtaque(){
@@ -125,10 +117,6 @@ public class Medaparte {
     
     public void setSaludActual(int saludActual){
         this.saludActual = saludActual;
-    }
-
-    public void setPHRes(int puntosHabilidadRes) {
-        this.puntosHabilidadRes = puntosHabilidadRes;
     }
     
     public void setAtaque(int ataque){
