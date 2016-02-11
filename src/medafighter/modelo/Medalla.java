@@ -24,6 +24,8 @@ public class Medalla {
     
     private int cantidad;
     
+    private int turnoCarga;
+    
     private ConexionBD cbd;
     
     public Medalla (String nombre) throws SQLException {
@@ -43,6 +45,8 @@ public class Medalla {
         this.tipoCarga = (String)datosMedalla.get(3);
         
         this.medafuerza = (String)datosMedalla.get(4);
+        
+        this.turnoCarga = 0;
         
     }
     
@@ -64,6 +68,15 @@ public class Medalla {
     
     public int getCantidad(){
         return this.cantidad;
+    }
+    
+    public int getTurnoCarga(){
+        return this.turnoCarga;
+    }
+    
+    
+    public void setTurnoCarga(int turnoCarga){
+        this.turnoCarga = turnoCarga;
     }
     
 }

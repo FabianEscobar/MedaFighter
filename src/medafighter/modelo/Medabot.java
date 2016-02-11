@@ -84,6 +84,46 @@ public class Medabot {
         
         this.puntosHabilidadRes = this.puntosHabilidadMax;
         
+        if (this.medalla.getPotenciador().equals("ataqueCercano")) {
+            
+            this.cabeza.setAtaque(this.cabeza.getAtaque()+this.medalla.getCantidad());
+            this.brazoIzq.setAtaque(this.brazoIzq.getAtaque()+this.medalla.getCantidad());
+            this.brazoDer.setAtaque(this.brazoDer.getAtaque()+this.medalla.getCantidad());
+            this.piernaIzq.setAtaque(this.piernaIzq.getAtaque()+this.medalla.getCantidad());
+            this.piernaDer.setAtaque(this.piernaDer.getAtaque()+this.medalla.getCantidad());
+            
+        }
+        
+        if (this.medalla.getPotenciador().equals("defensa")) {
+            
+            this.cabeza.setDefensa(this.cabeza.getDefensa()+this.medalla.getCantidad());
+            this.brazoIzq.setDefensa(this.brazoIzq.getDefensa()+this.medalla.getCantidad());
+            this.brazoDer.setDefensa(this.brazoDer.getDefensa()+this.medalla.getCantidad());
+            this.piernaIzq.setDefensa(this.piernaIzq.getDefensa()+this.medalla.getCantidad());
+            this.piernaDer.setDefensa(this.piernaDer.getDefensa()+this.medalla.getCantidad());
+            
+        }
+        
+        if (this.medalla.getPotenciador().equals("precision")) {
+            
+            this.cabeza.setPrecision(this.cabeza.getPrecision()+this.medalla.getCantidad());
+            this.brazoIzq.setPrecision(this.brazoIzq.getPrecision()+this.medalla.getCantidad());
+            this.brazoDer.setPrecision(this.brazoDer.getPrecision()+this.medalla.getCantidad());
+            this.piernaIzq.setPrecision(this.piernaIzq.getPrecision()+this.medalla.getCantidad());
+            this.piernaDer.setPrecision(this.piernaDer.getPrecision()+this.medalla.getCantidad());
+            
+        }
+        
+        if (this.medalla.getPotenciador().equals("esquive")) {
+            
+            this.cabeza.setEsquive(this.cabeza.getEsquive()+this.medalla.getCantidad());
+            this.brazoIzq.setEsquive(this.brazoIzq.getEsquive()+this.medalla.getCantidad());
+            this.brazoDer.setEsquive(this.brazoDer.getEsquive()+this.medalla.getCantidad());
+            this.piernaIzq.setEsquive(this.piernaIzq.getEsquive()+this.medalla.getCantidad());
+            this.piernaDer.setEsquive(this.piernaDer.getEsquive()+this.medalla.getCantidad());
+            
+        }
+        
     }
     
     public String getNombre(){
@@ -108,6 +148,10 @@ public class Medabot {
     
     public Medaparte getPiernaDer(){
         return this.piernaDer;
+    }
+    
+    public Medalla getMedalla(){
+        return this.medalla;
     }
     
     public int getSaludActual(){
@@ -174,19 +218,23 @@ public class Medabot {
         
         if (this.getPHRes() > 0) {
             
-            dano = medaparteAtacante.getAtaque() - medaparteEnemiga.getDefensa();
+            int porcentaje = (int)(100 - medaparteAtacante.getPrecision() + medaparteEnemiga.getEsquive());
             
+            if(new Random().nextInt(100) > porcentaje) dano = medaparteAtacante.getAtaque() - medaparteEnemiga.getDefensa();
+            
+            else dano = -1;
+                        
             if (dano > 0) {
                 
                 medaparteEnemiga.setSaludActual(medaparteEnemiga.getSaludActual() - dano);
+                
+                medabotEnemigo.ataqueTotal = medabotEnemigo.ataqueTotal + medaparteAtacante.getAtaque();
                 
             }  
             
             this.setPHRes(this.getPHRes() - medaparteAtacante.getCostoPH());
             
-            medabotEnemigo.setDanoTotal(medabotEnemigo.getDanoTotal() + dano);
-            
-            medabotEnemigo.ataqueTotal = medabotEnemigo.ataqueTotal + medaparteAtacante.getAtaque();
+            //medabotEnemigo.setDanoTotal(medabotEnemigo.getDanoTotal() + dano);
             
         }        
                        
@@ -223,8 +271,10 @@ public class Medabot {
         if(this.getPHRes() > 0) {
             
             int danoFinal = 0;
+            
+            int porcentaje = 100 - this.esquiveTotal; 
         
-            esquive = new Random().nextInt(100 - this.esquiveTotal) == 0;
+            esquive = new Random().nextInt(100) > porcentaje;
         
             if (esquive == false) {
             
@@ -254,15 +304,97 @@ public class Medabot {
         
     }
     
-    public void cargarMedafuerza() {
+    public boolean cargarMedafuerza(Medabot medabotEnemigo) {
         
+        boolean carga = false;
         
+            if (this.medalla.getTipoCarga().equals("venganza")) {
+        
+                if ((this.saludActual == (int)this.saludMaxima*0.75)||(this.saludActual == (int)this.saludMaxima*0.5)||(this.saludActual == (int)this.saludMaxima*0.25)) {
+                
+                    carga = true;
+                
+                }
+            
+            }
+            
+            if (this.medalla.getTipoCarga().equals("racha")) {
+        
+                if ((medabotEnemigo.getSaludActual() == (int)medabotEnemigo.getSaludMaxima()*0.75)||(medabotEnemigo.getSaludActual() == (int)medabotEnemigo.getSaludMaxima()*0.5)||(medabotEnemigo.getSaludActual() == (int)medabotEnemigo.getSaludMaxima()*0.25)) {
+                
+                    carga = true;
+                
+                }
+            
+            }
+            
+            if (this.medalla.getTipoCarga().equals("concentracion")) {
+        
+                if (this.medalla.getTurnoCarga() == 15) {
+                
+                    carga = true;
+                
+                }
+                
+                else this.medalla.setTurnoCarga(this.medalla.getTurnoCarga()+1);
+            
+            }
+        
+        return carga;
         
     }
     
-    public void activarMedafuerza() {
+    public boolean activarMedafuerza() {
         
+        if (this.medalla.getMedafuerza().equals("Regeneracion")) {
+            
+            this.saludActual = (int) (this.saludActual*1.25);
+            
+            this.cabeza.setSaludActual((int) (this.cabeza.getSaludActual()*1.25));
+            
+            this.brazoIzq.setSaludActual((int) (this.brazoIzq.getSaludActual()*1.25));
+            
+            this.brazoDer.setSaludActual((int) (this.brazoDer.getSaludActual()*1.25));
+            
+            this.piernaIzq.setSaludActual((int) (this.piernaIzq.getSaludActual()*1.25));
+            
+            this.piernaDer.setSaludActual((int) (this.piernaDer.getSaludActual()*1.25));
+            
+        }
         
+        if (this.medalla.getMedafuerza().equals("Reaccion")) {
+            
+            this.puntosHabilidadRes = this.puntosHabilidadRes*2;
+            
+        }
+        
+        if (this.medalla.getMedafuerza().equals("Poder")) {
+            
+            this.cabeza.setAtaque(this.cabeza.getAtaque()*2);
+            
+            this.brazoIzq.setAtaque(this.brazoIzq.getAtaque()*2);
+            
+            this.brazoDer.setAtaque(this.brazoDer.getAtaque()*2);
+            
+            this.piernaIzq.setAtaque(this.piernaIzq.getAtaque()*2);
+            
+            this.piernaDer.setAtaque(this.piernaDer.getAtaque()*2);
+            
+        }
+        
+        if (this.medalla.getMedafuerza().equals("Velocidad")) {
+            
+            this.esquiveTotal = 100;
+            
+        }
+        
+        if (this.medalla.getMedafuerza().equals("Invulnerabilidad")) {
+            
+            this.defensaTotal = this.defensaTotal+100;
+            
+        }
+        
+        return true;
         
     }
     

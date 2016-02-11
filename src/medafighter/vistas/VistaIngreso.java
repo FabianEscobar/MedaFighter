@@ -5,6 +5,7 @@
  */
 package medafighter.vistas;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 /**
