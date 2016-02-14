@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class JugadorCPU extends Jugador {
     
+    private String tipoCPU; 
+    
     public JugadorCPU (String nombre, String versionMedabot) throws SQLException {
     
         this.cbd = new ConexionBD();
@@ -28,6 +30,8 @@ public class JugadorCPU extends Jugador {
         this.derrotas = (Integer)datosJugador.get(4);
         
         this.torneos = (Integer)datosJugador.get(5);
+        
+        this.tipoCPU = this.nombre.substring(this.nombre.length()-1);
         
         String nombreMedabot = new String();
         
@@ -53,5 +57,8 @@ public class JugadorCPU extends Jugador {
     
     }
     
+    public String getTipoCPU(){
+        return this.tipoCPU;
+    }
     
 }

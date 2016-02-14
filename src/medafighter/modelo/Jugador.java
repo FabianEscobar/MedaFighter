@@ -45,6 +45,8 @@ public abstract class Jugador {
         return this.torneos;
     }
     
+    public abstract String getTipoCPU();
+    
     public void setVictorias(int victorias){
         this.victorias = victorias;
     }

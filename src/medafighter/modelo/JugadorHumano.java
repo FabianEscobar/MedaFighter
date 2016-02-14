@@ -55,4 +55,9 @@ public class JugadorHumano extends Jugador {
     
     }
 
+    @Override
+    public String getTipoCPU() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

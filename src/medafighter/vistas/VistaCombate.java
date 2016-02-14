@@ -121,6 +121,9 @@ public class VistaCombate extends javax.swing.JFrame {
         this.medafuerzaJ1.setEnabled(false);
         this.medafuerzaJ2.setEnabled(false);
         
+        this.medafuerzaJ1.setEnabled(false);
+        this.medafuerzaJ2.setEnabled(false);
+        
         if (robobatalla.getJugadorActivo().equals(robobatalla.getJugador1().getNombre())) {
             
             this.atacanteJ2.setEnabled(false);
@@ -147,9 +150,49 @@ public class VistaCombate extends javax.swing.JFrame {
             this.esquivarJ2.setEnabled(false);            
             this.rendirseJ1.setEnabled(false);
             
-        }
+        }                
         
         logBatalla.append("* "+numeroAOrdinal(robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.numeroAOrdinal(robobatalla.getTurno()).substring(1)+" turno - Turno de "+robobatalla.getJugadorActivo()+".\n- Como es el primer turno, puede atacar sin la necesidad de defender o esquivar un ataque anterior.\n\n");
+        
+        if (robobatalla.getModoJuego().equals("Jugador v/s CPU")) {
+            
+            this.atacanteJ2.setEnabled(false);
+            this.defensorJ1.setEnabled(false);
+            this.atacarJ2.setEnabled(false);            
+            this.defenderJ2.setEnabled(false);
+            this.esquivarJ2.setEnabled(false);
+            this.atacanteJ2.setEnabled(false);
+            this.defenderJ1.setEnabled(false);
+            this.esquivarJ1.setEnabled(false);
+            this.rendirseJ2.setEnabled(false);
+            this.terminarTurno.setEnabled(false);  
+            
+        }
+        
+        if (robobatalla.getModoJuego().equals("CPU V/S CPU")) {
+            
+            this.atacanteJ2.setEnabled(false);
+            this.defensorJ1.setEnabled(false);
+            this.atacarJ2.setEnabled(false);            
+            this.defenderJ2.setEnabled(false);
+            this.esquivarJ2.setEnabled(false);
+            this.atacanteJ2.setEnabled(false);
+            this.defenderJ1.setEnabled(false);
+            this.esquivarJ1.setEnabled(false);
+            this.rendirseJ2.setEnabled(false);
+            
+            this.atacanteJ2.setEnabled(false);
+            this.defensorJ1.setEnabled(false);
+            this.atacarJ2.setEnabled(false);            
+            this.defenderJ2.setEnabled(false);
+            this.esquivarJ2.setEnabled(false);
+            this.atacanteJ2.setEnabled(false);
+            this.defenderJ1.setEnabled(false);
+            this.esquivarJ1.setEnabled(false);
+            this.rendirseJ2.setEnabled(false);
+            this.terminarTurno.setEnabled(false);  
+            
+        }
         
     }
     
@@ -193,8 +236,6 @@ public class VistaCombate extends javax.swing.JFrame {
         
         this.barraSaludPiernaDerM1.addChangeListener(cl);
         
-        this.barraMedafuerzaM1.addChangeListener(cl);
-        
         this.barraSaludM2.addChangeListener(cl);
         
         this.barraSaludCabezaM2.addChangeListener(cl);
@@ -206,8 +247,6 @@ public class VistaCombate extends javax.swing.JFrame {
         this.barraSaludPiernaIzqM2.addChangeListener(cl);
         
         this.barraSaludPiernaDerM2.addChangeListener(cl);
-        
-        this.barraMedafuerzaM2.addChangeListener(cl);
         
     }
     
@@ -270,8 +309,6 @@ public class VistaCombate extends javax.swing.JFrame {
         barraSaludM1 = new javax.swing.JProgressBar();
         barraSaludM2 = new javax.swing.JProgressBar();
         nombreM2 = new javax.swing.JLabel();
-        barraMedafuerzaM1 = new javax.swing.JProgressBar();
-        barraMedafuerzaM2 = new javax.swing.JProgressBar();
         saludMedabotJ1 = new javax.swing.JLabel();
         saludMedabotJ2 = new javax.swing.JLabel();
         atacarJ1 = new javax.swing.JButton();
@@ -337,13 +374,18 @@ public class VistaCombate extends javax.swing.JFrame {
         phRestanteJ2 = new javax.swing.JLabel();
         medabotJ1 = new javax.swing.JLabel();
         medabotJ2 = new javax.swing.JLabel();
+        estadoMedafuerzaJ1 = new javax.swing.JLabel();
+        estadoMedafuerzaJ2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Medabatalla");
         setBounds(new java.awt.Rectangle(0, 0, 800, 600));
         setLocation(new java.awt.Point(0, 0));
-        setMaximumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
@@ -377,8 +419,6 @@ public class VistaCombate extends javax.swing.JFrame {
         nombreM2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         nombreM2.setText("Medabot");
         getContentPane().add(nombreM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 54, 66, -1));
-        getContentPane().add(barraMedafuerzaM1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, -1, 20));
-        getContentPane().add(barraMedafuerzaM2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, 20));
 
         saludMedabotJ1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         saludMedabotJ1.setText("1000");
@@ -563,6 +603,24 @@ public class VistaCombate extends javax.swing.JFrame {
         medabotJ2.setText("jLabel1");
         getContentPane().add(medabotJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 310, 100, -1));
 
+        estadoMedafuerzaJ1.setText("Medafuerza Inactiva");
+        getContentPane().add(estadoMedafuerzaJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, -1, -1));
+
+        estadoMedafuerzaJ2.setText("Medafuerza Inactiva");
+        getContentPane().add(estadoMedafuerzaJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, -1, -1));
+
+        jLabel1.setText("Atacante");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
+
+        jLabel2.setText("Defensora");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, -1, -1));
+
+        jLabel3.setText("Atacante");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, -1, -1));
+
+        jLabel4.setText("Defensora");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, -1, -1));
+
         fondo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/medafighter/imagenes/vistaCombate.png"))); // NOI18N
         fondo.setText("jLabel13");
@@ -611,6 +669,10 @@ public class VistaCombate extends javax.swing.JFrame {
         return this.piernaDerJ1;
     }
     
+    public javax.swing.JLabel getEstadoMedafuerzaJ1(){
+        return this.estadoMedafuerzaJ1;
+    }
+    
     public javax.swing.JLabel getNombreJ2(){
         return this.nombreJ2;
     }
@@ -649,6 +711,10 @@ public class VistaCombate extends javax.swing.JFrame {
     
     public javax.swing.JLabel getPiernaDerJ2(){
         return this.piernaDerJ2;
+    }
+    
+    public javax.swing.JLabel getEstadoMedafuerzaJ2(){
+        return this.estadoMedafuerzaJ2;
     }
     
     public javax.swing.JButton getAtacarJ1(){
@@ -831,10 +897,6 @@ public class VistaCombate extends javax.swing.JFrame {
         return this.barraSaludPiernaDerM1;
     }
     
-    public javax.swing.JProgressBar getBarraMedafuerzaM1(){
-        return this.barraMedafuerzaM1;
-    }
-    
     public javax.swing.JProgressBar getBarraSaludM2(){
         return this.barraSaludM2;
     }
@@ -857,10 +919,6 @@ public class VistaCombate extends javax.swing.JFrame {
     
     public javax.swing.JProgressBar getBarraSaludPiernaDerM2(){
         return this.barraSaludPiernaDerM2;
-    }
-    
-    public javax.swing.JProgressBar getBarraMedafuerzaM2(){
-        return this.barraMedafuerzaM2;
     }
     
     public javax.swing.JTextArea getLogBatalla(){
@@ -963,6 +1021,10 @@ public class VistaCombate extends javax.swing.JFrame {
         this.phPiernaDerM1.setText(text);
     }
     
+    public void setEstadoMedafuerzaJ1(String text){
+        this.estadoMedafuerzaJ1.setText(text);
+    }
+    
     public void setPHJ2(String text){
         this.phRestanteJ2.setText(text);
     }
@@ -1010,14 +1072,16 @@ public class VistaCombate extends javax.swing.JFrame {
     public void setPHPiernaDerM2(String text){
         this.phPiernaDerM2.setText(text);
     }
+    
+    public void setEstadoMedafuerzaJ2(String text){
+        this.estadoMedafuerzaJ2.setText(text);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox atacanteJ1;
     private javax.swing.JComboBox atacanteJ2;
     private javax.swing.JButton atacarJ1;
     private javax.swing.JButton atacarJ2;
-    private javax.swing.JProgressBar barraMedafuerzaM1;
-    private javax.swing.JProgressBar barraMedafuerzaM2;
     private javax.swing.JProgressBar barraSaludBrazoDerM1;
     private javax.swing.JProgressBar barraSaludBrazoDerM2;
     private javax.swing.JProgressBar barraSaludBrazoIzqM1;
@@ -1044,7 +1108,13 @@ public class VistaCombate extends javax.swing.JFrame {
     private javax.swing.JComboBox defensorJ2;
     private javax.swing.JButton esquivarJ1;
     private javax.swing.JButton esquivarJ2;
+    private javax.swing.JLabel estadoMedafuerzaJ1;
+    private javax.swing.JLabel estadoMedafuerzaJ2;
     private javax.swing.JLabel fondo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextArea logBatalla;
     private javax.swing.JLabel medabotJ1;
     private javax.swing.JLabel medabotJ2;

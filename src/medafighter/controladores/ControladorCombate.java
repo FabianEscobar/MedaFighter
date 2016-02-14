@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
@@ -49,6 +51,40 @@ public class ControladorCombate implements ActionListener, ChangeListener {
         this.robobatalla = new Robobatalla(jugador1,jugador2,versionMedabotJ1,versionMedabotJ2,modoJuego);
         
         this.vc = new VistaCombate(this,this.robobatalla);
+        
+        if(this.robobatalla.getModoJuego().equals("Jugador v/s CPU")&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
+            
+            if(this.robobatalla.getJugador2().getTipoCPU().equals("1")) {
+                
+                this.turnoCPU1();
+                
+            }
+            
+            if(this.robobatalla.getJugador2().getTipoCPU().equals("2")) {
+                
+                this.turnoCPU1();
+                
+            }
+            
+            if(this.robobatalla.getJugador2().getTipoCPU().equals("3")) {
+                
+                this.turnoCPU1();
+                
+            }
+            
+            if(this.robobatalla.getJugador2().getTipoCPU().equals("4")) {
+                
+                this.turnoCPU1();
+                
+            }
+            
+        }
+        
+        if(this.robobatalla.getModoJuego().equals("CPU V/S CPU")) {
+            
+            this.simulacion();
+            
+        }
            
     }
     
@@ -808,12 +844,6 @@ public class ControladorCombate implements ActionListener, ChangeListener {
             this.vc.setSaludPiernaIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getSaludActual()));
             this.vc.setSaludPiernaDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getSaludActual()));
             
-            //this.vc.setPHCabezaM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getCabeza().getPHRes()));
-            //this.vc.setPHBrazoIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getPHRes()));
-            //this.vc.setPHBrazoDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoDer().getPHRes()));
-            //this.vc.setPHPiernaIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getPHRes()));
-            //this.vc.setPHPiernaDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaDer().getPHRes()));
-            
             this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
             
             this.vc.setBarraSaludCabezaM1(this.robobatalla.getJugador1().getMedabot().getCabeza().getSaludActual());
@@ -1006,7 +1036,6 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getDefensorJ2().setEnabled(false);
                 this.vc.getAtacarJ1().setEnabled(false);
                 this.vc.getMedafuerzaJ1().setEnabled(false);
-                this.vc.getBarraMedafuerzaM1().setEnabled(false);
                 this.vc.getDefenderJ1().setEnabled(false);
                 this.vc.getEsquivarJ1().setEnabled(false);            
                 this.vc.getRendirseJ1().setEnabled(false);
@@ -1070,7 +1099,6 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getDefensorJ1().setEnabled(false);
                 this.vc.getAtacarJ2().setEnabled(false);
                 this.vc.getMedafuerzaJ2().setEnabled(false);
-                this.vc.getBarraMedafuerzaM2().setEnabled(false);
                 this.vc.getDefenderJ2().setEnabled(false);
                 this.vc.getEsquivarJ2().setEnabled(false);            
                 this.vc.getRendirseJ2().setEnabled(false);
@@ -1099,6 +1127,8 @@ public class ControladorCombate implements ActionListener, ChangeListener {
             
             this.vc.getMedafuerzaJ1().setEnabled(false);
             
+            this.vc.setEstadoMedafuerzaJ1("¡Medafuerza Activada!");
+            
             if(this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga().equals("concentracion")) 
                 
                 this.robobatalla.getJugador1().getMedabot().getMedalla().setTurnoCarga(0);
@@ -1112,6 +1142,8 @@ public class ControladorCombate implements ActionListener, ChangeListener {
             this.vc.getLogBatalla().append("¡La medafuerza de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0, this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha sido activada!\n\n");
             
             this.vc.getMedafuerzaJ2().setEnabled(false);
+            
+            this.vc.setEstadoMedafuerzaJ2("¡Medafuerza Activada!");
             
             if(this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga().equals("concentracion")) 
                 
@@ -1145,6 +1177,45 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getEsquivarJ1().setEnabled(true);
                 this.vc.getRendirseJ1().setEnabled(true);
                 
+                if ((this.vc.getEstadoMedafuerzaJ2().isEnabled())&&(this.vc.getEstadoMedafuerzaJ2().getText().equals("¡Medafuerza Activada!"))) {
+                    
+                    if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Poder")){
+                        
+                        this.robobatalla.getJugador2().getMedabot().getCabeza().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()*0.5));
+                                
+                        this.robobatalla.getJugador2().getMedabot().getBrazoIzq().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()*0.5));
+                                        
+                        this.robobatalla.getJugador2().getMedabot().getBrazoDer().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()*0.5));
+                                                
+                        this.robobatalla.getJugador2().getMedabot().getPiernaIzq().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()*0.5));
+                                                        
+                        this.robobatalla.getJugador2().getMedabot().getPiernaDer().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()*0.5));
+                        
+                    }
+                    
+                    if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Velocidad")){
+                        
+                        this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()-50);
+                        
+                    }
+                    
+                    if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Reaccion")){
+                        
+                        this.robobatalla.getJugador2().getMedabot().setPHRes((int) (this.robobatalla.getJugador2().getMedabot().getPHRes()*0.5));
+                        
+                    }
+                    
+                    if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Invulnerabilidad")){
+                        
+                        this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal()-100);
+                        
+                    }
+                    
+                    this.vc.setEstadoMedafuerzaJ2("Medafuerza Inactiva");
+                    this.vc.getEstadoMedafuerzaJ2().setEnabled(false);
+                    
+                }
+                
                 boolean mfActivadaJ1 = this.robobatalla.getJugador1().getMedabot().cargarMedafuerza(this.robobatalla.getJugador2().getMedabot());
             
                 if (mfActivadaJ1) {
@@ -1152,7 +1223,11 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                     this.vc.getMedafuerzaJ1().setEnabled(true);
                     
                     this.vc.getLogBatalla().append("¡La medafuerza de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0, this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" está lista para ser activada!\n\n");
-                            
+                
+                    this.vc.getEstadoMedafuerzaJ1().setEnabled(true);
+                    
+                    this.vc.setEstadoMedafuerzaJ1("¡Medafuerza Lista!");
+                    
                 }
                 
             }
@@ -1173,6 +1248,45 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getEsquivarJ2().setEnabled(true);
                 this.vc.getRendirseJ2().setEnabled(true);
                 
+                if ((this.vc.getEstadoMedafuerzaJ1().isEnabled())&&(this.vc.getEstadoMedafuerzaJ1().getText().equals("¡Medafuerza Activada!"))) {
+                    
+                    if(this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza().equals("Poder")){
+                        
+                        this.robobatalla.getJugador1().getMedabot().getCabeza().setAtaque((int) (this.robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()*0.5));
+                                
+                        this.robobatalla.getJugador1().getMedabot().getBrazoIzq().setAtaque((int) (this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()*0.5));
+                                        
+                        this.robobatalla.getJugador1().getMedabot().getBrazoDer().setAtaque((int) (this.robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()*0.5));
+                                                
+                        this.robobatalla.getJugador1().getMedabot().getPiernaIzq().setAtaque((int) (this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()*0.5));
+                                                        
+                        this.robobatalla.getJugador1().getMedabot().getPiernaDer().setAtaque((int) (this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()*0.5));
+                        
+                    }
+                    
+                    if(this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza().equals("Velocidad")){
+                        
+                        this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal()-50);
+                        
+                    }
+                    
+                    if(this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza().equals("Reaccion")){
+                        
+                        this.robobatalla.getJugador1().getMedabot().setPHRes((int) (this.robobatalla.getJugador1().getMedabot().getPHRes()*0.5));
+                        
+                    }
+                    
+                    if(this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza().equals("Invulnerabilidad")){
+                        
+                        this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal()-100);
+                        
+                    }
+                    
+                    this.vc.setEstadoMedafuerzaJ1("Medafuerza Inactiva");
+                    this.vc.getEstadoMedafuerzaJ1().setEnabled(false);
+                    
+                }
+                
                 boolean mfActivadaJ2 = this.robobatalla.getJugador2().getMedabot().cargarMedafuerza(this.robobatalla.getJugador1().getMedabot());
             
                 if (mfActivadaJ2) {
@@ -1180,41 +1294,27 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                     this.vc.getMedafuerzaJ2().setEnabled(true);
                     
                     this.vc.getLogBatalla().append("¡La medafuerza de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0, this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" está lista para ser activada!\n\n");
-                            
+                
+                    this.vc.getEstadoMedafuerzaJ2().setEnabled(true);
+                    
+                    this.vc.setEstadoMedafuerzaJ2("¡Medafuerza Lista!");
+                    
                 }
             
             }
             
             this.vc.getTerminarTurno().setEnabled(false);
             
-            //this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getCabeza().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getCabeza().getPHMax());
-            //this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoIzq().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoIzq().getPHMax());
-            //this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoDer().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getBrazoDer().getPHMax());
-            //this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaIzq().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaIzq().getPHMax());
-            //this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaDer().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPiernaDer().getPHMax());
-            
             this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPHMax());
                         
             if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) {
                
-                //this.vc.setPHCabezaM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getCabeza().getPHRes()));
-                //this.vc.setPHBrazoIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getPHRes()));
-                //this.vc.setPHBrazoDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoDer().getPHRes()));
-                //this.vc.setPHPiernaIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getPHRes()));
-                //this.vc.setPHPiernaDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getPHRes()));
-            
                 this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
                 
             }
             
             if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
                 
-                //this.vc.setPHCabezaM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getCabeza().getPHRes()));
-                //this.vc.setPHBrazoIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getPHRes()));
-                //this.vc.setPHBrazoDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoDer().getPHRes()));
-                //this.vc.setPHPiernaIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getPHRes()));
-                //this.vc.setPHPiernaDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaDer().getPHRes()));
-            
                 this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
                 
             }
@@ -1222,7 +1322,47 @@ public class ControladorCombate implements ActionListener, ChangeListener {
             this.robobatalla.setTurno(this.robobatalla.getTurno()+1);
             
             this.vc.getLogBatalla().append("* "+this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(1)+" turno - Turno de "+this.robobatalla.getJugadorActivo()+".\nPuede escoger entre defender o esquivar los ataques realizados el turno anterior, o recibir todo el daño y sólo atacar.\n\n");
-           
+                      
+            if(this.robobatalla.getModoJuego().equals("Jugador v/s CPU")&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
+            
+                this.vc.getAtacanteJ2().setEnabled(false);
+                this.vc.getDefensorJ1().setEnabled(false);
+                this.vc.getAtacarJ2().setEnabled(false);            
+                this.vc.getDefenderJ2().setEnabled(false);
+                this.vc.getEsquivarJ2().setEnabled(false);
+                this.vc.getAtacanteJ2().setEnabled(false);
+                this.vc.getDefenderJ1().setEnabled(false);
+                this.vc.getEsquivarJ1().setEnabled(false);
+                this.vc.getRendirseJ2().setEnabled(false);
+                this.vc.getTerminarTurno().setEnabled(false); 
+                this.vc.getMedafuerzaJ2().setEnabled(false);
+                
+                if(this.robobatalla.getJugador2().getTipoCPU().equals("1")) {
+                
+                    this.turnoCPU1();
+                
+                }
+            
+                if(this.robobatalla.getJugador2().getTipoCPU().equals("2")) {
+                
+                    this.turnoCPU1();
+                
+                }
+            
+                if(this.robobatalla.getJugador2().getTipoCPU().equals("3")) {
+                
+                    this.turnoCPU1();
+                
+                }
+            
+                if(this.robobatalla.getJugador2().getTipoCPU().equals("4")) {
+                
+                    this.turnoCPU1();
+                
+                }
+            
+            }
+            
         }   
     
     }
@@ -1273,7 +1413,6 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getDefensorJ2().setEnabled(false);
                 this.vc.getAtacarJ1().setEnabled(false);
                 this.vc.getMedafuerzaJ1().setEnabled(false);
-                this.vc.getBarraMedafuerzaM1().setEnabled(false);
                 this.vc.getDefenderJ1().setEnabled(false);
                 this.vc.getEsquivarJ1().setEnabled(false);            
                 this.vc.getRendirseJ1().setEnabled(false);
@@ -1434,16 +1573,6 @@ public class ControladorCombate implements ActionListener, ChangeListener {
             
         }
         
-        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraMedafuerzaM1())) {
-            
-            if (this.vc.getBarraMedafuerzaM1().getValue() == 100) {
-                
-                
-                
-            }
-            
-        }
-        
         if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraSaludM2())) {
             
             if (this.vc.getBarraSaludM2().getValue() == 0) {
@@ -1487,7 +1616,6 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getDefensorJ1().setEnabled(false);
                 this.vc.getAtacarJ2().setEnabled(false);
                 this.vc.getMedafuerzaJ2().setEnabled(false);
-                this.vc.getBarraMedafuerzaM2().setEnabled(false);
                 this.vc.getDefenderJ2().setEnabled(false);
                 this.vc.getEsquivarJ2().setEnabled(false);            
                 this.vc.getRendirseJ2().setEnabled(false);
@@ -1502,7 +1630,13 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 
                 this.vc.setVisible(false);
                 
-                this.vc.dispose(); 
+                this.vc.dispose();
+                
+                try {
+                    this.finalize();
+                } catch (Throwable ex) {
+                    Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
             }
             
@@ -1647,17 +1781,838 @@ public class ControladorCombate implements ActionListener, ChangeListener {
             }
             
         }
+    
+    }
+    
+    public void turnoCPU1() {
         
-        if (((JProgressBar)ce.getSource()).equals(this.vc.getBarraMedafuerzaM2())) {
+        int dano = 0;
+        
+        String mpAtacante, mpDefensora;
+        
+        this.robobatalla.getJugador2().getMedabot().setSaludActual(this.robobatalla.getJugador2().getMedabot().getSaludActual() - this.robobatalla.getJugador2().getMedabot().getAtaqueTotal());
+                
+        this.vc.setSaludMedabotJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getSaludActual()));
             
-            if (this.vc.getBarraMedafuerzaM2().getValue() == 100) {
+        this.vc.setBarraSaludM2(this.robobatalla.getJugador2().getMedabot().getSaludActual());
+                            
+        this.vc.getLogBatalla().append("- Al no defender o intentar esquivar, "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" recibe todo el daño de los ataques del turno anterior.\n\n");
                 
+        this.robobatalla.getJugador2().getMedabot().setAtaqueTotal(0);
+        
+        while(this.robobatalla.getJugador2().getMedabot().getPHRes() > 0) {
+        
+        if(this.vc.getCabezaJ1().isEnabled()&&this.vc.getBarraSaludCabezaM1().getValue()>0) {
+                        
+            mpAtacante = "Cabeza";
+            
+            if(this.vc.getCabezaJ2().isEnabled()) {
+            
+                mpDefensora = "Cabeza";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getCabeza(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getCabeza()); 
                 
-                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+ 
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+     
             }
             
+            else if(this.vc.getBrazoIzqJ2().isEnabled()) {
+            
+                mpDefensora = "Brazo Izquierdo";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getCabeza(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getBrazoIzq()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nEl "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún daño!\n\n");
+
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+
+            }
+            
+            else if(this.vc.getBrazoDerJ2().isEnabled()) {
+            
+                mpDefensora = "Brazo Derecho";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getCabeza(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getBrazoDer()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nEl "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún daño!\n\n");
+
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+
+            }
+            
+            else if(this.vc.getPiernaIzqJ2().isEnabled()) {
+            
+                mpDefensora = "Pierna Izquierda";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getCabeza(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getPiernaIzq()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+            
+            else if(this.vc.getPiernaDerJ2().isEnabled()) {
+            
+                mpDefensora = "Pierna Derecha";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getCabeza(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getPiernaDer()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }            
+        
+        } 
+        
+        else if(this.vc.getBrazoIzqJ1().isEnabled()&&this.vc.getBarraSaludBrazoIzqM1().getValue()>0) {
+                        
+            mpAtacante = "Brazo Izquierdo";
+            
+            if(this.vc.getCabezaJ2().isEnabled()) {
+            
+                mpDefensora = "Cabeza";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getBrazoIzq(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getCabeza()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque del "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+            
+            else if(this.vc.getBrazoIzqJ2().isEnabled()) {
+            
+                mpDefensora = "Brazo Izquierdo";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getBrazoIzq(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getBrazoIzq()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nEl "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque del "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+           
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún daño!\n\n");
+
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+
+            }
+            
+            else if(this.vc.getBrazoDerJ2().isEnabled()) {
+            
+                mpDefensora = "Brazo Derecho";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getBrazoIzq(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getBrazoDer()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nEl "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque del "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+           
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún daño!\n\n");
+
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+
+            }
+            
+            else if(this.vc.getPiernaIzqJ2().isEnabled()) {
+            
+                mpDefensora = "Pierna Izquierda";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getBrazoIzq(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getPiernaIzq()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque del "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+            
+            else if(this.vc.getPiernaDerJ2().isEnabled()) {
+            
+                mpDefensora = "Pierna Derecha";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getBrazoIzq(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getPiernaDer()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque del "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+        
+        }
+        
+        else if(this.vc.getBrazoDerJ1().isEnabled()&&this.vc.getBarraSaludBrazoDerM1().getValue()>0) {
+                        
+            mpAtacante = "Brazo Derecho";
+            
+            if(this.vc.getCabezaJ2().isEnabled()) {
+            
+                mpDefensora = "Cabeza";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getBrazoDer(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getCabeza()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque del "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+            
+            else if(this.vc.getBrazoIzqJ2().isEnabled()) {
+            
+                mpDefensora = "Brazo Izquierdo";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getBrazoDer(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getBrazoIzq()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nEl "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque del "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+           
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún daño!\n\n");
+
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+
+            }
+            
+            else if(this.vc.getBrazoDerJ2().isEnabled()) {
+            
+                mpDefensora = "Brazo Derecho";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getBrazoDer(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getBrazoDer()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nEl "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque del "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+           
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún daño!\n\n");
+
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+
+            }
+            
+            else if(this.vc.getPiernaIzqJ2().isEnabled()) {
+            
+                mpDefensora = "Pierna Izquierda";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getBrazoDer(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getPiernaIzq()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque del "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+            
+            else if(this.vc.getPiernaDerJ2().isEnabled()) {
+            
+                mpDefensora = "Pierna Derecha";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getBrazoDer(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getPiernaDer()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque del "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+        
+        }
+        
+        else if(this.vc.getPiernaIzqJ1().isEnabled()&&this.vc.getBarraSaludPiernaIzqM1().getValue()>0) {
+                        
+            mpAtacante = "Pierna Izquierda";
+            
+            if(this.vc.getCabezaJ2().isEnabled()) {
+            
+                mpDefensora = "Cabeza";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getPiernaIzq(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getCabeza()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+            
+            else if(this.vc.getBrazoIzqJ2().isEnabled()) {
+            
+                mpDefensora = "Brazo Izquierdo";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getPiernaIzq(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getBrazoIzq()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nEl "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún daño!\n\n");
+
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+
+            }
+            
+            else if(this.vc.getBrazoDerJ2().isEnabled()) {
+            
+                mpDefensora = "Brazo Derecho";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getPiernaIzq(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getBrazoDer()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nEl "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún daño!\n\n");
+
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+
+            }
+            
+            else if(this.vc.getPiernaIzqJ2().isEnabled()) {
+            
+                mpDefensora = "Pierna Izquierda";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getPiernaIzq(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getPiernaIzq()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+            
+            else if(this.vc.getPiernaDerJ2().isEnabled()) {
+            
+                mpDefensora = "Pierna Derecha";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getPiernaIzq(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getPiernaDer()); 
+                            
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+        
+        }
+        
+        else if(this.vc.getPiernaDerJ1().isEnabled()&&this.vc.getBarraSaludPiernaDerM1().getValue()>0) {
+                        
+            mpAtacante = "Pierna Derecha";
+            
+            if(this.vc.getCabezaJ2().isEnabled()) {
+            
+                mpDefensora = "Cabeza";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getPiernaDer(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getCabeza()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+            
+            else if(this.vc.getBrazoIzqJ2().isEnabled()) {
+            
+                mpDefensora = "Brazo Izquierdo";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getPiernaDer(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getBrazoIzq()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nEl "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún daño!\n\n");
+
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+
+            }
+            
+            else if(this.vc.getBrazoDerJ2().isEnabled()) {
+            
+                mpDefensora = "Brazo Derecho";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getPiernaDer(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getBrazoDer()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nEl "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún daño!\n\n");
+
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡El "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+
+            }
+            
+            else if(this.vc.getPiernaIzqJ2().isEnabled()) {
+            
+                mpDefensora = "Pierna Izquierda";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getPiernaDer(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getPiernaIzq()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+            
+            else if(this.vc.getPiernaDerJ2().isEnabled()) {
+            
+                mpDefensora = "Pierna Derecha";
+            
+                dano = this.robobatalla.getJugador2().getMedabot().atacar(this.robobatalla.getJugador2().getMedabot().getPiernaDer(), this.robobatalla.getJugador1().getMedabot(), this.robobatalla.getJugador1().getMedabot().getPiernaDer()); 
+                
+                if((dano > 0)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\nLa "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha recibido "+dano+" de daño por el ataque de la "+mpAtacante+" de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+
+                if((dano == 0)&&(this.robobatalla.getJugador2().getMedabot().getPHRes() != 0)&&(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" no ha recibido ningún dano!\n\n");
+ 
+                if((dano == -1)&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre()))this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ataca!\n¡La "+mpDefensora+" de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha evadido el ataque!\n\n");
+ 
+            }
+        
+        }
+        
+        this.vc.setSaludCabezaM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getCabeza().getSaludActual()));
+        this.vc.setSaludBrazoIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getSaludActual()));
+        this.vc.setSaludBrazoDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoDer().getSaludActual()));
+        this.vc.setSaludPiernaIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getSaludActual()));
+        this.vc.setSaludPiernaDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getSaludActual()));
+            
+        this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
+            
+        this.vc.setBarraSaludCabezaM1(this.robobatalla.getJugador1().getMedabot().getCabeza().getSaludActual());
+        this.vc.setBarraSaludBrazoIzqM1(this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getSaludActual());
+        this.vc.setBarraSaludBrazoDerM1(this.robobatalla.getJugador1().getMedabot().getBrazoDer().getSaludActual());
+        this.vc.setBarraSaludPiernaIzqM1(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getSaludActual());
+        this.vc.setBarraSaludPiernaDerM1(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getSaludActual());
+        
+        }
+                      
+        
+        if(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) 
+                
+            this.robobatalla.setJugadorActivo(this.robobatalla.getJugador2().getNombre());
+            
+        else  
+                
+            this.robobatalla.setJugadorActivo(this.robobatalla.getJugador1().getNombre());
+            
+        if (robobatalla.getJugadorActivo().equals(robobatalla.getJugador1().getNombre())) {
+            
+            this.vc.getAtacanteJ2().setEnabled(false);
+            this.vc.getDefensorJ1().setEnabled(false);
+            this.vc.getAtacarJ2().setEnabled(false);
+            this.vc.getDefenderJ2().setEnabled(false);
+            this.vc.getEsquivarJ2().setEnabled(false);
+            this.vc.getRendirseJ2().setEnabled(false);
+                
+            this.vc.getAtacanteJ1().setEnabled(true);
+            this.vc.getDefensorJ2().setEnabled(true);
+            this.vc.getAtacarJ1().setEnabled(true);
+            this.vc.getDefenderJ1().setEnabled(true);
+            this.vc.getEsquivarJ1().setEnabled(true);
+            this.vc.getRendirseJ1().setEnabled(true);
+                
+            if ((this.vc.getEstadoMedafuerzaJ2().isEnabled())&&(this.vc.getEstadoMedafuerzaJ2().getText().equals("¡Medafuerza Activada!"))) {
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Poder")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().getCabeza().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()*0.5));
+                                
+                    this.robobatalla.getJugador2().getMedabot().getBrazoIzq().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()*0.5));
+                                        
+                    this.robobatalla.getJugador2().getMedabot().getBrazoDer().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()*0.5));
+                                                
+                    this.robobatalla.getJugador2().getMedabot().getPiernaIzq().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()*0.5));
+                                                        
+                    this.robobatalla.getJugador2().getMedabot().getPiernaDer().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()*0.5));
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Velocidad")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()-50);
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Reaccion")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setPHRes((int) (this.robobatalla.getJugador2().getMedabot().getPHRes()*0.5));
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Invulnerabilidad")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal()-100);
+                        
+                }
+                    
+                this.vc.setEstadoMedafuerzaJ2("Medafuerza Inactiva");
+                this.vc.getEstadoMedafuerzaJ2().setEnabled(false);
+                    
+            }
+                
+            boolean mfActivadaJ1 = this.robobatalla.getJugador1().getMedabot().cargarMedafuerza(this.robobatalla.getJugador2().getMedabot());
+            
+            if (mfActivadaJ1) {
+                    
+                this.vc.getMedafuerzaJ1().setEnabled(true);
+                    
+                this.vc.getLogBatalla().append("¡La medafuerza de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0, this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" está lista para ser activada!\n\n");
+                
+                this.vc.getEstadoMedafuerzaJ1().setEnabled(true);
+                    
+                this.vc.setEstadoMedafuerzaJ1("¡Medafuerza Lista!");
+                    
+            }
+                
         }
     
+        this.vc.getTerminarTurno().setEnabled(false);
+            
+        this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPHMax());
+                        
+        if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) {
+               
+            this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
+                
+        }
+            
+        if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
+                
+            this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
+                
+        }
+                        
+        this.robobatalla.setTurno(this.robobatalla.getTurno()+1);
+            
+        this.vc.getLogBatalla().append("* "+this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(1)+" turno - Turno de "+this.robobatalla.getJugadorActivo()+".\nPuede escoger entre defender o esquivar los ataques realizados el turno anterior, o recibir todo el daño y sólo atacar.\n\n");
+             
+    }
+    
+    public void turnoCPU2() {
+        
+        if(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) 
+                
+            this.robobatalla.setJugadorActivo(this.robobatalla.getJugador2().getNombre());
+            
+        else  
+                
+            this.robobatalla.setJugadorActivo(this.robobatalla.getJugador1().getNombre());
+            
+        if (robobatalla.getJugadorActivo().equals(robobatalla.getJugador1().getNombre())) {
+            
+            this.vc.getAtacanteJ2().setEnabled(false);
+            this.vc.getDefensorJ1().setEnabled(false);
+            this.vc.getAtacarJ2().setEnabled(false);
+            this.vc.getDefenderJ2().setEnabled(false);
+            this.vc.getEsquivarJ2().setEnabled(false);
+            this.vc.getRendirseJ2().setEnabled(false);
+                
+            this.vc.getAtacanteJ1().setEnabled(true);
+            this.vc.getDefensorJ2().setEnabled(true);
+            this.vc.getAtacarJ1().setEnabled(true);
+            this.vc.getDefenderJ1().setEnabled(true);
+            this.vc.getEsquivarJ1().setEnabled(true);
+            this.vc.getRendirseJ1().setEnabled(true);
+                
+            if ((this.vc.getEstadoMedafuerzaJ2().isEnabled())&&(this.vc.getEstadoMedafuerzaJ2().getText().equals("¡Medafuerza Activada!"))) {
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Poder")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().getCabeza().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()*0.5));
+                                
+                    this.robobatalla.getJugador2().getMedabot().getBrazoIzq().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()*0.5));
+                                        
+                    this.robobatalla.getJugador2().getMedabot().getBrazoDer().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()*0.5));
+                                                
+                    this.robobatalla.getJugador2().getMedabot().getPiernaIzq().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()*0.5));
+                                                        
+                    this.robobatalla.getJugador2().getMedabot().getPiernaDer().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()*0.5));
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Velocidad")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()-50);
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Reaccion")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setPHRes((int) (this.robobatalla.getJugador2().getMedabot().getPHRes()*0.5));
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Invulnerabilidad")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal()-100);
+                        
+                }
+                    
+                this.vc.setEstadoMedafuerzaJ2("Medafuerza Inactiva");
+                this.vc.getEstadoMedafuerzaJ2().setEnabled(false);
+                    
+            }
+                
+            boolean mfActivadaJ1 = this.robobatalla.getJugador1().getMedabot().cargarMedafuerza(this.robobatalla.getJugador2().getMedabot());
+            
+            if (mfActivadaJ1) {
+                    
+                this.vc.getMedafuerzaJ1().setEnabled(true);
+                    
+                this.vc.getLogBatalla().append("¡La medafuerza de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0, this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" está lista para ser activada!\n\n");
+                
+                this.vc.getEstadoMedafuerzaJ1().setEnabled(true);
+                    
+                this.vc.setEstadoMedafuerzaJ1("¡Medafuerza Lista!");
+                    
+            }
+                
+        }
+    
+        this.vc.getTerminarTurno().setEnabled(false);
+            
+        this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPHMax());
+                        
+        if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) {
+               
+            this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
+                
+        }
+            
+        if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
+                
+            this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
+                
+        }
+                        
+        this.robobatalla.setTurno(this.robobatalla.getTurno()+1);
+            
+        this.vc.getLogBatalla().append("* "+this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(1)+" turno - Turno de "+this.robobatalla.getJugadorActivo()+".\nPuede escoger entre defender o esquivar los ataques realizados el turno anterior, o recibir todo el daño y sólo atacar.\n\n");
+             
+    }
+    
+    public void turnoCPU3() {
+        
+        if(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) 
+                
+            this.robobatalla.setJugadorActivo(this.robobatalla.getJugador2().getNombre());
+            
+        else  
+                
+            this.robobatalla.setJugadorActivo(this.robobatalla.getJugador1().getNombre());
+            
+        if (robobatalla.getJugadorActivo().equals(robobatalla.getJugador1().getNombre())) {
+            
+            this.vc.getAtacanteJ2().setEnabled(false);
+            this.vc.getDefensorJ1().setEnabled(false);
+            this.vc.getAtacarJ2().setEnabled(false);
+            this.vc.getDefenderJ2().setEnabled(false);
+            this.vc.getEsquivarJ2().setEnabled(false);
+            this.vc.getRendirseJ2().setEnabled(false);
+                
+            this.vc.getAtacanteJ1().setEnabled(true);
+            this.vc.getDefensorJ2().setEnabled(true);
+            this.vc.getAtacarJ1().setEnabled(true);
+            this.vc.getDefenderJ1().setEnabled(true);
+            this.vc.getEsquivarJ1().setEnabled(true);
+            this.vc.getRendirseJ1().setEnabled(true);
+                
+            if ((this.vc.getEstadoMedafuerzaJ2().isEnabled())&&(this.vc.getEstadoMedafuerzaJ2().getText().equals("¡Medafuerza Activada!"))) {
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Poder")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().getCabeza().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()*0.5));
+                                
+                    this.robobatalla.getJugador2().getMedabot().getBrazoIzq().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()*0.5));
+                                        
+                    this.robobatalla.getJugador2().getMedabot().getBrazoDer().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()*0.5));
+                                                
+                    this.robobatalla.getJugador2().getMedabot().getPiernaIzq().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()*0.5));
+                                                        
+                    this.robobatalla.getJugador2().getMedabot().getPiernaDer().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()*0.5));
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Velocidad")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()-50);
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Reaccion")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setPHRes((int) (this.robobatalla.getJugador2().getMedabot().getPHRes()*0.5));
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Invulnerabilidad")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal()-100);
+                        
+                }
+                    
+                this.vc.setEstadoMedafuerzaJ2("Medafuerza Inactiva");
+                this.vc.getEstadoMedafuerzaJ2().setEnabled(false);
+                    
+            }
+                
+            boolean mfActivadaJ1 = this.robobatalla.getJugador1().getMedabot().cargarMedafuerza(this.robobatalla.getJugador2().getMedabot());
+            
+            if (mfActivadaJ1) {
+                    
+                this.vc.getMedafuerzaJ1().setEnabled(true);
+                    
+                this.vc.getLogBatalla().append("¡La medafuerza de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0, this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" está lista para ser activada!\n\n");
+                
+                this.vc.getEstadoMedafuerzaJ1().setEnabled(true);
+                    
+                this.vc.setEstadoMedafuerzaJ1("¡Medafuerza Lista!");
+                    
+            }
+                
+        }
+    
+        this.vc.getTerminarTurno().setEnabled(false);
+            
+        this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPHMax());
+                        
+        if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) {
+               
+            this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
+                
+        }
+            
+        if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
+                
+            this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
+                
+        }
+                        
+        this.robobatalla.setTurno(this.robobatalla.getTurno()+1);
+            
+        this.vc.getLogBatalla().append("* "+this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(1)+" turno - Turno de "+this.robobatalla.getJugadorActivo()+".\nPuede escoger entre defender o esquivar los ataques realizados el turno anterior, o recibir todo el daño y sólo atacar.\n\n");
+             
+    }
+    
+    public void turnoCPU4() {
+        
+        if(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) 
+                
+            this.robobatalla.setJugadorActivo(this.robobatalla.getJugador2().getNombre());
+            
+        else  
+                
+            this.robobatalla.setJugadorActivo(this.robobatalla.getJugador1().getNombre());
+            
+        if (robobatalla.getJugadorActivo().equals(robobatalla.getJugador1().getNombre())) {
+            
+            this.vc.getAtacanteJ2().setEnabled(false);
+            this.vc.getDefensorJ1().setEnabled(false);
+            this.vc.getAtacarJ2().setEnabled(false);
+            this.vc.getDefenderJ2().setEnabled(false);
+            this.vc.getEsquivarJ2().setEnabled(false);
+            this.vc.getRendirseJ2().setEnabled(false);
+                
+            this.vc.getAtacanteJ1().setEnabled(true);
+            this.vc.getDefensorJ2().setEnabled(true);
+            this.vc.getAtacarJ1().setEnabled(true);
+            this.vc.getDefenderJ1().setEnabled(true);
+            this.vc.getEsquivarJ1().setEnabled(true);
+            this.vc.getRendirseJ1().setEnabled(true);
+                
+            if ((this.vc.getEstadoMedafuerzaJ2().isEnabled())&&(this.vc.getEstadoMedafuerzaJ2().getText().equals("¡Medafuerza Activada!"))) {
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Poder")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().getCabeza().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()*0.5));
+                                
+                    this.robobatalla.getJugador2().getMedabot().getBrazoIzq().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()*0.5));
+                                        
+                    this.robobatalla.getJugador2().getMedabot().getBrazoDer().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()*0.5));
+                                                
+                    this.robobatalla.getJugador2().getMedabot().getPiernaIzq().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()*0.5));
+                                                        
+                    this.robobatalla.getJugador2().getMedabot().getPiernaDer().setAtaque((int) (this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()*0.5));
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Velocidad")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()-50);
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Reaccion")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setPHRes((int) (this.robobatalla.getJugador2().getMedabot().getPHRes()*0.5));
+                        
+                }
+                    
+                if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Invulnerabilidad")){
+                        
+                    this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal()-100);
+                        
+                }
+                    
+                this.vc.setEstadoMedafuerzaJ2("Medafuerza Inactiva");
+                this.vc.getEstadoMedafuerzaJ2().setEnabled(false);
+                    
+            }
+                
+            boolean mfActivadaJ1 = this.robobatalla.getJugador1().getMedabot().cargarMedafuerza(this.robobatalla.getJugador2().getMedabot());
+            
+            if (mfActivadaJ1) {
+                    
+                this.vc.getMedafuerzaJ1().setEnabled(true);
+                    
+                this.vc.getLogBatalla().append("¡La medafuerza de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0, this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" está lista para ser activada!\n\n");
+                
+                this.vc.getEstadoMedafuerzaJ1().setEnabled(true);
+                    
+                this.vc.setEstadoMedafuerzaJ1("¡Medafuerza Lista!");
+                    
+            }
+                
+        }
+    
+        this.vc.getTerminarTurno().setEnabled(false);
+            
+        this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPHMax());
+                        
+        if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) {
+               
+            this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
+                
+        }
+            
+        if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
+                
+            this.vc.setPHJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPHRes()));
+                
+        }
+                        
+        this.robobatalla.setTurno(this.robobatalla.getTurno()+1);
+            
+        this.vc.getLogBatalla().append("* "+this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(1)+" turno - Turno de "+this.robobatalla.getJugadorActivo()+".\nPuede escoger entre defender o esquivar los ataques realizados el turno anterior, o recibir todo el daño y sólo atacar.\n\n");
+             
+    }
+    
+    private void simulacion() {
+        
+        
+        
     }
     
 }

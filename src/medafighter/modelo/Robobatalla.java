@@ -18,6 +18,8 @@ public class Robobatalla {
     
     private Jugador jugador2;
     
+    private String modoJuego;
+    
     private int turno;
     
     private String jugadorActivo;
@@ -38,18 +40,20 @@ public class Robobatalla {
         if (modoJuego.equals("Jugador v/s CPU")) {
             
             this.jugador1 = new JugadorHumano(jugador1, versionMedabotJ1);
-            this.jugador2 = new JugadorCPU(jugador1, versionMedabotJ1);
+            this.jugador2 = new JugadorCPU(jugador2, versionMedabotJ1);
             
         }
         
         if (modoJuego.equals("CPU V/S CPU")) {
             
             this.jugador1 = new JugadorCPU(jugador1, versionMedabotJ1);
-            this.jugador2 = new JugadorCPU(jugador1, versionMedabotJ1);
+            this.jugador2 = new JugadorCPU(jugador2, versionMedabotJ1);
             
         }
         
         this.turno = 1;
+        
+        this.modoJuego = modoJuego;
         
         this.jugadorActivo = this.jugador1.getNombre();
         
@@ -65,6 +69,10 @@ public class Robobatalla {
     
     public Jugador getJugador2(){
         return this.jugador2;
+    }
+    
+    public String getModoJuego(){
+        return this.modoJuego;
     }
     
     public int getTurno(){

@@ -384,7 +384,7 @@ public class Medabot {
         
         if (this.medalla.getMedafuerza().equals("Velocidad")) {
             
-            this.esquiveTotal = 100;
+            this.esquiveTotal = this.esquiveTotal +50;
             
         }
         
