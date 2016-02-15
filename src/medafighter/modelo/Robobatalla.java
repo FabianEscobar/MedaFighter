@@ -93,6 +93,16 @@ public class Robobatalla {
         
     }
     
+    public Jugador getJugadorPasivo(String jugadorActivo) {
+        
+        if (jugadorActivo.equals(this.jugador1.getNombre())) return this.jugador2;
+        
+        if (jugadorActivo.equals(this.jugador2.getNombre())) return this.jugador1;
+        
+        return null;
+        
+    }
+    
     
     public void setTurno(int turno){
         this.turno = turno;
