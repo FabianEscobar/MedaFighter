@@ -461,12 +461,6 @@ public class ControladorCombate implements ActionListener, ChangeListener {
             this.vc.setSaludPiernaIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getSaludActual()));
             this.vc.setSaludPiernaDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getPiernaDer().getSaludActual()));
                         
-            //this.vc.setPHCabezaM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getCabeza().getPHRes()));
-            //this.vc.setPHBrazoIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getPHRes()));
-            //this.vc.setPHBrazoDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getBrazoDer().getPHRes()));
-            //this.vc.setPHPiernaIzqM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getPHRes()));
-            //this.vc.setPHPiernaDerM1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPiernaDer().getPHRes()));
-            
             this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
                         
             this.vc.setBarraSaludCabezaM2(this.robobatalla.getJugador2().getMedabot().getCabeza().getSaludActual());
@@ -1046,6 +1040,18 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 
                 JOptionPane.showMessageDialog(vc, "- ¡"+this.robobatalla.getJugador1().getNombre()+" se ha rendido!\n\n- ¡"+this.robobatalla.getJugador2().getNombre()+" es el ganador!\n\n");
                 
+                try {
+                    
+                    this.cbd.actualizarDatosJugadores(this.robobatalla.getJugador1().getNombre(),this.robobatalla.getJugador2().getNombre(),false);
+                
+                } 
+                
+                catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
+                
+                }
+                
                 this.cm = new ControladorMenu();
                 
                 this.vc.setVisible(false);
@@ -1108,7 +1114,19 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getNombre()+" se ha rendido!\n\n- ¡"+this.robobatalla.getJugador1().getNombre()+" es el ganador!\n\n");
                 
                 JOptionPane.showMessageDialog(vc, "- ¡"+this.robobatalla.getJugador2().getNombre()+" se ha rendido!\n\n- ¡"+this.robobatalla.getJugador1().getNombre()+" es el ganador!\n\n");
+                                
+                try {
+                    
+                    this.cbd.actualizarDatosJugadores(this.robobatalla.getJugador2().getNombre(),this.robobatalla.getJugador1().getNombre(),false);
                 
+                } 
+                
+                catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
+                
+                }
+                                
                 this.cm = new ControladorMenu();
                 
                 this.vc.setVisible(false);
@@ -1129,9 +1147,62 @@ public class ControladorCombate implements ActionListener, ChangeListener {
             
             this.vc.setEstadoMedafuerzaJ1("¡Medafuerza Activada!");
             
-            if(this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga().equals("concentracion")) 
+            if(this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga().equals("concentracion")) {
                 
                 this.robobatalla.getJugador1().getMedabot().getMedalla().setTurnoCarga(0);
+                
+            }
+            
+            if(this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza().equals("Poder")) {
+                                
+                String descripcionM1 = "<html><body>Nombre: "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()+"(*2)/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()+"(*2)/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()+"(*2)/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()+"(*2)/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()+"(*2)/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+robobatalla.getJugador1().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+robobatalla.getJugador1().getMedabot().getEsquiveTotal()+"</body></html>";
+                
+                this.vc.getMedarotchJ1().setToolTipText(descripcionM1);
+                
+            }
+            
+            if(this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza().equals("Velocidad")) {
+                
+                String descripcionM1 = "<html><body>Nombre: "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador1().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador1().getMedabot().getEsquiveTotal()+"(+50)</body></html>";
+                
+                this.vc.getMedarotchJ1().setToolTipText(descripcionM1);
+                
+            }
+            
+            if(this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza().equals("Invulnerabilidad")) {
+                
+                String descripcionM1 = "<html><body>Nombre: "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador1().getMedabot().getDefensaTotal()+"(+100)<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador1().getMedabot().getEsquiveTotal()+"</body></html>";
+                
+                this.vc.getMedarotchJ1().setToolTipText(descripcionM1);
+                                
+            }
                                  
         }
         
@@ -1145,10 +1216,63 @@ public class ControladorCombate implements ActionListener, ChangeListener {
             
             this.vc.setEstadoMedafuerzaJ2("¡Medafuerza Activada!");
             
-            if(this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga().equals("concentracion")) 
+            if(this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga().equals("concentracion")) { 
                 
                 this.robobatalla.getJugador2().getMedabot().getMedalla().setTurnoCarga(0);
+                
+            }            
             
+            if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Poder")) {
+                                
+                String descripcionM2 = "<html><body>Nombre: "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()+"(*2)/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()+"(*2)/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()+"(*2)/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()+"(*2)/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()+"(*2)/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+robobatalla.getJugador2().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+robobatalla.getJugador2().getMedabot().getEsquiveTotal()+"</body></html>";
+                
+                this.vc.getMedarotchJ2().setToolTipText(descripcionM2);
+                
+            }
+            
+            if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Velocidad")) {
+                
+                String descripcionM2 = "<html><body>Nombre: "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador2().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()+"(+50)</body></html>";
+                
+                this.vc.getMedarotchJ2().setToolTipText(descripcionM2);
+                
+            }
+            
+            if(this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza().equals("Invulnerabilidad")) {
+                
+                String descripcionM2 = "<html><body>Nombre: "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador2().getMedabot().getDefensaTotal()+"(+100)<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()+"</body></html>";
+                
+                this.vc.getMedarotchJ2().setToolTipText(descripcionM2);
+                                
+            }
+                        
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getTerminarTurno())) {
@@ -1169,6 +1293,7 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getDefenderJ2().setEnabled(false);
                 this.vc.getEsquivarJ2().setEnabled(false);
                 this.vc.getRendirseJ2().setEnabled(false);
+                this.vc.getMedarotchJ2().setEnabled(false);
                 
                 this.vc.getAtacanteJ1().setEnabled(true);
                 this.vc.getDefensorJ2().setEnabled(true);
@@ -1176,6 +1301,7 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getDefenderJ1().setEnabled(true);
                 this.vc.getEsquivarJ1().setEnabled(true);
                 this.vc.getRendirseJ1().setEnabled(true);
+                this.vc.getMedarotchJ1().setEnabled(true);
                 
                 if ((this.vc.getEstadoMedafuerzaJ2().isEnabled())&&(this.vc.getEstadoMedafuerzaJ2().getText().equals("¡Medafuerza Activada!"))) {
                     
@@ -1212,7 +1338,20 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                     }
                     
                     this.vc.setEstadoMedafuerzaJ2("Medafuerza Inactiva");
-                    this.vc.getEstadoMedafuerzaJ2().setEnabled(false);
+                    this.vc.getEstadoMedafuerzaJ2().setEnabled(false);                    
+                    
+                    String descripcionM2 = "<html><body>Nombre: "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"<br>"
+                            + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive()+"<br>"
+                            + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                            + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                            + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                            + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                            + "Medafuerza: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                            + "Carga: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                            + "Defensa Total: "+this.robobatalla.getJugador2().getMedabot().getDefensaTotal()+"<br>"
+                            + "Esquive Total: "+this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                    this.vc.getMedarotchJ2().setToolTipText(descripcionM2);
                     
                 }
                 
@@ -1226,7 +1365,7 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 
                     this.vc.getEstadoMedafuerzaJ1().setEnabled(true);
                     
-                    this.vc.setEstadoMedafuerzaJ1("¡Medafuerza Lista!");
+                    this.vc.setEstadoMedafuerzaJ1("¡Medafuerza Lista!");                    
                     
                 }
                 
@@ -1240,6 +1379,7 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getDefenderJ1().setEnabled(false);
                 this.vc.getEsquivarJ1().setEnabled(false);
                 this.vc.getRendirseJ1().setEnabled(false);
+                this.vc.getMedarotchJ1().setEnabled(false);
                 
                 this.vc.getAtacanteJ2().setEnabled(true);
                 this.vc.getDefensorJ1().setEnabled(true);
@@ -1247,6 +1387,7 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getDefenderJ2().setEnabled(true);
                 this.vc.getEsquivarJ2().setEnabled(true);
                 this.vc.getRendirseJ2().setEnabled(true);
+                this.vc.getMedarotchJ2().setEnabled(true);
                 
                 if ((this.vc.getEstadoMedafuerzaJ1().isEnabled())&&(this.vc.getEstadoMedafuerzaJ1().getText().equals("¡Medafuerza Activada!"))) {
                     
@@ -1261,6 +1402,7 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                         this.robobatalla.getJugador1().getMedabot().getPiernaIzq().setAtaque((int) (this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()*0.5));
                                                         
                         this.robobatalla.getJugador1().getMedabot().getPiernaDer().setAtaque((int) (this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()*0.5));
+                        
                         
                     }
                     
@@ -1284,7 +1426,20 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                     
                     this.vc.setEstadoMedafuerzaJ1("Medafuerza Inactiva");
                     this.vc.getEstadoMedafuerzaJ1().setEnabled(false);
-                    
+
+                    String descripcionM1 = "<html><body>Nombre: "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+"<br>"
+                            + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive()+"<br>"
+                            + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                            + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                            + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                            + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                            + "Medafuerza: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                            + "Carga: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                            + "Defensa Total: "+this.robobatalla.getJugador1().getMedabot().getDefensaTotal()+"<br>"
+                            + "Esquive Total: "+this.robobatalla.getJugador1().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                    this.vc.getMedarotchJ1().setToolTipText(descripcionM1);
+
                 }
                 
                 boolean mfActivadaJ2 = this.robobatalla.getJugador2().getMedabot().cargarMedafuerza(this.robobatalla.getJugador1().getMedabot());
@@ -1335,7 +1490,8 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getEsquivarJ1().setEnabled(false);
                 this.vc.getRendirseJ2().setEnabled(false);
                 this.vc.getTerminarTurno().setEnabled(false); 
-                this.vc.getMedafuerzaJ2().setEnabled(false);
+                this.vc.getMedafuerzaJ2().setEnabled(false);                
+                this.vc.getMedarotchJ2().setEnabled(false);
                 
                 if(this.robobatalla.getJugador2().getTipoCPU().equals("1")) {
                 
@@ -1422,6 +1578,18 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha sido noqueado!\n\n- ¡"+this.robobatalla.getJugador2().getNombre()+" es el ganador!\n\n");
                 
                 JOptionPane.showMessageDialog(vc, "- ¡"+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha sido noqueado!\n\n- ¡"+this.robobatalla.getJugador2().getNombre()+" es el ganador!\n\n");
+                                
+                try {
+                    
+                    this.cbd.actualizarDatosJugadores(this.robobatalla.getJugador2().getNombre(),this.robobatalla.getJugador1().getNombre(),false);
+                
+                } 
+                
+                catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
+                
+                }                
                 
                 this.cm = new ControladorMenu();
                 
@@ -1466,6 +1634,19 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal() - this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa());
                 
                 this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive());
+
+                String descripcionM1 = "<html><body>Nombre: "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador1().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador1().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                this.vc.getMedarotchJ1().setToolTipText(descripcionM1);
                 
                 this.vc.getLogBatalla().append("- La Cabeza de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
                                 
@@ -1494,7 +1675,20 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal() - this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa());
                 
                 this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive());
-                
+                                
+                String descripcionM1 = "<html><body>Nombre: "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador1().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador1().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                this.vc.getMedarotchJ1().setToolTipText(descripcionM1);
+                                
                 this.vc.getLogBatalla().append("- El Brazo Izquierdo de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
                  
             }
@@ -1522,7 +1716,20 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal() - this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa());
                 
                 this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive());
-                
+                                
+                String descripcionM1 = "<html><body>Nombre: "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador1().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador1().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                this.vc.getMedarotchJ1().setToolTipText(descripcionM1);
+                                
                 this.vc.getLogBatalla().append("- El Brazo Derecho de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
                  
             }
@@ -1550,7 +1757,20 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal() - this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa());
                 
                 this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive());
-                
+                                
+                String descripcionM1 = "<html><body>Nombre: "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador1().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador1().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                this.vc.getMedarotchJ1().setToolTipText(descripcionM1);
+                                
                 this.vc.getLogBatalla().append("- La Pierna Izquierda de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
                  
             }
@@ -1578,7 +1798,20 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.robobatalla.getJugador1().getMedabot().setDefensaTotal(this.robobatalla.getJugador1().getMedabot().getDefensaTotal() - this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa());
                 
                 this.robobatalla.getJugador1().getMedabot().setEsquiveTotal(this.robobatalla.getJugador1().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive());
-                
+                                
+                String descripcionM1 = "<html><body>Nombre: "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador1().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador1().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                this.vc.getMedarotchJ1().setToolTipText(descripcionM1);
+                                
                 this.vc.getLogBatalla().append("- La Pierna Derecha de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
                  
             }
@@ -1637,6 +1870,18 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.vc.getLogBatalla().append("- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha sido noqueado!\n\n- ¡"+this.robobatalla.getJugador1().getNombre()+" es el ganador!\n\n");
                 
                 JOptionPane.showMessageDialog(vc, "- ¡"+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha sido noqueado!\n\n- ¡"+this.robobatalla.getJugador1().getNombre()+" es el ganador!\n\n");
+                                
+                try {
+                    
+                    this.cbd.actualizarDatosJugadores(this.robobatalla.getJugador1().getNombre(),this.robobatalla.getJugador2().getNombre(),false);
+                
+                } 
+                
+                catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
+                
+                }                
                 
                 this.cm = new ControladorMenu();
                 
@@ -1681,7 +1926,20 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal() - this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa());
                 
                 this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive());
-            
+
+                String descripcionM2 = "<html><body>Nombre: "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador2().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                this.vc.getMedarotchJ2().setToolTipText(descripcionM2);                    
+
                 this.vc.getLogBatalla().append("- La Cabeza de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
                              
             }
@@ -1709,6 +1967,19 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal() - this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa());
                 
                 this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive());
+               
+                String descripcionM2 = "<html><body>Nombre: "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador2().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                this.vc.getMedarotchJ2().setToolTipText(descripcionM2);                    
                 
                 this.vc.getLogBatalla().append("- El Brazo Izquierdo de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
                 
@@ -1737,6 +2008,19 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal() - this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa());
                 
                 this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive());
+               
+                String descripcionM2 = "<html><body>Nombre: "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador2().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                this.vc.getMedarotchJ2().setToolTipText(descripcionM2);                    
                 
                 this.vc.getLogBatalla().append("- El Brazo Derecho de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
                 
@@ -1765,6 +2049,19 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal() - this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa());
                 
                 this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive());
+                                
+                String descripcionM2 = "<html><body>Nombre: "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador2().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                this.vc.getMedarotchJ2().setToolTipText(descripcionM2);                    
                 
                 this.vc.getLogBatalla().append("- La Pierna Izquierda de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
                 
@@ -1793,6 +2090,19 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 this.robobatalla.getJugador2().getMedabot().setDefensaTotal(this.robobatalla.getJugador2().getMedabot().getDefensaTotal() - this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa());
                 
                 this.robobatalla.getJugador2().getMedabot().setEsquiveTotal(this.robobatalla.getJugador2().getMedabot().getEsquiveTotal() - this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive());
+                                
+                String descripcionM2 = "<html><body>Nombre: "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"<br>"
+                        + "Ataque/Defensa/Esquive Cabeza: "+this.robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getCabeza().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Izquierdo: "+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Brazo Derecho: "+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Izquierda: "+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                        + "Ataque/Defensa/Esquive Pierna Derecha: "+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa()+"/"+this.robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                        + "Medafuerza: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                        + "Carga: "+this.robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                        + "Defensa Total: "+this.robobatalla.getJugador2().getMedabot().getDefensaTotal()+"<br>"
+                        + "Esquive Total: "+this.robobatalla.getJugador2().getMedabot().getEsquiveTotal()+"</body></html>";
+
+                this.vc.getMedarotchJ2().setToolTipText(descripcionM2);                    
                 
                 this.vc.getLogBatalla().append("- La Pierna Derecha de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha dejado de funcionar debido a que su salud llegó a 0.\n\n");
                 
@@ -2756,6 +3066,8 @@ public class ControladorCombate implements ActionListener, ChangeListener {
             this.vc.getDefenderJ1().setEnabled(true);
             this.vc.getEsquivarJ1().setEnabled(true);
             this.vc.getRendirseJ1().setEnabled(true);
+            
+            this.vc.getMedarotchJ1().setEnabled(true);
                 
             if ((this.vc.getEstadoMedafuerzaJ2().isEnabled())&&(this.vc.getEstadoMedafuerzaJ2().getText().equals("¡Medafuerza Activada!"))) {
                     

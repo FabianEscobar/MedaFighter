@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.EventListener;
 import javax.swing.event.ChangeListener;
 import medafighter.modelo.*;
+import medafighter.otros.MyLabel;
 
 /**
  *
@@ -112,6 +113,32 @@ public class VistaCombate extends javax.swing.JFrame {
         
         logBatalla.setText(logInicial);
         
+        String descripcionM1 = "<html><body>Nombre: "+robobatalla.getJugador1().getMedabot().getNombre().substring(0,robobatalla.getJugador1().getMedabot().getNombre().length()-2)+"<br>"
+                + "Ataque/Defensa/Esquive Cabeza: "+robobatalla.getJugador1().getMedabot().getCabeza().getAtaque()+"/"+robobatalla.getJugador1().getMedabot().getCabeza().getDefensa()+"/"+robobatalla.getJugador1().getMedabot().getCabeza().getEsquive()+"<br>"
+                + "Ataque/Defensa/Esquive Brazo Izquierdo: "+robobatalla.getJugador1().getMedabot().getBrazoIzq().getAtaque()+"/"+robobatalla.getJugador1().getMedabot().getBrazoIzq().getDefensa()+"/"+robobatalla.getJugador1().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                + "Ataque/Defensa/Esquive Brazo Derecho: "+robobatalla.getJugador1().getMedabot().getBrazoDer().getAtaque()+"/"+robobatalla.getJugador1().getMedabot().getBrazoDer().getDefensa()+"/"+robobatalla.getJugador1().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                + "Ataque/Defensa/Esquive Pierna Izquierda: "+robobatalla.getJugador1().getMedabot().getPiernaIzq().getAtaque()+"/"+robobatalla.getJugador1().getMedabot().getPiernaIzq().getDefensa()+"/"+robobatalla.getJugador1().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                + "Ataque/Defensa/Esquive Pierna Derecha: "+robobatalla.getJugador1().getMedabot().getPiernaDer().getAtaque()+"/"+robobatalla.getJugador1().getMedabot().getPiernaDer().getDefensa()+"/"+robobatalla.getJugador1().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                + "Medafuerza: "+robobatalla.getJugador1().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                + "Carga: "+robobatalla.getJugador1().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                + "Defensa Total: "+robobatalla.getJugador1().getMedabot().getDefensaTotal()+"<br>"
+                + "Esquive Total: "+robobatalla.getJugador1().getMedabot().getEsquiveTotal()+"</body></html>";
+        
+        String descripcionM2 = "<html><body>Nombre: "+robobatalla.getJugador2().getMedabot().getNombre().substring(0,robobatalla.getJugador2().getMedabot().getNombre().length()-2)+"<br>"
+                + "Ataque/Defensa/Esquive Cabeza: "+robobatalla.getJugador2().getMedabot().getCabeza().getAtaque()+"/"+robobatalla.getJugador2().getMedabot().getCabeza().getDefensa()+"/"+robobatalla.getJugador2().getMedabot().getCabeza().getEsquive()+"<br>"
+                + "Ataque/Defensa/Esquive Brazo Izquierdo: "+robobatalla.getJugador2().getMedabot().getBrazoIzq().getAtaque()+"/"+robobatalla.getJugador2().getMedabot().getBrazoIzq().getDefensa()+"/"+robobatalla.getJugador2().getMedabot().getBrazoIzq().getEsquive()+"<br>"
+                + "Ataque/Defensa/Esquive Brazo Derecho: "+robobatalla.getJugador2().getMedabot().getBrazoDer().getAtaque()+"/"+robobatalla.getJugador2().getMedabot().getBrazoDer().getDefensa()+"/"+robobatalla.getJugador2().getMedabot().getBrazoDer().getEsquive()+"<br>"
+                + "Ataque/Defensa/Esquive Pierna Izquierda: "+robobatalla.getJugador2().getMedabot().getPiernaIzq().getAtaque()+"/"+robobatalla.getJugador2().getMedabot().getPiernaIzq().getDefensa()+"/"+robobatalla.getJugador2().getMedabot().getPiernaIzq().getEsquive()+"<br>"
+                + "Ataque/Defensa/Esquive Pierna Derecha: "+robobatalla.getJugador2().getMedabot().getPiernaDer().getAtaque()+"/"+robobatalla.getJugador2().getMedabot().getPiernaDer().getDefensa()+"/"+robobatalla.getJugador2().getMedabot().getPiernaDer().getEsquive()+"<br>"
+                + "Medafuerza: "+robobatalla.getJugador2().getMedabot().getMedalla().getMedafuerza()+"<br>"
+                + "Carga: "+robobatalla.getJugador2().getMedabot().getMedalla().getTipoCarga()+"<br>"
+                + "Defensa Total: "+robobatalla.getJugador2().getMedabot().getDefensaTotal()+"<br>"
+                + "Esquive Total: "+robobatalla.getJugador2().getMedabot().getEsquiveTotal()+"</body></html>";
+        
+        this.medarotchJ1.setToolTipText(descripcionM1);
+        
+        this.medarotchJ2.setToolTipText(descripcionM2);
+        
         this.setVisible(true);
         
         agregarActionListener((ActionListener) el);
@@ -135,6 +162,7 @@ public class VistaCombate extends javax.swing.JFrame {
             this.defenderJ1.setEnabled(false);
             this.esquivarJ1.setEnabled(false);
             this.rendirseJ2.setEnabled(false);
+            this.medarotchJ2.setEnabled(false);
             
         }
         
@@ -149,6 +177,7 @@ public class VistaCombate extends javax.swing.JFrame {
             this.defenderJ2.setEnabled(false);
             this.esquivarJ2.setEnabled(false);            
             this.rendirseJ1.setEnabled(false);
+            this.medarotchJ1.setEnabled(false);
             
         }                
         
@@ -165,7 +194,8 @@ public class VistaCombate extends javax.swing.JFrame {
             this.defenderJ1.setEnabled(false);
             this.esquivarJ1.setEnabled(false);
             this.rendirseJ2.setEnabled(false);
-            this.terminarTurno.setEnabled(false);  
+            this.terminarTurno.setEnabled(false);
+            this.medarotchJ2.setEnabled(false);
             
         }
         
@@ -180,6 +210,7 @@ public class VistaCombate extends javax.swing.JFrame {
             this.defenderJ1.setEnabled(false);
             this.esquivarJ1.setEnabled(false);
             this.rendirseJ2.setEnabled(false);
+            this.medarotchJ2.setEnabled(false);
             
             this.atacanteJ2.setEnabled(false);
             this.defensorJ1.setEnabled(false);
@@ -190,6 +221,7 @@ public class VistaCombate extends javax.swing.JFrame {
             this.defenderJ1.setEnabled(false);
             this.esquivarJ1.setEnabled(false);
             this.rendirseJ2.setEnabled(false);
+            this.medarotchJ1.setEnabled(false);
             this.terminarTurno.setEnabled(false);  
             
         }
@@ -380,13 +412,14 @@ public class VistaCombate extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        medarotchJ1 = new medafighter.otros.MyLabel();
+        medarotchJ2 = new medafighter.otros.MyLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MedaFighter - Medabatalla");
         setBounds(new java.awt.Rectangle(0, 0, 800, 600));
         setLocation(new java.awt.Point(0, 0));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -621,10 +654,18 @@ public class VistaCombate extends javax.swing.JFrame {
         jLabel4.setText("Defensora");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, -1, -1));
 
+        medarotchJ1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/medafighter/imagenes/medarotch.png"))); // NOI18N
+        medarotchJ1.setText("myLabel1");
+        getContentPane().add(medarotchJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 80, -1));
+
+        medarotchJ2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/medafighter/imagenes/medarotch.png"))); // NOI18N
+        medarotchJ2.setText("myLabel2");
+        getContentPane().add(medarotchJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 80, -1));
+
         fondo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/medafighter/imagenes/vistaCombate.png"))); // NOI18N
         fondo.setText("jLabel13");
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -825,6 +866,10 @@ public class VistaCombate extends javax.swing.JFrame {
         return this.phPiernaDerM1;
     }
     
+    public MyLabel getMedarotchJ1(){
+        return this.medarotchJ1;
+    }
+    
     public javax.swing.JLabel getSaludMedabotJ2(){
         return this.saludMedabotJ2;
     }
@@ -871,6 +916,10 @@ public class VistaCombate extends javax.swing.JFrame {
     
     public javax.swing.JLabel getPHPiernaDerM2(){
         return this.phPiernaDerM2;
+    }
+    
+    public MyLabel getMedarotchJ2(){
+        return this.medarotchJ2;
     }
     
     public javax.swing.JProgressBar getBarraSaludM1(){
@@ -1120,6 +1169,8 @@ public class VistaCombate extends javax.swing.JFrame {
     private javax.swing.JLabel medabotJ2;
     private javax.swing.JButton medafuerzaJ1;
     private javax.swing.JButton medafuerzaJ2;
+    private medafighter.otros.MyLabel medarotchJ1;
+    private medafighter.otros.MyLabel medarotchJ2;
     private javax.swing.JLabel nombreJ1;
     private javax.swing.JLabel nombreJ2;
     private javax.swing.JLabel nombreM1;

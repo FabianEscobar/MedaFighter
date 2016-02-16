@@ -197,7 +197,17 @@ public class ControladorPrevia implements ActionListener {
         
         if ((ae.getSource()).equals(this.vp.getRecords())){
             
-            this.dr = new DialogRecords(this.vp,true);
+            try {
+                
+                this.dr = new DialogRecords(this.vp,true);
+            
+            } 
+            
+            catch (SQLException ex) {
+             
+                Logger.getLogger(ControladorPrevia.class.getName()).log(Level.SEVERE, null, ex);
+            
+            }
             
         }
     

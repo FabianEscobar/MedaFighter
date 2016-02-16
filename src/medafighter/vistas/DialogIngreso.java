@@ -135,7 +135,7 @@ public class DialogIngreso extends javax.swing.JDialog {
         
         boolean uBoolean = false;
         
-        cbd = new ConexionBD();
+        this.cbd = new ConexionBD();
                 
         try {
                    

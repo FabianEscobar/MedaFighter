@@ -5,23 +5,54 @@
  */
 package medafighter.vistas;
 
-import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.JFileChooser;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import medafighter.modelo.ConexionBD;
+import medafighter.otros.MyTableModel;
 
 /**
  *
  * @author Fabián
  */
 public class DialogRecords extends javax.swing.JDialog {
+    
+    private ConexionBD cbd;
 
     /**
      * Creates new form DialogRecords
      */
-    public DialogRecords(java.awt.Frame parent, boolean modal) {
+    public DialogRecords(java.awt.Frame parent, boolean modal) throws SQLException {
         
         super(parent, modal);
         
         initComponents();
         
+        this.cbd = new ConexionBD();
+        
+        Vector<Vector<Object>> datosJugador = new Vector<Vector<Object>>();
+        
+        datosJugador = this.cbd.buscarVDTJugadores();
+        
+        Vector<String> nombresColumnas = new Vector<String>();
+        
+        nombresColumnas.add("Jugador");
+        nombresColumnas.add("Tipo");
+        nombresColumnas.add("Victorias");
+        nombresColumnas.add("Derrotas");
+        nombresColumnas.add("Torneos");
+        
+        MyTableModel modeloTabla = new MyTableModel(datosJugador,nombresColumnas);
+        
+        this.tablaJugadores.setModel(modeloTabla);
+        
+        this.tablaJugadores.setAutoCreateRowSorter(true);
+                
         this.setLocationRelativeTo(null);
         
         this.setVisible(true);
@@ -38,34 +69,35 @@ public class DialogRecords extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jugadores = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tablaJugadores = new javax.swing.JTable();
+        guardarTxt = new javax.swing.JButton();
+        volver = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jugador = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MedaFighter - Records");
         setResizable(false);
 
-        jLabel1.setText("Escoja el jugador cuyo record desea consultar");
+        jLabel1.setText("Puede buscar el jugador cuyo record desea consultar y también guardar los");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaJugadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Jugador", "Tipo", "Victorias", "Derrotas"
+                "Jugador", "Tipo", "Victorias", "Derrotas", "Torneos"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -76,21 +108,23 @@ public class DialogRecords extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaJugadores);
 
-        jButton1.setText("Guardar en archivo de texto");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        guardarTxt.setText("Guardar en archivo de texto");
+        guardarTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                guardarTxtActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Volver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        volver.setText("Volver");
+        volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                volverActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("datos en un archivo de texto (tiene que agregar la extensión .txt al guardar).");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,12 +137,13 @@ public class DialogRecords extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addComponent(jugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2)
+                            .addComponent(jugador, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addComponent(jButton1)
+                        .addComponent(guardarTxt)
                         .addGap(54, 54, 54)
-                        .addComponent(jButton2)))
+                        .addComponent(volver)))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -116,41 +151,84 @@ public class DialogRecords extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
-                .addComponent(jugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(guardarTxt)
+                    .addComponent(volver))
                 .addGap(32, 32, 32))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void guardarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarTxtActionPerformed
         
-        JOptionPane.showMessageDialog(this, "¡Pronto en funcionamiento!");
+        JFileChooser jfc = new JFileChooser();
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        int returnVal = jfc.showSaveDialog(this);
+        
+        if (returnVal == jfc.APPROVE_OPTION) {
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            try {
+
+                File file = jfc.getSelectedFile();
+
+                PrintWriter pw = new PrintWriter(file);
+
+                pw.println("");
+
+                for (int row = 0; row < this.tablaJugadores.getRowCount(); row++) {
+
+                    for (int col = 0; col < this.tablaJugadores.getColumnCount(); col++) {
+
+                        pw.print(this.tablaJugadores.getColumnName(col));
+
+                        pw.print(": ");
+
+                        pw.println(this.tablaJugadores.getValueAt(row, col));
+
+                    }
+
+                }
+
+                pw.close();
+
+            } 
+
+            catch (IOException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }        
+
+        //JOptionPane.showMessageDialog(this, "¡Pronto en funcionamiento!");
+        
+    }//GEN-LAST:event_guardarTxtActionPerformed
+
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         
         this.setVisible(false);
                 
         this.dispose();
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_volverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton guardarTxt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox jugadores;
+    private javax.swing.JTextField jugador;
+    private javax.swing.JTable tablaJugadores;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

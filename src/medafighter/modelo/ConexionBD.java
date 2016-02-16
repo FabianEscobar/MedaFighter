@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  *
@@ -857,6 +858,77 @@ public class ConexionBD {
                     
                     int torneos = resultadoBusqueda.getInt(6);                    
                     datosJugador.add(torneos);
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        return datosJugador;
+        
+    }
+    
+    public void actualizarDatosJugadores (String ganador, String perdedor, boolean finalTorneo) throws SQLException {        
+         
+        boolean resultadoConexion = this.conectar();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consulta = "UPDATE USUARIO SET VICTORIAS = VICTORIAS + 1 WHERE NOMBRE = '" + ganador +"'";
+                stmt.executeUpdate(consulta);
+                
+                consulta = "UPDATE USUARIO SET DERROTAS = DERROTAS + 1 WHERE NOMBRE = '" + perdedor +"'";
+                stmt.executeUpdate(consulta);
+                
+                if(finalTorneo) {
+                    
+                    consulta = "UPDATE USUARIO SET TORNEOS = TORNEOS + 1 WHERE NOMBRE = '" + ganador +"'";
+                    
+                    stmt.executeUpdate(consulta);
+                
+                }
+                
+                
+            }           
+            
+        }  
+                
+    }    
+    
+    public Vector<Vector<Object>> buscarVDTJugadores() throws SQLException{
+        
+        boolean resultadoConexion = this.conectar();
+        
+        Vector<Vector<Object>> datosJugador = new Vector<Vector<Object>>();
+
+        Vector<Object> arrayList = new Vector<Object>();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT NOMBRE,TIPO,VICTORIAS,DERROTAS,TORNEOS FROM USUARIO";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                while(resultadoBusqueda.next()) {
+                    
+                    arrayList = new Vector<Object>();
+                
+                    for (int columnIndex = 1; columnIndex <= 5; columnIndex++) {
+                        
+                        arrayList.add(resultadoBusqueda.getObject(columnIndex));
+        
+                    }
+        
+                    datosJugador.add(arrayList);
                     
                 }           
             
