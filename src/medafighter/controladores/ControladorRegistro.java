@@ -12,19 +12,22 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import medafighter.modelo.ConexionBD;
+import medafighter.otros.MyController;
 import medafighter.vistas.VistaRegistro;
 
 /**
  *
  * @author Fabián
  */
-public class ControladorRegistro implements ActionListener {
+public class ControladorRegistro extends MyController implements ActionListener {
     
     private VistaRegistro vr;
     
@@ -48,7 +51,7 @@ public class ControladorRegistro implements ActionListener {
         
     }
     
-    public boolean registrarUsuario(String nombreUsuario, String contrasenia, String nombreMedabot) throws SQLException{
+    public boolean registrarUsuario(String nombreUsuario, String contrasenia, String nombreMedabot) throws SQLException, IOException{
         
         boolean registroCorrecto = false;
         
@@ -56,7 +59,9 @@ public class ControladorRegistro implements ActionListener {
         
         registroCorrecto = this.cbd.registrarUsuario(nombreUsuario, contrasenia, nombreMedabot);
         
-        return registroCorrecto;
+        this.escribirLog(nombreUsuario+" se ha registrado correctamente en la aplicacion.");
+        
+        return registroCorrecto;       
         
     }
     
@@ -125,6 +130,10 @@ public class ControladorRegistro implements ActionListener {
                    
                                 Logger.getLogger(ControladorRegistro.class.getName()).log(Level.SEVERE, null, ex);
                 
+                            } catch (IOException ex) {
+                                
+                                Logger.getLogger(ControladorRegistro.class.getName()).log(Level.SEVERE, null, ex);
+                            
                             }
                         
                         }

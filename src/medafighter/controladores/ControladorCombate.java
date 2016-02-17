@@ -12,6 +12,7 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -24,6 +25,7 @@ import javax.swing.event.ChangeListener;
 import medafighter.modelo.ConexionBD;
 import medafighter.vistas.VistaCombate;
 import medafighter.modelo.*;
+import medafighter.otros.MyController;
 
 /**
  *
@@ -32,7 +34,7 @@ import medafighter.modelo.*;
 
 /* Clase ControladorCombate con sus atributos y métodos */
 
-public class ControladorCombate implements ActionListener, ChangeListener {
+public class ControladorCombate extends MyController implements ActionListener, ChangeListener {
     
     private VistaCombate vc;
     
@@ -1043,10 +1045,20 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 try {
                     
                     this.cbd.actualizarDatosJugadores(this.robobatalla.getJugador1().getNombre(),this.robobatalla.getJugador2().getNombre(),false);
+                    
+                    this.cbd.agregarMedaparteJugador(this.robobatalla.getJugador2(),this.robobatalla.getJugador1());
+                    
+                    this.escribirLog(this.robobatalla.getJugador2().getNombre()+" ha vencido a "+this.robobatalla.getJugador1().getNombre()+" en una robobatalla.");
                 
                 } 
                 
                 catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
+                
+                } 
+                
+                catch (IOException ex) {
                     
                     Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
                 
@@ -1118,10 +1130,20 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 try {
                     
                     this.cbd.actualizarDatosJugadores(this.robobatalla.getJugador2().getNombre(),this.robobatalla.getJugador1().getNombre(),false);
+                    
+                    this.cbd.agregarMedaparteJugador(this.robobatalla.getJugador1(),this.robobatalla.getJugador2());
+                    
+                    this.escribirLog(this.robobatalla.getJugador1().getNombre()+" ha vencido a "+this.robobatalla.getJugador2().getNombre()+" en una robobatalla.");
                 
                 } 
                 
                 catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
+                
+                } 
+                
+                catch (IOException ex) {
                     
                     Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
                 
@@ -1582,10 +1604,20 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 try {
                     
                     this.cbd.actualizarDatosJugadores(this.robobatalla.getJugador2().getNombre(),this.robobatalla.getJugador1().getNombre(),false);
+                    
+                    this.cbd.agregarMedaparteJugador(this.robobatalla.getJugador2(),this.robobatalla.getJugador1());
+                    
+                    this.escribirLog(this.robobatalla.getJugador2().getNombre()+" ha vencido a "+this.robobatalla.getJugador1().getNombre()+" en una robobatalla.");
                 
                 } 
                 
                 catch (SQLException ex) {
+                    
+                    Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
+                
+                } 
+                
+                catch (IOException ex) {
                     
                     Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
                 
@@ -1874,11 +1906,21 @@ public class ControladorCombate implements ActionListener, ChangeListener {
                 try {
                     
                     this.cbd.actualizarDatosJugadores(this.robobatalla.getJugador1().getNombre(),this.robobatalla.getJugador2().getNombre(),false);
+                    
+                    this.cbd.agregarMedaparteJugador(this.robobatalla.getJugador1(),this.robobatalla.getJugador2());
+                    
+                    this.escribirLog(this.robobatalla.getJugador1().getNombre()+" ha vencido a "+this.robobatalla.getJugador2().getNombre()+" en una robobatalla.");
                 
                 } 
                 
                 catch (SQLException ex) {
                     
+                    Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
+                
+                } 
+                
+                catch (IOException ex) {
+                
                     Logger.getLogger(ControladorCombate.class.getName()).log(Level.SEVERE, null, ex);
                 
                 }                

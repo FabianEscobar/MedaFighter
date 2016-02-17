@@ -12,12 +12,14 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import medafighter.modelo.ConexionBD;
+import medafighter.otros.MyController;
 import medafighter.vistas.DialogIngreso;
 import medafighter.vistas.VistaMedabot;
 
@@ -25,7 +27,7 @@ import medafighter.vistas.VistaMedabot;
  *
  * @author Fabián
  */
-public class ControladorMedabot implements ActionListener {
+public class ControladorMedabot extends MyController implements ActionListener {
     
     private VistaMedabot vmed;
     
@@ -137,6 +139,18 @@ public class ControladorMedabot implements ActionListener {
                 if (medabotGuardado == true) {
                         
                     JOptionPane.showMessageDialog(this.vmed, "Cambios guardados exitosamente.");
+                    
+                    try {
+                        
+                        this.escribirLog(jugador+" ha modificado su medabot.");
+                    
+                    } 
+                    
+                    catch (IOException ex) {
+                        
+                        Logger.getLogger(ControladorMedabot.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                    }
                 
                 }
                 

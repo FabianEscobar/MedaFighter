@@ -12,19 +12,21 @@ package medafighter.controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import medafighter.modelo.ConexionBD;
+import medafighter.otros.MyController;
 import medafighter.vistas.VistaIngreso;
 
 /**
  *
  * @author Fabián
  */
-public class ControladorIngreso implements ActionListener {
+public class ControladorIngreso extends MyController implements ActionListener {
     
     private VistaIngreso vi;
     
@@ -40,7 +42,7 @@ public class ControladorIngreso implements ActionListener {
         
         this.cbd.limpiarSesionesActivas();
         
-        this.vi = new VistaIngreso(this);        
+        this.vi = new VistaIngreso(this);
         
     }
     
@@ -84,10 +86,18 @@ public class ControladorIngreso implements ActionListener {
                     try {
                         
                         cbd.agregarSesionActiva(nombreUsuario, contrasenia);
+                        
+                        this.escribirLog(nombreUsuario+" ha ingresado a la aplicacion.");
                     
                     } 
                     
                     catch (SQLException ex) {
+                        
+                        Logger.getLogger(ControladorIngreso.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                    } 
+                    
+                    catch (IOException ex) {
                         
                         Logger.getLogger(ControladorIngreso.class.getName()).log(Level.SEVERE, null, ex);
                     

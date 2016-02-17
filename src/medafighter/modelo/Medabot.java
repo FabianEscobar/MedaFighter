@@ -230,7 +230,9 @@ public class Medabot {
                 
                 medabotEnemigo.ataqueTotal = medabotEnemigo.ataqueTotal + medaparteAtacante.getAtaque();
                 
-            }  
+            }
+            
+            if (dano <= -5) dano = 0;
             
             this.setPHRes(this.getPHRes() - medaparteAtacante.getCostoPH());
             

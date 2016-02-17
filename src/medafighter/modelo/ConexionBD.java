@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Vector;
 
 /**
@@ -101,6 +102,8 @@ public class ConexionBD {
             
         }
         
+        this.desconectar();
+        
         return uBoolean;
     
     }
@@ -129,7 +132,9 @@ public class ConexionBD {
             
             }  
             
-        }
+        }        
+        
+        this.desconectar();
         
         return uBoolean;
     
@@ -227,7 +232,9 @@ public class ConexionBD {
                 
             }           
             
-        }  
+        }               
+        
+        this.desconectar();
         
         return saludMaximaMedabot;
         
@@ -303,7 +310,9 @@ public class ConexionBD {
                 
             }           
             
-        }  
+        }
+        
+        this.desconectar();  
         
         return registroCorrecto;
             
@@ -337,6 +346,8 @@ public class ConexionBD {
             
         }
         
+        this.desconectar();
+        
         return jugadores;
         
     }
@@ -369,6 +380,8 @@ public class ConexionBD {
             
         }
         
+        this.desconectar();
+        
         return jugadores;
         
     }
@@ -391,6 +404,8 @@ public class ConexionBD {
             
         }
         
+        this.desconectar();
+        
     }
     
     public void agregarSesionActiva(String nombreUsuario, String contrasenia) throws SQLException {
@@ -410,6 +425,8 @@ public class ConexionBD {
             }  
             
         }
+        
+        this.desconectar();
         
     }
     
@@ -438,6 +455,8 @@ public class ConexionBD {
             }  
             
         }
+        
+        this.desconectar();
         
         return uBoolean;
     
@@ -468,6 +487,8 @@ public class ConexionBD {
             }  
             
         }
+        
+        this.desconectar();
         
         return tipoJugador;
         
@@ -500,6 +521,8 @@ public class ConexionBD {
             }  
             
         }
+        
+        this.desconectar();
         
         return nombreMedabot;
         
@@ -564,6 +587,8 @@ public class ConexionBD {
             
         }  
         
+        this.desconectar();
+        
         return medabotGuardado;
         
     }
@@ -595,6 +620,8 @@ public class ConexionBD {
             }  
             
         }
+        
+        this.desconectar();
         
         return medapartes;
         
@@ -628,6 +655,8 @@ public class ConexionBD {
             
         }
         
+        this.desconectar();
+        
         return medapartes;
         
     }
@@ -659,6 +688,8 @@ public class ConexionBD {
             }  
             
         }
+        
+        this.desconectar();
         
         return medallas;
         
@@ -718,6 +749,8 @@ public class ConexionBD {
             
         }
         
+        this.desconectar();
+        
         return datosMedabot;
         
     }
@@ -760,6 +793,8 @@ public class ConexionBD {
             }  
             
         }
+        
+        this.desconectar();
         
         return datosMedalla;
         
@@ -819,6 +854,8 @@ public class ConexionBD {
             
         }
         
+        this.desconectar();
+        
         return datosMedaparte;
         
     }
@@ -865,6 +902,8 @@ public class ConexionBD {
             
         }
         
+        this.desconectar();
+        
         return datosJugador;
         
     }
@@ -897,6 +936,8 @@ public class ConexionBD {
             }           
             
         }  
+        
+        this.desconectar();
                 
     }    
     
@@ -936,9 +977,97 @@ public class ConexionBD {
             
         }
         
+        this.desconectar();
+        
         return datosJugador;
         
     }
+    
+    public void agregarMedaparteJugador(Jugador ganador, Jugador perdedor) throws SQLException {        
+        
+        boolean resultadoConexion = this.conectar();
+        
+        int nextInt = new Random().nextInt(4);
+        
+        String medaparte = new String();
+        
+        String tipo = new String();
+        
+        switch(nextInt) {
+            
+            case 0: medaparte = perdedor.getMedabot().getCabeza().getNombre();
+                    tipo = "Cabeza";
+                    break;
+                
+            case 1: medaparte = perdedor.getMedabot().getBrazoIzq().getNombre();
+                    tipo = "BrazoIzq";
+                    break;
+                
+            case 2: medaparte = perdedor.getMedabot().getBrazoDer().getNombre();
+                    tipo = "BrazoDer";
+                    break;
+                
+            case 3: medaparte = perdedor.getMedabot().getPiernaIzq().getNombre();
+                    tipo = "PiernaIzq";
+                    break;
+                
+            case 4: medaparte = perdedor.getMedabot().getPiernaDer().getNombre();
+                    tipo = "PiernaDer";
+                    break;
+            
+        }
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "INSERT INTO MEDAPARTEUSUARIO (USUARIO,MEDAPARTE,TIPO) VALUES('" + ganador.getNombre() +"','" + medaparte +"','" + tipo +"')";
+        
+                if(this.verificarMedaparteJugador(ganador.getNombre(), medaparte, tipo) == false) stmt.executeUpdate(consultaUsuario);    
+            
+            }  
+            
+        }
+        
+        this.desconectar();        
+        
+    }
+    
+    
+    public boolean verificarMedaparteJugador(String jugador, String medaparte, String tipo) throws SQLException {
+        
+        boolean uBoolean = false;
+    
+        boolean resultadoConexion = this.conectar();
+        
+        if(resultadoConexion == true) {
+            
+            Statement stmt = this.crearConsulta();
+        
+            if(stmt != null) {
+            
+                String consultaUsuario = "SELECT * FROM MEDAPARTEUSUARIO WHERE USUARIO = '" + jugador + "' AND MEDAPARTE = '" + medaparte +"' AND TIPO = '" + tipo +"'";
+        
+                ResultSet resultadoBusqueda= stmt.executeQuery(consultaUsuario);
+            
+                if(resultadoBusqueda.next()) {
+                
+                    uBoolean = true;
+                    
+                }           
+            
+            }  
+            
+        }
+        
+        this.desconectar();
+        
+        return uBoolean;
+    
+    }
+    
         
 }
     
