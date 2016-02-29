@@ -5,6 +5,8 @@
  */
 package medafighter.vistas;
 
+/* Clases importadas */
+
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;

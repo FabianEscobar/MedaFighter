@@ -5,6 +5,8 @@
  */
 package medafighter.modelo;
 
+/* Clases importadas */
+
 import java.sql.SQLException;
 import java.util.Random;
 

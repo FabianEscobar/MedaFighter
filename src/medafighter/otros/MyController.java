@@ -5,6 +5,8 @@
  */
 package medafighter.otros;
 
+/* Clases importadas */
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

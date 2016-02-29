@@ -5,6 +5,8 @@
  */
 package medafighter.vistas;
 
+/* Clases importadas */
+
 import java.awt.event.ActionListener;
 
 /**

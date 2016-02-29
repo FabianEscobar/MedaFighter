@@ -5,6 +5,8 @@
  */
 package medafighter.otros;
 
+/* Clase importada */
+
 import javax.swing.JLabel;
 
 /**
