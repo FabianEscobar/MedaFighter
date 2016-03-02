@@ -21,7 +21,7 @@ public abstract class Jugador {
     
     protected int torneos;
     
-    public Medabot medabot;
+    protected Medabot medabot;
     
     protected ConexionBD cbd;
     

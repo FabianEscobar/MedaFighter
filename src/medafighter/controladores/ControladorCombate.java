@@ -52,7 +52,7 @@ public class ControladorCombate extends MyController implements ActionListener, 
         
         this.robobatalla = new Robobatalla(jugador1,jugador2,versionMedabotJ1,versionMedabotJ2,modoJuego);
         
-        this.vc = new VistaCombate(this,this.robobatalla);
+        this.vc = new VistaCombate(this,this.robobatalla,false);
         
         if(this.robobatalla.getModoJuego().equals("Jugador v/s CPU")&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
             
@@ -90,11 +90,67 @@ public class ControladorCombate extends MyController implements ActionListener, 
            
     }
     
-    public ControladorCombate(ArrayList<String> jugadores, String tipoTorneo) {
-        
-        this.vc = new VistaCombate(this,this.robobatalla);
+    public ControladorCombate(ArrayList<String> jugadores, ArrayList<String> medabots, String tipoTorneo) throws SQLException {
         
         this.cbd = new ConexionBD();
+        
+        if (tipoTorneo.equals("Torneo Normal")) this.torneo = new TorneoNormal(jugadores,medabots,tipoTorneo);
+        
+        if (tipoTorneo.equals("Torneo Avanzado")) this.torneo = new TorneoAvanzado(jugadores,medabots,tipoTorneo);
+        
+        for (int i = 0; i < 8; i = i + 2) {
+
+            if(jugadores.get(0).startsWith("cpu")) {
+
+                this.robobatalla = new Robobatalla(jugadores.get(i),jugadores.get(i+1),medabots.get(i),medabots.get(i+1),"CPU V/S CPU");
+
+            }
+
+            if(jugadores.get(1).startsWith("cpu")) {
+
+                this.robobatalla = new Robobatalla(jugadores.get(i),jugadores.get(i+1),medabots.get(i),medabots.get(i+1),"Jugador v/s CPU");
+
+            }
+
+            this.robobatalla = new Robobatalla(jugadores.get(i),jugadores.get(i+1),medabots.get(i),medabots.get(i+1),"Jugador v/s Jugador");
+
+            this.vc = new VistaCombate(this,this.robobatalla,true);
+
+            if(this.robobatalla.getModoJuego().equals("Jugador v/s CPU")&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
+
+                if(this.robobatalla.getJugador2().getTipoCPU().equals("1")) {
+
+                    this.turnoCPU1J2();
+
+                }
+
+                if(this.robobatalla.getJugador2().getTipoCPU().equals("2")) {
+
+                    this.turnoCPU1J2();
+
+                }
+
+                if(this.robobatalla.getJugador2().getTipoCPU().equals("3")) {
+
+                    this.turnoCPU1J2();
+
+                }
+
+                if(this.robobatalla.getJugador2().getTipoCPU().equals("4")) {
+
+                    this.turnoCPU1J2();
+
+                }
+
+            }
+
+            if(this.robobatalla.getModoJuego().equals("CPU V/S CPU")) {
+
+                this.simulacion();
+
+            }
+            
+        }
         
     }
 
@@ -1064,7 +1120,7 @@ public class ControladorCombate extends MyController implements ActionListener, 
                 
                 }
                 
-                this.cm = new ControladorMenu();
+                if (!this.vc.getTorneo()) this.cm = new ControladorMenu();
                 
                 this.vc.setVisible(false);
                 
@@ -1149,7 +1205,7 @@ public class ControladorCombate extends MyController implements ActionListener, 
                 
                 }
                                 
-                this.cm = new ControladorMenu();
+                if (!this.vc.getTorneo()) this.cm = new ControladorMenu();
                 
                 this.vc.setVisible(false);
                 
@@ -1623,7 +1679,7 @@ public class ControladorCombate extends MyController implements ActionListener, 
                 
                 }                
                 
-                this.cm = new ControladorMenu();
+                if (!this.vc.getTorneo()) this.cm = new ControladorMenu();
                 
                 this.vc.setVisible(false);
                 
@@ -1925,7 +1981,7 @@ public class ControladorCombate extends MyController implements ActionListener, 
                 
                 }                
                 
-                this.cm = new ControladorMenu();
+                if (!this.vc.getTorneo()) this.cm = new ControladorMenu();
                 
                 this.vc.setVisible(false);
                 

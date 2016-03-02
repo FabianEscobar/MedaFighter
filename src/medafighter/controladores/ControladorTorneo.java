@@ -56,6 +56,8 @@ public class ControladorTorneo implements ActionListener {
                 
                 ArrayList<String> jugadores = new ArrayList<>();
                 
+                ArrayList<String> medabots = new ArrayList<>();
+                
                 String jugador1 = (String)this.vt.getJugador1().getSelectedItem();
                 jugadores.add(jugador1);
                 
@@ -79,6 +81,30 @@ public class ControladorTorneo implements ActionListener {
                 
                 String jugador8 = (String)this.vt.getJugador8().getSelectedItem();
                 jugadores.add(jugador8);
+                                
+                String medabot1 = (String)this.vt.getMedabot1().getSelectedItem();
+                medabots.add(medabot1);
+                
+                String medabot2 = (String)this.vt.getMedabot2().getSelectedItem();
+                medabots.add(medabot2);
+                
+                String medabot3 = (String)this.vt.getMedabot3().getSelectedItem();
+                medabots.add(medabot3);
+                
+                String medabot4 = (String)this.vt.getMedabot4().getSelectedItem();
+                medabots.add(medabot4);
+                
+                String medabot5 = (String)this.vt.getMedabot5().getSelectedItem();
+                medabots.add(medabot5);
+                
+                String medabot6 = (String)this.vt.getMedabot6().getSelectedItem();
+                medabots.add(medabot6);
+                
+                String medabot7 = (String)this.vt.getMedabot7().getSelectedItem();
+                medabots.add(medabot7);
+                
+                String medabot8 = (String)this.vt.getMedabot8().getSelectedItem();
+                medabots.add(medabot8);
                 
                 boolean validador = true;
                 
@@ -271,7 +297,17 @@ public class ControladorTorneo implements ActionListener {
                 
                         String tipoTorneo = (String)this.vt.getTipoTorneo().getSelectedItem();
                     
-                        this.cc = new ControladorCombate(jugadores, tipoTorneo);
+                        try {
+                            
+                            this.cc = new ControladorCombate(jugadores, medabots, tipoTorneo);
+                        
+                        } 
+                        
+                        catch (SQLException ex) {
+                        
+                            Logger.getLogger(ControladorTorneo.class.getName()).log(Level.SEVERE, null, ex);
+                        
+                        }
                        
                         this.vt.setVisible(false);
                 

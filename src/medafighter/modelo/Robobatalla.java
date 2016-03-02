@@ -59,7 +59,7 @@ public class Robobatalla {
         
         boolean moneda = new Random().nextInt(2) == 0;
         
-        if (moneda == true) {jugadorActivo = jugador1;} else {jugadorActivo = jugador2;}
+        if (moneda == true) {this.jugadorActivo = jugador1;} else {this.jugadorActivo = jugador2;}
 
     }
     

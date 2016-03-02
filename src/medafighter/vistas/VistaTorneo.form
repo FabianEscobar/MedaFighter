@@ -25,95 +25,155 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="jLabel9" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="2" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
                       <Component id="jugador2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="69" pref="69" max="69" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                      <Component id="jugador5" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="2" attributes="0">
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
                       <Component id="jugador3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="69" pref="69" max="69" attributes="0"/>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                      <Component id="jugador6" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="2" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
                       <Component id="jugador4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="69" pref="69" max="69" attributes="0"/>
-                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="10" attributes="0"/>
-                      <Component id="jugador7" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="2" attributes="0">
-                      <Component id="torneo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
-                      <Component id="volver" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="2" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
                       <Component id="jugador1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="69" pref="69" max="69" attributes="0"/>
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="medabot1" min="-2" max="-2" attributes="0"/>
+                  <Component id="medabot2" min="-2" max="-2" attributes="0"/>
+                  <Component id="medabot3" min="-2" max="-2" attributes="0"/>
+                  <Component id="medabot4" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Group type="102" alignment="2" attributes="0">
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="10" pref="10" max="10" attributes="0"/>
+                      <Component id="jugador6" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="2" attributes="0">
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="10" pref="10" max="10" attributes="0"/>
+                      <Component id="jugador7" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="2" attributes="0">
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
                       <Component id="jugador8" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="2" attributes="0">
-                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="tipoTorneo" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="10" pref="10" max="10" attributes="0"/>
+                      <Component id="jugador5" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="medabot5" min="-2" max="-2" attributes="0"/>
+                  <Component id="medabot7" min="-2" max="-2" attributes="0"/>
+                  <Component id="medabot6" min="-2" max="-2" attributes="0"/>
+                  <Component id="medabot8" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="65" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Group type="102" alignment="2" attributes="0">
+                              <Component id="torneo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                              <Component id="volver" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="2" attributes="0">
+                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              <Component id="tipoTorneo" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="jLabel5" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jugador1" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jugador8" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="jugador1" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="medabot1" alignment="2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jugador2" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="medabot2" alignment="2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="jLabel3" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jugador3" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="medabot3" alignment="2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="jLabel4" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jugador4" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="medabot4" alignment="2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="jLabel5" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jugador5" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="medabot5" alignment="2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="jLabel6" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jugador6" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="medabot6" alignment="2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="jLabel7" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jugador7" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="medabot7" alignment="2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="jLabel8" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jugador8" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="medabot8" alignment="2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel6" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jugador2" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jugador5" alignment="2" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="jLabel3" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jugador3" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jugador6" alignment="2" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="jLabel4" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel8" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jugador4" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jugador7" alignment="2" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace pref="42" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tipoTorneo" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -228,7 +288,7 @@
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Elija las posiciones para cada jugador en el torneo"/>
+        <Property name="text" type="java.lang.String" value="Elija las posiciones para cada jugador en el torneo y las versiones de Medabot que usar&#xe1;n."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="torneo">
@@ -252,6 +312,94 @@
           <StringArray count="2">
             <StringItem index="0" value="Torneo Normal"/>
             <StringItem index="1" value="Torneo Avanzado"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="medabot1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Version 1"/>
+            <StringItem index="1" value="Version 2"/>
+            <StringItem index="2" value="Version 3"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="medabot2">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Version 1"/>
+            <StringItem index="1" value="Version 2"/>
+            <StringItem index="2" value="Version 3"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="medabot3">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Version 1"/>
+            <StringItem index="1" value="Version 2"/>
+            <StringItem index="2" value="Version 3"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="medabot4">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Version 1"/>
+            <StringItem index="1" value="Version 2"/>
+            <StringItem index="2" value="Version 3"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="medabot5">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Version 1"/>
+            <StringItem index="1" value="Version 2"/>
+            <StringItem index="2" value="Version 3"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="medabot6">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Version 1"/>
+            <StringItem index="1" value="Version 2"/>
+            <StringItem index="2" value="Version 3"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="medabot7">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Version 1"/>
+            <StringItem index="1" value="Version 2"/>
+            <StringItem index="2" value="Version 3"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="medabot8">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Version 1"/>
+            <StringItem index="1" value="Version 2"/>
+            <StringItem index="2" value="Version 3"/>
           </StringArray>
         </Property>
       </Properties>

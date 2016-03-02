@@ -16,13 +16,17 @@ import medafighter.otros.MyLabel;
  * @author Fabián
  */
 public class VistaCombate extends javax.swing.JFrame {
+    
+    private boolean torneo;
 
     /**
      * Creates new form VistaCombate
      */
-    public VistaCombate(EventListener el, Robobatalla robobatalla) {
+    public VistaCombate(EventListener el, Robobatalla robobatalla, boolean torneo) {
         
         initComponents();
+        
+        this.torneo = torneo;
         
         this.setLocationRelativeTo(null);
         
@@ -972,6 +976,10 @@ public class VistaCombate extends javax.swing.JFrame {
     
     public javax.swing.JTextArea getLogBatalla(){
         return this.logBatalla;
+    }
+    
+    public boolean getTorneo(){
+        return this.torneo;
     }
     
     public void setBarraSaludM1(int value){

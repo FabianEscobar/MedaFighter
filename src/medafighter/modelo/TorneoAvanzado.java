@@ -5,11 +5,21 @@
  */
 package medafighter.modelo;
 
+import java.util.ArrayList;
+
 
 public class TorneoAvanzado extends Torneo {
+    
+    public TorneoAvanzado(ArrayList<String> jugadores, ArrayList<String> medabots, String tipoTorneo) {
+        
+        this.cbd = new ConexionBD();
+        
+        
+        
+    }
 
     @Override
-    public void recuperacion(Jugador[] participantes) {
+    public void recuperacion(ArrayList<Jugador> participantes) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

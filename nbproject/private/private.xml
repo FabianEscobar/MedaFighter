@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="25"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Fabián/Documents/NetBeansProjects/MedaFighter/src/medafighter/controladores/ControladorTorneo.java</file>
             <file>file:/C:/Users/Fabián/Documents/NetBeansProjects/MedaFighter/src/medafighter/modelo/ConexionBD.java</file>
-            <file>file:/C:/Users/Fabián/Documents/NetBeansProjects/MedaFighter/src/medafighter/vistas/DialogRecords.java</file>
             <file>file:/C:/Users/Fabián/Documents/NetBeansProjects/MedaFighter/src/medafighter/controladores/ControladorCombate.java</file>
+            <file>file:/C:/Users/Fabián/Documents/NetBeansProjects/MedaFighter/src/medafighter/vistas/VistaTorneo.java</file>
         </group>
     </open-files>
 </project-private>
