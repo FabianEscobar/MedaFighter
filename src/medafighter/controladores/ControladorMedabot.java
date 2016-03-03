@@ -48,6 +48,11 @@ public class ControladorMedabot extends MyController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {        
         
+        // Si el usuario oprime el boton Guardar, entonces se almacenan los datos en la base de datos
+        // de acuerdo a lo escogido en los comboboxs.
+        // Cabe destacar que si el usuario no ha sido ingresado a la aplicacion, se le pedira ingresar
+        // al apretar este boton. Si no ingresa correctamente, los cambios no se guardaran.
+        
         if ((ae.getSource()).equals(this.vmed.getGuardar())) {
             
             String jugador = (String)this.vmed.getJugador().getSelectedItem();
@@ -163,6 +168,8 @@ public class ControladorMedabot extends MyController implements ActionListener {
             }
             
         }
+        
+        // Si el usuario aprieta Volver, se vuelve a abrir el menu.
         
         if ((ae.getSource()).equals(this.vmed.getVolver())) {
             

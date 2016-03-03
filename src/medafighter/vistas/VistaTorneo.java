@@ -69,6 +69,8 @@ public class VistaTorneo extends javax.swing.JFrame {
         
     }
     
+    // Agrega listeners a los botones
+    
     void agregarListener(ActionListener al){
         
         this.torneo.addActionListener(al);
@@ -299,6 +301,8 @@ public class VistaTorneo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // getters
+    
     public javax.swing.JButton getTorneo(){
         return this.torneo;
     }

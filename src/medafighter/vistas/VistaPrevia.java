@@ -60,6 +60,8 @@ public class VistaPrevia extends javax.swing.JFrame {
         
     }
     
+    // Agrega listeners a los botones
+    
     void agregarListener(ActionListener al){
         
         this.robobatalla.addActionListener(al);
@@ -199,6 +201,8 @@ public class VistaPrevia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Cambia lo que se muestra en las listas de jugadores cuando el usuario cambia el modo de juego
+    
     private void modoJuegoCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_modoJuegoCBItemStateChanged
         
         String modoJuego = (String)modoJuegoCB.getSelectedItem();
@@ -334,6 +338,8 @@ public class VistaPrevia extends javax.swing.JFrame {
         
     }//GEN-LAST:event_modoJuegoCBItemStateChanged
 
+    // getters
+    
     public javax.swing.JList getJugador1L(){
         return this.jugador1L;
     }

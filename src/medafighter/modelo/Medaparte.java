@@ -70,6 +70,8 @@ public class Medaparte {
         
     }
     
+    //getters
+    
     public String getNombre(){
         return this.nombre;
     }
@@ -114,6 +116,7 @@ public class Medaparte {
         return this.esquive;
     }
     
+    //setters
     
     public void setSaludActual(int saludActual){
         this.saludActual = saludActual;

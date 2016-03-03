@@ -61,6 +61,10 @@ public class ControladorIngreso extends MyController implements ActionListener {
         
         if(vi != null){           
             
+            // Si el usuario elige ingresar a la aplicacion, se verifica el nombre de usuario y la
+            // contraseña. Si es correcta, se ingresa normalmente. De lo contrario, se muestra
+            // un mensaje emergente comunicando al usuario que los datos son incorrectos
+            
             if (((JButton)ae.getSource()).equals(this.vi.getIngresar())) {
                 
                 String nombreUsuario = this.vi.getNombreUsuario().getText();
@@ -103,6 +107,8 @@ public class ControladorIngreso extends MyController implements ActionListener {
                     
                     }         
                     
+                    // Se abre el menu
+                    
                     this.cm = new ControladorMenu();
                        
                     this.vi.setVisible(false);
@@ -121,6 +127,8 @@ public class ControladorIngreso extends MyController implements ActionListener {
             
             if (((JButton)ae.getSource()).equals(this.vi.getRegistrarse())){
                 
+                // Si el usuario quiere registrarse, entonces se abre el controlador y la vista registro
+                
                 this.cr = new ControladorRegistro();
                 
                 this.vi.setVisible(false);
@@ -130,6 +138,8 @@ public class ControladorIngreso extends MyController implements ActionListener {
             }
             
             if (((JButton)ae.getSource()).equals(this.vi.getSalir())){
+                
+                // Si el usuario elige salir de la aplicacion, entonces esta se cierra 
                 
                 System.exit(0);
                 

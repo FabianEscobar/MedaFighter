@@ -126,6 +126,8 @@ public class Medabot {
         
     }
     
+    //getters
+    
     public String getNombre(){
         return this.nombre;
     }
@@ -186,6 +188,7 @@ public class Medabot {
         return this.esquiveTotal;        
     }
     
+    // setters
     
     public void setSaludActual(int saludActual){
         this.saludActual = saludActual;

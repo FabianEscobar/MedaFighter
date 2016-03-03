@@ -57,6 +57,8 @@ public class JugadorCPU extends Jugador {
     
     }
     
+    // getters
+    
     public String getTipoCPU(){
         return this.tipoCPU;
     }

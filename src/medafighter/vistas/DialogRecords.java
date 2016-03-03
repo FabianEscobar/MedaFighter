@@ -20,6 +20,10 @@ import medafighter.otros.MyTableModel;
  *
  * @author Fabián
  */
+
+// En este dialogo se muestran las victorias, derrotas y torneos de los jugadores
+// y da la opcion para guardar los datos en un archivo de texto
+
 public class DialogRecords extends javax.swing.JDialog {
     
     private ConexionBD cbd;

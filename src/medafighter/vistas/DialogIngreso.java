@@ -22,6 +22,10 @@ public class DialogIngreso extends javax.swing.JDialog {
     /**
      * Creates new form DialogIngreso
      */
+    
+    // Esta vista es una version reducida de VistaIngreso (no tiene la opcion de registro) y sirve para ingresar jugadores
+    // en otras vistas como en la vista previa, vista medabot y vista torneo
+    
     public DialogIngreso(java.awt.Frame parent, boolean modal, String jugador) {
         
         super(parent, modal);

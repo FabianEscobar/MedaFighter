@@ -50,6 +50,8 @@ public class Medalla {
         
     }
     
+    // getters
+    
     public String getNombre(){
         return this.nombre;
     }
@@ -74,6 +76,7 @@ public class Medalla {
         return this.turnoCarga;
     }
     
+    // setters
     
     public void setTurnoCarga(int turnoCarga){
         this.turnoCarga = turnoCarga;

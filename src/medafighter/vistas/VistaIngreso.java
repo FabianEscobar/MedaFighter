@@ -29,6 +29,8 @@ public class VistaIngreso extends javax.swing.JFrame {
         
     }
     
+    // Agrega listeners
+    
     void agregarListener(ActionListener al){
         
         this.ingresar.addActionListener(al);
@@ -128,6 +130,8 @@ public class VistaIngreso extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // getters
+    
     public javax.swing.JButton getIngresar(){
         return this.ingresar;
     }

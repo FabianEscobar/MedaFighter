@@ -51,6 +51,12 @@ public class ControladorPrevia implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         
+        // Si el usuario elige Robobatalla!, entonces se les pedira autentificacion a los usuarios humanos
+        // que aun no hayan sido ingresados. Si ingresan todos, entonces se abrira la Robobatalla con los
+        // parametros ingresados a traves de los componentes de la vista. De lo contrario, se informa
+        // que no se puede iniciar la partida
+        // Tambien esta la opcion de ver los records de victorias, derrotas y torneo de los jugadores
+        
         if ((ae.getSource()).equals(this.vp.getRobobatalla())){
             
             String jugador1 = (String)this.vp.getJugador1L().getSelectedValue();

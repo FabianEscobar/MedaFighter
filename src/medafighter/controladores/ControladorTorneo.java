@@ -52,6 +52,12 @@ public class ControladorTorneo implements ActionListener {
         
         if(vt != null){
             
+            // Si el usuario hace click en Comenzar Torneo, entonces se abren vistas combate con los
+            // datos ingresados a traves de los combobos. Cabe destacar que no se pueden repetir jugadores
+            // y se pedira autentificacion a todos los jugadores que participen. Si despues de eso no
+            // estan todos los jugadores ingresados, entonces el torneo no se realiza y se comunica eso
+            // al usuario
+            
             if ((ae.getSource()).equals(this.vt.getTorneo())){
                 
                 ArrayList<String> jugadores = new ArrayList<>();

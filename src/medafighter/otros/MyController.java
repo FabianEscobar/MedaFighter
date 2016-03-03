@@ -16,7 +16,14 @@ import java.time.LocalDateTime;
  *
  * @author Fabián
  */
+
+// Esta es una clase abstracte que sirve para que los controladores hereden el metodo escribirLog
+
 public abstract class MyController {
+    
+    // Este metodo permite escribir logs en un archivo de texto
+    // Todos los controladores usan este metodo para escribir en el archivo
+    // y enumerar las acciones que realizan los usuarios cuando ocupan la aplicacion
     
     public void escribirLog(String log) throws IOException  {
             

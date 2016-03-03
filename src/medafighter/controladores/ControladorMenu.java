@@ -43,6 +43,9 @@ public class ControladorMenu implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         
+        // El menu consiste en varios botones y cada uno abre vistas distintas.
+        // Tambien es posible cerrar sesion (se cerraran todas las sesiones activas 
+        
         if(vm != null){
     
             if (((JButton)ae.getSource()).equals(this.vm.getAjustesMedabot())){

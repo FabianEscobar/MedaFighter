@@ -54,6 +54,8 @@ public class JugadorHumano extends Jugador {
         this.medabot = new Medabot(nombreMedabot, this.nombre);
     
     }
+    
+    // getters
 
     @Override
     public String getTipoCPU() {

@@ -232,6 +232,8 @@ public class VistaCombate extends javax.swing.JFrame {
         
     }
     
+    // Agrega los actionListeners a los botones
+    
     void agregarActionListener(ActionListener al){
         
         this.atacarJ1.addActionListener(al);
@@ -257,6 +259,8 @@ public class VistaCombate extends javax.swing.JFrame {
         this.terminarTurno.addActionListener(al);
         
     }
+    
+    // Agrega los changeListeners a las barras de salud
     
     void agregarChangeListener(ChangeListener cl){
         
@@ -285,6 +289,9 @@ public class VistaCombate extends javax.swing.JFrame {
         this.barraSaludPiernaDerM2.addChangeListener(cl);
         
     }
+    
+    // Recibe un int y devuelve un String que contiene el numero ordinal correspondiente
+    // Sirve para mostrar los turnos en el log de la robobatalla y se sepa en cual turno se esta jugando
     
     public String numeroAOrdinal(int numero) {
         
@@ -674,6 +681,8 @@ public class VistaCombate extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // getters
+    
     public javax.swing.JLabel getNombreJ1(){
         return this.nombreJ1;
     }
@@ -981,6 +990,8 @@ public class VistaCombate extends javax.swing.JFrame {
     public boolean getTorneo(){
         return this.torneo;
     }
+    
+    // setters
     
     public void setBarraSaludM1(int value){
         this.barraSaludM1.setValue(value);

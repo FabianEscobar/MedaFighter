@@ -28,6 +28,8 @@ public class VistaMenu extends javax.swing.JFrame {
         
     }
     
+    // Agrega listeners a los botones
+    
     void agregarListener(ActionListener al){
         
         this.ajustesMedabot.addActionListener(al);
@@ -103,6 +105,8 @@ public class VistaMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // getters
+    
     public javax.swing.JButton getAjustesMedabot(){
         return this.ajustesMedabot;
     }

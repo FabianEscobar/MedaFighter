@@ -72,6 +72,10 @@ public class ControladorRegistro extends MyController implements ActionListener 
         
         if(vr != null){           
             
+            // Cuando el usuario oprime el boton Registrarse, se verifica que el usuario no exista en la base
+            // de datos. Si no existe, el registro es exitoso. De lo contrario, el registro falla. Para ambos
+            // casos se muestra un mensaje que comunica lo que paso
+            
             if (((JButton)ae.getSource()).equals(this.vr.getRegistrarse())){
                 
                 String nombreUsuario = this.vr.getNombreUsuario().getText();
@@ -149,6 +153,8 @@ public class ControladorRegistro extends MyController implements ActionListener 
                 }
                 
             }
+            
+            // Si el usuario oprime Volver, entonces se vuelve a la vista Ingreso
             
             if (((JButton)ae.getSource()).equals(this.vr.getVolver())){
                 

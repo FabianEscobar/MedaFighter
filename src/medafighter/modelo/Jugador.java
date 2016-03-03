@@ -25,6 +25,8 @@ public abstract class Jugador {
     
     protected ConexionBD cbd;
     
+    // getters
+    
     public String getNombre(){
         return this.nombre;
     }
@@ -46,6 +48,8 @@ public abstract class Jugador {
     }
     
     public abstract String getTipoCPU();
+    
+    // setters
     
     public void setVictorias(int victorias){
         this.victorias = victorias;

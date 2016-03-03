@@ -63,6 +63,8 @@ public class Robobatalla {
 
     }
     
+    //getters
+    
     public Jugador getJugador1(){
         return this.jugador1;
     }
@@ -103,6 +105,7 @@ public class Robobatalla {
         
     }
     
+    //setters
     
     public void setTurno(int turno){
         this.turno = turno;

@@ -32,6 +32,8 @@ public class ConexionBD {
 
     private Connection conexion = null;
     
+    // Hace conexion a la base de datos
+    
     public boolean conectar() throws SQLException {
         
         this.conexion = DriverManager.getConnection(URL_CONEXION);
@@ -50,6 +52,8 @@ public class ConexionBD {
     
     }
     
+    // Desconecta de la base de datos
+    
     public void desconectar() throws SQLException {
         
         if(this.conexion != null) {
@@ -59,6 +63,8 @@ public class ConexionBD {
         }
     
     }
+    
+    // Crea una consulta para la base de datos
     
     public Statement crearConsulta() throws SQLException {
         
@@ -75,6 +81,10 @@ public class ConexionBD {
         }
         
     }
+    
+    // Los siguientes metodos trabajan con la base de datos usando los metodos de arriba
+    // Las operaciones que hacen incluyen verificar, actualizar y borrar datos de acuerdo
+    // a los parametros que reciben
     
     public boolean verificarUsuario(String nombreUsuario, String contrasenia) throws SQLException {
         

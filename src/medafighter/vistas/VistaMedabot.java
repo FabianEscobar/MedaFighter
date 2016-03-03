@@ -91,6 +91,8 @@ public class VistaMedabot extends javax.swing.JFrame {
         
     }
     
+    // Agrega listeners a los botones
+    
     void agregarListener(ActionListener al){
           
         this.brazoDerecho.addActionListener(al);
@@ -289,6 +291,8 @@ public class VistaMedabot extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Carga las medapartes en los combobox cuando se hace click en ellos
+    
     private void jugadorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jugadorItemStateChanged
     
         String jugador = (String)this.jugador.getSelectedItem();
@@ -349,6 +353,8 @@ public class VistaMedabot extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jugadorItemStateChanged
 
+    // getters
+    
     public javax.swing.JButton getGuardar(){
         return this.guardar;
     }

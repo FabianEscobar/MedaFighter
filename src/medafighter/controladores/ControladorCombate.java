@@ -50,11 +50,15 @@ public class ControladorCombate extends MyController implements ActionListener, 
         
         this.cbd = new ConexionBD();
         
+        // Se crea una robobatalla, la cual a su vez crea todos los objetos asociados a esta (jugadores, medabots, etc.)
+        
         this.robobatalla = new Robobatalla(jugador1,jugador2,versionMedabotJ1,versionMedabotJ2,modoJuego);
         
         this.vc = new VistaCombate(this,this.robobatalla,false);
         
         if(this.robobatalla.getModoJuego().equals("Jugador v/s CPU")&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
+            
+            // Verifica el tipo de CPU y ejecuta el algoritmo apropiado. Sólo hay implementada 1 tipo de CPU.
             
             if(this.robobatalla.getJugador2().getTipoCPU().equals("1")) {
                 
@@ -82,6 +86,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
             
         }
         
+        // Se ejecuta una silumacion en caso de que el usuario asi lo haya escogido
+        
         if(this.robobatalla.getModoJuego().equals("CPU V/S CPU")) {
             
             this.simulacion();
@@ -97,6 +103,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
         if (tipoTorneo.equals("Torneo Normal")) this.torneo = new TorneoNormal(jugadores,medabots,tipoTorneo);
         
         if (tipoTorneo.equals("Torneo Avanzado")) this.torneo = new TorneoAvanzado(jugadores,medabots,tipoTorneo);
+        
+        // Se crean las vistas correspondientes a los combates del torneo
         
         for (int i = 0; i < 8; i = i + 2) {
 
@@ -153,11 +161,15 @@ public class ControladorCombate extends MyController implements ActionListener, 
         }
         
     }
+    
+    // Acciones que se realizan cuando el usuario oprime un boton
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         
         if (((JButton)ae.getSource()).equals(this.vc.getAtacarJ1())) {
+            
+            // Si el jugador elige atacar sin defender o esquivar, entonces el medabot recibe todo el daño de los ataques del turno anterior
             
             if ((this.vc.getDefenderJ1().isEnabled() == true)&&(this.vc.getEsquivarJ1().isEnabled() == true)) {
                 
@@ -177,6 +189,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
             String mpDefensora = (String)this.vc.getDefensorJ2().getSelectedItem();
             
             int dano = 0;
+            
+            // Se realiza el ataque segun las medapartes elegidas
             
             if (mpAtacante.equals("Cabeza")) {
                 
@@ -513,6 +527,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
                 
             }
             
+            // Se actualiza la vista con los nuevos valores luego de que termina el ataque
+            
             this.vc.setSaludCabezaM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getCabeza().getSaludActual()));
             this.vc.setSaludBrazoIzqM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoIzq().getSaludActual()));
             this.vc.setSaludBrazoDerM2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getBrazoDer().getSaludActual()));
@@ -535,6 +551,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getAtacarJ2())) {
+            
+            // Funciona de manera analoga a AtacarJ1
             
             if ((this.vc.getDefenderJ2().isEnabled() == true)&&(this.vc.getEsquivarJ2().isEnabled() == true)) {
                 
@@ -913,6 +931,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
         
         if (((JButton)ae.getSource()).equals(this.vc.getDefenderJ1())) {
             
+            // Se realiza la defensa de los ataques del turno anterior y se actualiza la vista de acuerdo a los nuevos parametros
+            
             this.robobatalla.getJugador1().getMedabot().defender(this.robobatalla.getJugador1().getMedabot().getAtaqueTotal());
             
             this.vc.setSaludMedabotJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getSaludActual()));
@@ -922,6 +942,9 @@ public class ControladorCombate extends MyController implements ActionListener, 
             this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
             
             this.vc.getLogBatalla().append("- "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0,this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" se ha defendido de los ataques de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0,this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+".\n\n");
+            
+            // Si la salud del medabot llega a 0 entonces se desactivan todos los elementos de la vista correspondientes
+            // al jugador para que muestre un efecto grafico de que ha perdido la partida
             
             if (this.robobatalla.getJugador1().getMedabot().getSaludActual() > 0) {
             
@@ -944,6 +967,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getDefenderJ2())) {
+            
+            // Funciona de manera analoga a DefenderJ1
             
             this.robobatalla.getJugador2().getMedabot().defender(this.robobatalla.getJugador2().getMedabot().getAtaqueTotal());
             
@@ -976,6 +1001,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getEsquivarJ1())) {
+            
+            // Realiza una evasion. Excepto eso, esto funciona analogamente respecto a DefenderJ1
             
             boolean esquivar = this.robobatalla.getJugador1().getMedabot().esquivar(this.robobatalla.getJugador1().getMedabot().getAtaqueTotal());
             
@@ -1013,6 +1040,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
         
         if (((JButton)ae.getSource()).equals(this.vc.getEsquivarJ2())) {
             
+            // Analogo a EsquivarJ1
+            
             boolean esquivar = this.robobatalla.getJugador2().getMedabot().esquivar(this.robobatalla.getJugador2().getMedabot().getAtaqueTotal());
             
             this.vc.setSaludMedabotJ2(String.valueOf(this.robobatalla.getJugador2().getMedabot().getSaludActual()));
@@ -1046,6 +1075,9 @@ public class ControladorCombate extends MyController implements ActionListener, 
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getRendirseJ1())) {
+            
+            // Si un jugador oprime el boton Rendirse, entonces se le pide confirmacion.
+            // Si es positiva, entonces este pierde la partida
             
             int opcion = JOptionPane.showConfirmDialog(this.vc, "¿Está seguro que desea rendirse?", "Medafighter - Rendirse", 2);
             
@@ -1132,6 +1164,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
         
         if (((JButton)ae.getSource()).equals(this.vc.getRendirseJ2())) {
             
+            // Analogo a RendirseJ1
+            
             int opcion = JOptionPane.showConfirmDialog(this.vc, "¿Está seguro que desea rendirse?", "Medafighter - Rendirse", 2);
             
             if (opcion == 0) {
@@ -1217,6 +1251,10 @@ public class ControladorCombate extends MyController implements ActionListener, 
         
         if (((JButton)ae.getSource()).equals(this.vc.getMedafuerzaJ1())) {
             
+            // Si se activa la medafuerza, se verifica las caracteristicas de la medalla del medabot
+            // De acuerdo a eso, se cambian los atributos correspondientes a los objetos
+            // y tambien lo que se muestra en la vista
+            
             this.robobatalla.getJugador1().getMedabot().activarMedafuerza();
             
             this.vc.getLogBatalla().append("¡La medafuerza de "+this.robobatalla.getJugador1().getMedabot().getNombre().substring(0, this.robobatalla.getJugador1().getMedabot().getNombre().length()-2)+" ha sido activada!\n\n");
@@ -1286,6 +1324,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
         
         if (((JButton)ae.getSource()).equals(this.vc.getMedafuerzaJ2())) {
             
+            // Analogo a MedaferzaJ1
+            
             this.robobatalla.getJugador2().getMedabot().activarMedafuerza();
             
             this.vc.getLogBatalla().append("¡La medafuerza de "+this.robobatalla.getJugador2().getMedabot().getNombre().substring(0, this.robobatalla.getJugador2().getMedabot().getNombre().length()-2)+" ha sido activada!\n\n");
@@ -1354,6 +1394,9 @@ public class ControladorCombate extends MyController implements ActionListener, 
         }
         
         if (((JButton)ae.getSource()).equals(this.vc.getTerminarTurno())) {
+            
+            // Si un jugador elige terminar su turno, entonces se desactivan sus botones y se activan
+            // los del otro jugador. Tambien el otro jugador pasa a ser el jugador activo
             
             if(this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) 
                 
@@ -1435,6 +1478,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
                 
                 boolean mfActivadaJ1 = this.robobatalla.getJugador1().getMedabot().cargarMedafuerza(this.robobatalla.getJugador2().getMedabot());
             
+                //Se verifica el estado de la medafuerza (si esta lista para usarse o no)
+                
                 if (mfActivadaJ1) {
                     
                     this.vc.getMedafuerzaJ1().setEnabled(true);
@@ -1522,6 +1567,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
                 
                 boolean mfActivadaJ2 = this.robobatalla.getJugador2().getMedabot().cargarMedafuerza(this.robobatalla.getJugador1().getMedabot());
             
+                // Se verifica el estado de la medafuerza (si se puede usar o no)
+                
                 if (mfActivadaJ2) {
                     
                     this.vc.getMedafuerzaJ2().setEnabled(true);
@@ -1540,6 +1587,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
             
             this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().setPHRes(this.robobatalla.getJugadorActivo(this.robobatalla.getJugadorActivo()).getMedabot().getPHMax());
                         
+            // Se resetean los PHs
+            
             if (this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador1().getNombre())) {
                
                 this.vc.setPHJ1(String.valueOf(this.robobatalla.getJugador1().getMedabot().getPHRes()));
@@ -1552,10 +1601,12 @@ public class ControladorCombate extends MyController implements ActionListener, 
                 
             }
                         
-            this.robobatalla.setTurno(this.robobatalla.getTurno()+1);
+            this.robobatalla.setTurno(this.robobatalla.getTurno()+1); //Se contean los turnos
             
             this.vc.getLogBatalla().append("* "+this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(1)+" turno - Turno de "+this.robobatalla.getJugadorActivo()+".\nPuede escoger entre defender o esquivar los ataques realizados el turno anterior, o recibir todo el daño y sólo atacar.\n\n");
                       
+            // Si le toca jugar a la CPU, entonces se simula un turno
+            
             if(this.robobatalla.getModoJuego().equals("Jugador v/s CPU")&&this.robobatalla.getJugadorActivo().equals(this.robobatalla.getJugador2().getNombre())) {
             
                 this.vc.getAtacanteJ2().setEnabled(false);
@@ -1600,6 +1651,13 @@ public class ControladorCombate extends MyController implements ActionListener, 
         }   
     
     }
+    
+    // Acciones que se realizan cuando se cambia un valor de los componentes de la vista
+    // En este caso particular, estas acciones se realizan cuando algunas de las barras
+    // de salud llega a 0
+    // Cuando una barra de salud correspondiente a una medaparte llega a 0,
+    // entonces se desactiva dicha medaparte. Si la barra de un medabot llega a 0,
+    // entonces el jugador dueño del medabot pierde la partida
 
     @Override
     public void stateChanged(ChangeEvent ce) {
@@ -2209,6 +2267,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
         }
     
     }
+    
+    // Simula un turno completo de CPU
     
     public void turnoCPU1J1() {
         
@@ -3243,6 +3303,8 @@ public class ControladorCombate extends MyController implements ActionListener, 
         this.vc.getLogBatalla().append("* "+this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(0, 1).toUpperCase() + this.vc.numeroAOrdinal(this.robobatalla.getTurno()).substring(1)+" turno - Turno de "+this.robobatalla.getJugadorActivo()+".\nPuede escoger entre defender o esquivar los ataques realizados el turno anterior, o recibir todo el daño y sólo atacar.\n\n");
              
     }
+    
+    // Simula una robobatalla
     
     private void simulacion() {
         
